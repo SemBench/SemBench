@@ -484,12 +484,12 @@ function calculateAggregatedMetrics(allRoundsData) {
             Object.values(allRoundsData).forEach(roundData => {
                 if (roundData[system] && roundData[system][query]) {
                     const queryData = roundData[system][query];
-                    
-                    // Only include if query was successful and has positive cost
-                    if (queryData.status === 'success' && queryData.money_cost > 0) {
+
+                    // Only include if has positive cost (matches Python logic)
+                    if (queryData.money_cost > 0) {
                         values.money_cost.push(queryData.money_cost);
                         values.execution_time.push(queryData.execution_time);
-                        
+
                         // Get quality metric
                         const qualityMetric = getQualityMetric(queryData);
                         if (qualityMetric !== null) {
@@ -513,12 +513,14 @@ function calculateAggregatedMetrics(allRoundsData) {
                     hasMultipleRounds: values.money_cost.length > 1
                 };
                 
-                // Add backward compatibility fields
+                // Add backward compatibility fields (match Python logic)
                 const qualityMean = aggregatedData[system][query].quality_mean;
                 if (qualityMean !== null) {
-                    // Use the same field names that getQualityMetric expects
+                    // Add accuracy field like Python does (line 465 in table_brick_design.py)
+                    aggregatedData[system][query].accuracy = qualityMean;
+
+                    // Also add f1_score for backward compatibility with getQualityMetric
                     if (values.quality.length > 0) {
-                        // Assume f1_score for now - this could be enhanced based on the original metric type
                         aggregatedData[system][query].f1_score = qualityMean;
                     }
                 }
@@ -537,7 +539,8 @@ function calculateMean(values) {
 function calculateStd(values) {
     if (values.length <= 1) return 0;
     const mean = calculateMean(values);
-    const variance = values.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / (values.length - 1);
+    // Use population std (divide by N, not N-1) to match Python's np.std() default behavior
+    const variance = values.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / values.length;
     return Math.sqrt(variance);
 }
 
@@ -814,33 +817,49 @@ function calculateSystemSummary(systemData, summaryType) {
 
     queries.forEach(queryId => {
         const queryData = systemData[queryId];
-        
-        if (queryData && queryData.status === 'success') {
-            if (queryData.money_cost !== null && queryData.money_cost !== undefined) {
+
+        // Match Python logic: only check if query exists and has data (no status check)
+        if (queryData) {
+            // For average calculation - Python doesn't require > 0
+            if ('money_cost' in queryData && queryData.money_cost !== null) {
                 costs.push(queryData.money_cost);
-                
-                // For std dev calculation, collect relative variance if available
-                if (summaryType === 'stddev' && queryData.money_cost_std && queryData.money_cost > 0) {
-                    costVars.push(queryData.money_cost_std / queryData.money_cost);
-                }
             }
-            
-            const qualityMetric = getQualityMetric(queryData);
-            if (qualityMetric !== null) {
-                qualities.push(qualityMetric);
-                
-                // For std dev calculation
-                if (summaryType === 'stddev' && queryData.quality_std && qualityMetric > 0) {
-                    qualityVars.push(queryData.quality_std / qualityMetric);
-                }
+
+            if ('accuracy' in queryData && queryData.accuracy !== null) {
+                qualities.push(queryData.accuracy);
             }
-            
-            if (queryData.execution_time !== null && queryData.execution_time !== undefined) {
+
+            if ('execution_time' in queryData && queryData.execution_time !== null) {
                 latencies.push(queryData.execution_time);
-                
-                // For std dev calculation
-                if (summaryType === 'stddev' && queryData.execution_time_std && queryData.execution_time > 0) {
-                    latencyVars.push(queryData.execution_time_std / queryData.execution_time);
+            }
+
+            // For std dev calculation - match Python's exact logic
+            if (summaryType === 'stddev') {
+                // Cost relative variance - check: not null AND not undefined AND > 0
+                const cost = queryData.money_cost;
+                const cost_std = queryData.money_cost_std;
+                if (cost !== null && cost !== undefined &&
+                    cost_std !== null && cost_std !== undefined &&
+                    cost > 0) {
+                    costVars.push(cost_std / cost);
+                }
+
+                // Quality relative variance - use "accuracy" like Python, not getQualityMetric
+                const quality = queryData.accuracy;
+                const quality_std = queryData.quality_std;
+                if (quality !== null && quality !== undefined &&
+                    quality_std !== null && quality_std !== undefined &&
+                    quality > 0) {
+                    qualityVars.push(quality_std / quality);
+                }
+
+                // Latency relative variance
+                const latency = queryData.execution_time;
+                const latency_std = queryData.execution_time_std;
+                if (latency !== null && latency !== undefined &&
+                    latency_std !== null && latency_std !== undefined &&
+                    latency > 0) {
+                    latencyVars.push(latency_std / latency);
                 }
             }
         }
