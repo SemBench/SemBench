@@ -54,15 +54,15 @@
   "Q3f": {
     "query_id": "3f",
     "status": "success",
-    "execution_time": 3.826349973678589,
-    "token_usage": 66765.0,
-    "money_cost": 0.02134949999999999,
-    "row_count": 4,
+    "execution_time": 7.484766960144043,
+    "token_usage": 74565.0,
+    "money_cost": 0.023689499999999985,
+    "row_count": 3,
     "model_name": "gemini-2.5-flash",
     "concurrent_llm_worker": 20,
-    "precision": 0.75,
+    "precision": 1.0,
     "recall": 1.0,
-    "f1_score": 0.8571428571428571
+    "f1_score": 1.0
   },
   "Q4": {
     "query_id": "4",
@@ -79,12 +79,16 @@
   },
   "Q5": {
     "query_id": "5",
-    "status": "failed",
-    "execution_time": 0.0,
-    "error": "No columns to parse from file",
-    "row_count": 0,
+    "status": "success",
+    "execution_time": 0.4374566078186035,
+    "token_usage": 3991.0,
+    "money_cost": 0.0012391,
+    "row_count": 1,
     "model_name": "gemini-2.5-flash",
-    "concurrent_llm_worker": 20
+    "concurrent_llm_worker": 20,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0
   },
   "Q6a": {
     "query_id": "6a",
