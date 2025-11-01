@@ -1,10 +1,12 @@
-# SemBench: Benchmarking Semantic Query Processing Engines (VLDB 2026 Submission)
+# SemBench: Benchmarking Semantic Query Processing Engines 
 
-SemBench is a systematic benchmark designed to evaluate and compare multi-modal data systems in realistic settings. It includes well-defined use cases that integrate structured data (tables) with unstructured modalities (text, images, audio), enabling the assessment of systems' ability to process complex semantic queries with ground truth validation. These systems are expected to balance multiple objectives—accuracy, cost, and efficiency—especially when handling large-scale datasets. SemBench emphasizes the trade-offs among these dimensions rather than performance in isolation.
+SemBench is a benchmark targeting a novel class of systems: **semantic query processing engines**. Those systems rely inherently on generative and reasoning  capabilities of state-of-the-art large language models (LLMs). They extend SQL with semantic operators, configured by natural language instructions, that are evaluated via LLMs and enable users to perform various operations on multimodal data.
 
-## Important Notes to Reviewers
-We use an anonymous repository because the materials are currently private and pending approval from Google. 
-The repository will be made public once approval is granted, which is expected within a few weeks. All submitted materials are supposed to be confidential anyway until accept. Thanks for understanding!
+SemBench introduces diversity across three key dimensions: **scenarios, modalities, and operators**. Included are scenarios ranging from movie review analysis to medical question-answering. Within these scenarios, we cover different data modalities, including images, audio, text, and table. Finally, the queries involve a diverse set of operators, including semantic filters, joins, mappings, ranking, and classification operators. 
+
+Currently SemBench is evalulated on **three academic systems (LOTUS, Palimpzest, and ThalamusDB) and one industrial system, Google BigQuery**. Although these results reflect a snapshot of systems under continuous development, our study offers crucial insights into their current strengths and weaknesses, illuminating promising directions for future research.
+
+We understand that every system is under rapid development, which is why we maintain an [online leaderboard](https://sembench.ngrok.io/). We encourage you to submit your system's results and participate in the benchmark. Please reach out to discuss how to contribute your results to the leaderboard.
 
 ## Materials
 - [Online Leaderboard](https://sembench.ngrok.io/)
@@ -15,11 +17,20 @@ The repository will be made public once approval is granted, which is expected w
 
 Modern data systems increasingly need to process and reason over multi-modal data - combining traditional relational data with images, audio, and text. SemBench provides a standardized evaluation framework with:
 
-- **5 Real-world Use Cases**: wildlife monitoring, medical diagnosis, sentiment analysis, question anwering, product analysis
+- **5 Real-world Scenarios**: wildlife monitoring, medical diagnosis, sentiment analysis of movie reviews, question anwering, E-commerce product analysis
 - **Multi-modal Queries**: Complex semantic operations across multi-modal databases: table, text, image, and audio  
 - **System-agnostic Design**: Extensible and already supports LOTUS, Palimpzest, ThalamusDB, CAESURA, BigQuery, DuckDB FlockMTL
-- **Comprehensive Metrics**: Quality (precision/recall/F1, relative error...), cost (money, token consumption), and performance evaluation (execution time)
+- **Comprehensive Metrics**: Quality (precision/recall/F1, relative error...), cost (money, token consumption), and efficiency evaluation (execution time)
 - **Rich Visualizations**: Automated generation of performance comparisons
+
+| Scenario | #Queries | Mod: Table | Mod: Text | Mod: Image | Mod: Audio | Op: Filter | Op: Join | Op: Map | Op: Rank | Op: Classify | Size: Text | Size: Image | Size: Audio |
+| :--- | ---: | :---: | :---: | :---: | :---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Movie | 10 | ✓ | ✓ | -- | -- | 4 | 3 | -- | 2 | 1 | 1,375,738 | -- | -- |
+| Wildlife | 10 | ✓ | -- | ✓ | ✓ | 17 | -- | -- | -- | -- | -- | 8,718 | 650 |
+| E-Commerce | 14 | ✓ | ✓ | ✓ | -- | 12 | 9 | 3 | 1 | 2 | 44,446 | 44,446 | -- |
+| MMQA | 11 | ✓ | ✓ | ✓ | -- | 5 | 3 | 4 | -- | -- | 5,000 | 1,000 | -- |
+| Medical | 10 | ✓ | ✓ | ✓ | ✓ | 12 | -- | -- | -- | 1 | 1,200 | 10,012 | 336 |
+| **Total** | **55** | **✓** | **✓** | **✓** | **✓** | **49** | **15** | **7** | **3** | **4** | **1,426,384** | **64,176** | **986** |
 
 ## 📁 Architecture
 
@@ -40,14 +51,7 @@ SemBench/
 └── README.md
 ```
 
-### Core Components
-
-- **🎯 Runner Framework**: Modular system implementations with standardized interfaces
-- **📊 Evaluation Engine**: Automated quality assessment with precision/recall/F1 metrics  
-- **🔄 Query Processing**: Support for natural language and SQL query formats
-- **📈 Visualization Pipeline**: Automated generation of cost/quality/performance charts
-
-## 🚀 Supported Use Cases
+## 🚀 Supported Scenarios
 
 ### 1. **Animals** - Wildlife Monitoring
 *Data Modalities: Tables, Images, Audio*
@@ -101,16 +105,12 @@ SemBench supports evaluation of multiple multi-modal data systems:
 - **FlockMTL**: An open-source extension of DuckDB   
 - **BigQuery**: Google's analytics data warehouse
 
-Each system implements a standardized runner interface enabling fair comparison across different architectural approaches.
+Each system implements a standardized runner interface enabling fair comparison across different architectural approaches. Also SemBench can be easily extended to support more systems.
 
 ## ⚡ Quick Start
 
 ### Prerequisites
 ```bash
-# Copy environment template and add your API keys
-cp .env.example .env
-# Edit .env with your OpenAI credentials
-
 # Recommand using Miniconda to manage the Python environment
 conda create -n sembench python=3.10
 conda activate sembench
@@ -126,46 +126,37 @@ conda develop <path to the SemBench directory, e.g., ~/Desktop/MMBench-System>
 ### Running Benchmarks
 ```bash
 # Run specific system on specific use case and queries
-python3 src/run.py --systems lotus --use-cases movie --queries 1 3 --model gemini-2.5-flash
+python3 src/run.py --systems lotus --use-cases movie --queries 1 3 --model gemini-2.5-flash --scale-factor 2000
 
 # Run full evaluation on a use case  
-python3 src/run.py --systems lotus --use-cases movie
+python3 src/run.py --systems lotus --use-cases movie --model gemini-2.5-flash --scale-factor 2000
 
 # Compare multiple systems
-python3 src/run.py --systems lotus thalamusdb --use-cases movie
+python3 src/run.py --systems lotus thalamusdb --use-cases movie --model gemini-2.5-flash --scale-factor 2000
 
 # Execute repeated experiments for error bars
+# Please configure the script file first
 cd scripts
 ./repeat_experiment.sh
 
 # Generate performance visualizations
 python3 src/plot.py
+
+# Generate the latex table used in our paper
+python3 src/table_brick_design.py
+
+# Generate analysis report
+python3 src/scripts/analysis.py
 ```
 
 ### Output Structure
 Results are organized as:
 - **Query Results**: `files/{use_case}/raw_results/{system}/Q{n}.csv`
 - **Performance Metrics**: `files/{use_case}/metrics/{system}.json`  
-- **Visualizations**: `figures/{use_case}/{metric}.png`
+- **Visualizations**: `figures/{use_case}/`
 
-Performance metrics include execution time, token usage, monetary cost, and quality scores (precision, recall, F1).
+SemBench provides bar charts for every performance metric (money cost, latency, and result quality), pareto figure for cost-quality trade-off, and a comprehensive table in latex to compare all metrics.
 
-## 📊 Evaluation Framework
-
-The benchmark provides comprehensive evaluation across multiple dimensions:
-
-- **Quality Assessment**: Precision, recall, and F1-score for retrieval queries; relative error for aggregation queries
-- **Performance Metrics**: Query execution time 
-- **Cost Analysis**: Token usage and monetary cost tracking
-- **Comparative Analysis**: Automated generation of Pareto frontier charts
-
-## 🎨 Visualization
-
-Automated generation of comparative charts including:
-- **Quality vs Cost**: Pareto frontier analysis
-- **Execution Time**: Performance comparison across systems
-- **Cost Breakdown**: Token usage and monetary cost analysis
-- **Quality Metrics**: Precision, recall, and F1-score comparisons
 
 ## 🏗️ Extending the Benchmark
 
