@@ -1,7 +1,7 @@
 <table border="0">
   <tr>
     <td style="border: none;"><h1>SemBench: Benchmarking Semantic Query Processing Engines</h1></td>
-    <td style="border: none;"><img src="assets/SemBench_logo.png" alt="SemBench Logo" width="1000"></td>
+    <td style="border: none;"><img src="assets/SemBench_logo.png" alt="SemBench Logo" width="1500"></td>
   </tr>
 </table> 
 
