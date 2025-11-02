@@ -39,10 +39,19 @@ kill_process "/tmp/sembench_tunnel.pid" "ngrok tunnel"
 # Stop local server
 kill_process "/tmp/sembench_server.pid" "Local server"
 
-# Clean up any remaining processes
-echo "🧹 Cleaning up remaining processes..."
-pkill -f "python3 -m http.server" 2>/dev/null || true
-pkill -f "ngrok http" 2>/dev/null || true
+# Clean up only SemBench-specific processes if PID-based kill failed
+echo "🧹 Verifying cleanup..."
+
+# Only attempt to find and kill ngrok processes that match sembench.ngrok.io domain
+if pgrep -f "ngrok http.*sembench.ngrok.io" > /dev/null 2>&1; then
+    echo "⚠️  Found orphaned ngrok process for sembench.ngrok.io, cleaning up..."
+    pkill -f "ngrok http.*sembench.ngrok.io" 2>/dev/null || true
+fi
+
+# Note: We do NOT use generic pkill for python http.server to avoid
+# stopping other websites. Only the specific PID saved during deployment
+# is stopped. If you have orphaned HTTP server processes, please stop
+# them manually or check /tmp/sembench_logs/server.log for the port number.
 
 # Clean up temporary files
 echo "🗑️  Removing temporary files..."

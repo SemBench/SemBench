@@ -16,6 +16,7 @@ let systemsData = {};
 let coverageData = null; // Coverage data for current scenario
 let colorblindMode = false; // Colorblind-friendly mode toggle
 let availableVersions = []; // Available versions from versions.json
+let systemVersions = {}; // System version numbers from system_version.json
 let scenarioData = {
     'animals': {
         'models': ['2.0flash', '2.5flash', '5mini'],
@@ -349,6 +350,9 @@ async function loadBenchmarkData() {
 
         // Load coverage data for current scenario
         coverageData = await loadCoverageData();
+
+        // Load system versions
+        systemVersions = await loadSystemVersions();
 
         // Load data with round aggregation if available, fallback to single run
         systemsData = await loadDataWithRoundSupport();
@@ -888,13 +892,21 @@ function calculateSystemSummary(systemData, summaryType) {
 
 function formatSystemName(systemName) {
     const nameMap = {
-        'lotus': 'Lotus',
-        'palimpzest': 'Palimpzest', 
+        'lotus': 'LOTUS',
+        'palimpzest': 'Palimpzest',
         'thalamusdb': 'ThalamusDB',
         'bigquery': 'BigQuery',
         'snowflake': 'Snowflake'
     };
-    return nameMap[systemName] || systemName;
+
+    const displayName = nameMap[systemName] || systemName;
+
+    // Add version number if available
+    if (systemVersions && systemVersions[displayName]) {
+        return `${displayName} (${systemVersions[displayName]})`;
+    }
+
+    return displayName;
 }
 
 function calculateOverallMetrics(systemData) {
@@ -985,6 +997,21 @@ async function loadCoverageData() {
         console.log(`No coverage data found for ${currentScenario}, using default table view`);
     }
     return null;
+}
+
+async function loadSystemVersions() {
+    try {
+        const versionPath = `${getDataBasePath()}/system_version.json`;
+        const response = await fetch(versionPath);
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Loaded system versions:', data);
+            return data;
+        }
+    } catch (error) {
+        console.log('No system version data found, using system names without versions');
+    }
+    return {};
 }
 
 function getPerformanceClass(qualityMetric) {
@@ -1109,11 +1136,6 @@ function createSystemsSummary(queryId) {
                 timeText = queryData.execution_time ? `${queryData.execution_time.toFixed(1)}s` : 'N/A';
             }
             
-            let roundInfo = '';
-            if (hasMultipleRounds) {
-                roundInfo = `<p><strong>Rounds:</strong> ${queryData.round_count}</p>`;
-            }
-            
             summaryHtml += `
                 <div class="system-summary ${performanceClass}">
                     <h5>${formatSystemName(systemName)}</h5>
@@ -1121,7 +1143,6 @@ function createSystemsSummary(queryId) {
                     <p><strong>Cost:</strong> ${costText}</p>
                     <p><strong>Time:</strong> ${timeText}</p>
                     <p><strong>Status:</strong> ${queryData.status}</p>
-                    ${roundInfo}
                 </div>
             `;
         }

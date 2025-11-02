@@ -1,23 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta property="og:title" content="SemBench"/>
-  <meta property="og:description" content="SemBench: A Benchmark for Semantic Query Processing Engines"/>
-  <meta property="description" content="SemBench: A Benchmark for Semantic Query Processing Engines"/>
 
-  <meta property="og:url" content="https://sembench.ai/"/>
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
-  <meta name="keywords" content="LLM, Multi-modal, Data Systems, Semantic Query Processing, Benchmark, AI, Machine Learning, SemBench"/>
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="SemBench: A Benchmark for Semantic Query Processing Engines">
+  <meta name="description" content="SemBench is a systematic benchmark for evaluating LLM-powered multi-modal data systems. Compare LOTUS, Palimpzest, ThalamusDB, BigQuery on complex semantic queries with ground truth validation.">
+  <meta name="keywords" content="SemBench, LLM benchmark, semantic query processing, multi-modal data systems, LOTUS, Palimpzest, ThalamusDB, BigQuery, AI database, semantic operators, benchmark, data systems, machine learning, artificial intelligence">
+  <meta name="author" content="SemBench Team">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sembench.ngrok.io/">
+  <meta property="og:title" content="SemBench: A Benchmark for Semantic Query Processing Engines">
+  <meta property="og:description" content="SemBench is a systematic benchmark for evaluating LLM-powered multi-modal data systems. Compare LOTUS, Palimpzest, ThalamusDB, BigQuery on complex semantic queries with ground truth validation.">
+  <meta property="og:site_name" content="SemBench">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://sembench.ngrok.io/">
+  <meta name="twitter:title" content="SemBench: A Benchmark for Semantic Query Processing Engines">
+  <meta name="twitter:description" content="SemBench is a systematic benchmark for evaluating LLM-powered multi-modal data systems. Compare LOTUS, Palimpzest, ThalamusDB, BigQuery on complex semantic queries with ground truth validation.">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- Privacy controls - prevent search engine indexing -->
-  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
 
-  <title>SemBench</title>
+  <!-- SEO: Allow search engine indexing and crawling -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <link rel="canonical" href="https://sembench.ngrok.io/">
+
+  <title>SemBench: A Benchmark for Semantic Query Processing Engines</title>
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
 
@@ -36,7 +50,52 @@
   <script src="static/js/bulma-slider.min.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
   <script src="static/js/index.js"></script>
-  
+
+  <!-- Structured Data (JSON-LD) for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "SemBench",
+    "description": "A systematic benchmark for evaluating LLM-powered multi-modal data systems on complex semantic queries",
+    "url": "https://sembench.ngrok.io/",
+    "keywords": "semantic query processing, LLM benchmark, multi-modal data systems, LOTUS, Palimpzest, ThalamusDB, BigQuery",
+    "inLanguage": "en-US",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://sembench.ngrok.io/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "about": {
+      "@type": "ResearchProject",
+      "name": "SemBench",
+      "description": "SemBench is a systematic benchmark designed to evaluate and compare recent LLM-powered multi-modal data systems in realistic settings. It includes well-defined use cases that integrate structured data (tables) with unstructured modalities (text, images, audio), enabling the assessment of systems' ability to process complex semantic queries with ground truth validation.",
+      "keywords": ["semantic query processing", "benchmark", "LLM", "multi-modal", "data systems"]
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "SemBench Team",
+      "member": [
+        {"@type": "Person", "name": "Jiale Lao", "affiliation": "Cornell University"},
+        {"@type": "Person", "name": "Immanuel Trummer", "affiliation": "Cornell University"},
+        {"@type": "Person", "name": "Andreas Zimmerer", "affiliation": "University of Technology Nuremberg"},
+        {"@type": "Person", "name": "Andreas Kipf", "affiliation": "University of Technology Nuremberg"},
+        {"@type": "Person", "name": "Olga Ovcharenko", "affiliation": "BIFOLD & TU Berlin"},
+        {"@type": "Person", "name": "Sebastian Schelter", "affiliation": "BIFOLD & TU Berlin"},
+        {"@type": "Person", "name": "Tianji Cong", "affiliation": "University of Michigan"},
+        {"@type": "Person", "name": "H. V. Jagadish", "affiliation": "University of Michigan"},
+        {"@type": "Person", "name": "Matthew Russo", "affiliation": "MIT CSAIL"},
+        {"@type": "Person", "name": "Gerardo Vitagliano", "affiliation": "MIT CSAIL"},
+        {"@type": "Person", "name": "Michael Cochez", "affiliation": "ELLIS Institute & Åbo Akademi"},
+        {"@type": "Person", "name": "Thibaud Hottelier", "affiliation": "Google"},
+        {"@type": "Person", "name": "Gautam Gupta", "affiliation": "Google"},
+        {"@type": "Person", "name": "Kris Kissel", "affiliation": "Google"},
+        {"@type": "Person", "name": "Fatma Ozcan", "affiliation": "Google"}
+      ]
+    }
+  }
+  </script>
+
 </head>
 <body>
 
