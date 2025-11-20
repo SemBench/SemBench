@@ -26,6 +26,6 @@ LEFT OUTER JOIN product_selection p2
      images. Only focus on the main object. Base your comparison solely on
      object type and overall surface color.''', p1.ref, p2.ref),
     connection_id => '<<connection>>',
-    model_params => JSON '{"labels":{"query_uuid": "<<query_id>>"}}' <<other_params>>
+    model_params => JSON '{"labels":{"query_uuid": "<<query_id>>"}, "generation_config": {"thinking_config": {"thinking_budget": <<thinking_budget>>}}}' <<other_params>>
   )
 ;

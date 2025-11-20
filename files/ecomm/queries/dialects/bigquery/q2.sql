@@ -5,6 +5,6 @@ WHERE true
   AND AI.IF(
     ('The image shows a (pair of) sports shoe(s) that feature the colors yellow and silver.', images.ref),
     connection_id => '<<connection>>',
-    model_params => JSON '{"labels":{"query_uuid": "<<query_id>>"}}' <<other_params>>
+    model_params => JSON '{"labels":{"query_uuid": "<<query_id>>"}, "generation_config": {"thinking_config": {"thinking_budget": <<thinking_budget>>}}}' <<other_params>>
   )
 ;

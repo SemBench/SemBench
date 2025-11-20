@@ -182,7 +182,11 @@ class GenericBigQueryRunner(GenericRunner):
             if metrics.status == "failed":
                 continue
 
-            max_retries = 3  # 12 * 5s max wait
+            # Wait a moment for inference logs to materialize in BigQuery
+            print(f"  Waiting 5 seconds for inference logs to materialize for query {query_id}...")
+            time.sleep(5)
+
+            max_retries = 3  # 3 * 5s = 15s additional wait if needed
             retry_count = 0
             cost_retrieved = False
 
