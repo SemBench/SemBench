@@ -121,7 +121,7 @@ Each system implements a standardized runner interface enabling fair comparison 
 ## ⚡ Quick Start
 
 ### Large Language Model Provider Setup
-Please refer to the .env.example file and create a corresponding .env file to configure the necessary credentials or API keys for using Gemini, OpenAI, or models provided by other platforms.
+Please refer to the `.env.example` file and create a corresponding `.env` file to configure the necessary credentials or API keys for using Gemini, OpenAI, or models provided by other platforms.
 For the list of supported models for each system, please consult the corresponding repository for detailed information.
 
 ### Automatic Environment Setup
