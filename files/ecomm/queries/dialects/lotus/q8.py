@@ -14,8 +14,14 @@ def run(data_dir: str):
     image_mapping = pd.read_parquet(os.path.join(data_dir, 'image_mapping.parquet'))
 
     # Pre-filter data
-    styles_details = styles_details[styles_details.apply(lambda row: len(row['productDescriptors']['description']['value']) >= 3000, axis=1)]
-    image_mapping = image_mapping[image_mapping['id'].astype('int').isin(styles_details['id'])]
+    styles_details = styles_details[styles_details.apply(
+        lambda row: (
+            row['productDescriptors'].get('description') is not None and
+            row['productDescriptors']['description'].get('value') is not None and
+            len(row['productDescriptors']['description']['value']) >= 3000
+        ), axis=1
+    )]
+    # image_mapping = image_mapping[image_mapping['id'].astype('int').isin(styles_details['id'])]
     image_mapping['images']  = ImageArray(image_mapping.filename.apply(lambda s: os.path.join(data_dir, 'images', s)))
 
     # Perform joins

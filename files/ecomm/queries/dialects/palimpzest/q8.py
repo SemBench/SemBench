@@ -28,14 +28,17 @@ def run(pz_config, data_dir: str):
     )
     styles_details = styles_details[
         styles_details.apply(
-            lambda row: len(row["productDescriptors"]["description"]["value"])
-            >= 3000,
+            lambda row: (
+                row["productDescriptors"].get("description") is not None and
+                row["productDescriptors"]["description"].get("value") is not None and
+                len(row["productDescriptors"]["description"]["value"]) >= 3000
+            ),
             axis=1,
         )
     ]
-    images = images.filter(
-        lambda row: int(row["prod_id"]) in styles_details["prod_id"].values
-    )
+    # images = images.filter(
+    #     lambda row: int(row["prod_id"]) in styles_details["prod_id"].values
+    # )
 
     styles_details_ds = pz.MemoryDataset(
         id="styles_details", vals=styles_details
