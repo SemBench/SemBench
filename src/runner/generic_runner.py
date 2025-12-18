@@ -334,5 +334,9 @@ class GenericRunner(ABC):
             return MovieScenario(scale_factor=scale_factor)
         elif use_case == "detective":
             return None  # Scenario does not have a specific handler
+        elif use_case == "cars":
+            from scenario.cars.cars_scenario import CarsScenario
+
+            return CarsScenario(scale_factor=scale_factor)
         else:
             raise ValueError(f"Unknown use case: {use_case}.")

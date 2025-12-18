@@ -11,6 +11,7 @@ Creates test database from the following Kaggle datasets:
 """
 
 import argparse
+from calendar import c
 from genericpath import isfile
 import glob
 import json
@@ -1293,7 +1294,7 @@ def _prepare_data_from_scratch(args: argparse.Namespace) -> None:
     print(f"Data preparation complete! Files saved to {base_folder}.")
 
 
-def prepare_data(scaling_factor: int = 1000) -> None:
+def prepare_data(scaling_factor: int = 157376) -> None:
     """Main function to prepare cars data."""
     if scaling_factor < 1:
         raise ValueError("scaling_factor should be at least 1")
@@ -1309,10 +1310,11 @@ def prepare_data(scaling_factor: int = 1000) -> None:
         "text_complaints_data_full.csv"
     ]
 
-    base_folder = Path(__file__).resolve().parents[4] / "files" / "cars" / "data" / "full_data"
+    base_folder_full = Path(__file__).resolve().parents[4] / "files" / "cars" / "data" / f"sf_{scaling_factor}" if scaling_factor != 157376 else Path(__file__).resolve().parents[4] / "files" / "cars" / "data" / "full_data"
+    base_folder = Path(__file__).resolve().parents[4] / "files" / "cars" / "data" / f"sf_{scaling_factor}"
     
-    if all(os.path.exists(folder / f) for f in csv_files):
-        print("Data already exists, skipping preparation.")
+    if all(os.path.exists(base_folder_full / f) for f in csv_files):
+        print("Data already exists, skipping download.")
     
     else:
         _download_from_drive(id="1mNJaYSv5W_5sWhrGCCfdo5ljmfMthifI", file_name="full_data.zip")
@@ -1323,10 +1325,10 @@ def prepare_data(scaling_factor: int = 1000) -> None:
     if not Path(f"{Path(__file__).resolve().parents[4] / "files" / "cars" / "data"}/all_car_audio").exists():
         _download_from_drive(id="11dUPwTRuCpHSTAQAo3T0GWKr73WokvZ5", file_name="all_car_audio.zip")
 
-    car_table_with_links = pd.read_csv(f"{base_folder}/car_data_full.csv")
-    image_table_with_links = pd.read_csv(f"{base_folder}/image_data_full.csv")
-    audio_table_with_links = pd.read_csv(f"{base_folder}/audio_data_full.csv")
-    complaints_table_with_links = pd.read_csv(f"{base_folder}/text_complaints_data_full.csv")
+    car_table_with_links = pd.read_csv(f"{base_folder_full}/car_data_full.csv")
+    image_table_with_links = pd.read_csv(f"{base_folder_full}/image_data_full.csv")
+    audio_table_with_links = pd.read_csv(f"{base_folder_full}/audio_data_full.csv")
+    complaints_table_with_links = pd.read_csv(f"{base_folder_full}/text_complaints_data_full.csv")
 
     # Scale down if needed
     if scaling_factor < len(car_table_with_links):
@@ -1345,10 +1347,11 @@ def prepare_data(scaling_factor: int = 1000) -> None:
         scaling_factor = car_table_with_links.shape[0]
     
     # Save
+    os.makedirs(base_folder, exist_ok=True)
     car_table_sf.to_csv(f"{base_folder}/car_data_{scaling_factor}.csv", index=False)
-    image_table_sf.to_csv(f"{base_folder}/image_car_data_{scaling_factor}.csv", index=False)
-    audio_table_sf.to_csv(f"{base_folder}/audio_car_data_{scaling_factor}.csv", index=False)
-    complaints_table_sf.to_csv(f"{base_folder}/text_complaints_data_{scaling_factor}.csv", index=False)
+    image_table_sf.to_csv(f"{base_folder}/image_car_data_{scaling_factor}.csv", index=False, columns=["image_path","image_id", "car_id"])
+    audio_table_sf.to_csv(f"{base_folder}/audio_car_data_{scaling_factor}.csv", index=False, columns=["audio_path","audio_id", "car_id"])
+    complaints_table_sf.to_csv(f"{base_folder}/text_complaints_data_{scaling_factor}.csv", index=False, columns=["summary","complaint_id", "car_id"])
 
 
 def main():

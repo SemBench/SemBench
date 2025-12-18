@@ -69,6 +69,7 @@ def get_evaluator(use_case: str):
         "animals": "AnimalsEvaluator",
         "ecomm": "EcommEvaluator",
         "mmqa": "MMQAEvaluator",
+        "cars": "CarsEvaluator",
         # Add more use cases here as needed
     }
 

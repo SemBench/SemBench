@@ -31,38 +31,20 @@ The `CarComplaint` table contains text complaints (`summary`) describing vehicle
 
 ## Queries
 
-- Which cars have brake-related complaints in our database?
+- Find cars that were in a crash/accident/collision.
 
-- Find cars with available audio recordings that show normal engine startup and have no visible damage in their images.
+- Find cars with available audio recordings that show a dead battery.
 
-- Find five cars registered in the USA that have engine problems according to their audio recordings (non-normal audio).
+- Find ten cars that are damaged according to images.
 
-- What is the average mileage of cars with steering-related complaints?
+- How many 'Automatic' transmission cars are damaged according to audio and images?
 
-- Count cars with automatic transmission whose audio and images suggest brake or engine issues.
+- Find cars that are damaged according to one modality but not the other. For this query, for complaints, check if the car was on fire.
 
-- Find cars that have issues according to at least one modality but are healthy according to another modality, consider only cars with two or more available modalities. Consider only audio recordings, images, and text complaints.
+- Find cars that are either dented (image), have worn out brakes (audio), or have electrical system problems (text). They should be damaged at least according to a single modality.
 
-- Find cars with any reported issues in our database (consider all audio recordings, images, and text complaints)?
+- Find a hundred cars with punctures and paint scratches on images.
 
-- Find hundred cars with crash-related complaints and more than 2 previous owners.
-
-- Find cars that have issues according to both audio recordings and images (semantic filter/join with audio and image in one prompt).
+- Find cars that are torn according to images and have bad ignition according to audio.
 
 - For all complaints, generate a component category from a given list of component classes.
-
-## Ground Truth
-
-- `SELECT year, mileage, fuel_type, transmission, country, car_id FROM car WHERE component_class LIKE '%BRAKE%' OR summary LIKE '%brake%';`
-
-- `SELECT year, mileage, fuel_type, transmission, country, car_id FROM car WHERE generic_problem = 'startup state' AND detailed_problem = 'normal_engine_startup' AND damage_status = 'no_damage';`
-
-- `SELECT year, mileage, fuel_type, transmission, country, car_id FROM car WHERE country = 'USA' AND generic_problem = 'idle state' AND detailed_problem NOT IN ('normal_engine_idle') LIMIT 5;`
-
-- `SELECT AVG(mileage) AS average_mileage FROM car WHERE component_class LIKE '%STEERING%' OR summary LIKE '%steering%';`
-
-- `SELECT transmission, COUNT(*) AS count FROM car WHERE transmission = 'Automatic' AND (detailed_problem NOT IN ('normal_engine_startup', 'normal_engine_idle', 'normal_brakes') OR damage_status != 'no_damage' OR component_class NOT IN ('UNKNOWN')) GROUP BY transmission;`
-
-- `SELECT year, mileage, fuel_type, transmission, country, car_id FROM car WHERE (detailed_problem NOT IN ('normal_engine_startup', 'normal_engine_idle', 'normal_brakes') OR damage_status != 'no_damage' OR component_class NOT IN ('UNKNOWN')) AND (detailed_problem IN ('normal_engine_startup', 'normal_engine_idle', 'normal_brakes') OR damage_status = 'no_damage' OR component_class = 'UNKNOWN') ORDER BY year ASC LIMIT 1;`
-
-- `SELECT year, mileage, fuel_type, transmission, country, car_id FROM car WHERE detailed_problem NOT IN ('normal_engine_startup', 'normal_engine_idle', 'normal_brakes') OR damage_status != 'no_damage' OR component_class NOT IN ('UNKNOWN');`
