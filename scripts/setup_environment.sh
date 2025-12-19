@@ -149,6 +149,10 @@ grep -v "^lotus-ai" requirements.txt | grep -v "^palimpzest" > /tmp/requirements
 $PIP_PATH install -r /tmp/requirements_temp.txt
 rm /tmp/requirements_temp.txt
 
+# Install BigQuery dependencies
+print_step "Installing BigQuery dependencies..."
+$PIP_PATH install dotenv overrides jinja2 google-cloud-bigquery google-cloud-storage 
+
 print_success "All pip packages installed"
 
 ################################################################################
