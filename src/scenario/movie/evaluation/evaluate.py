@@ -117,6 +117,8 @@ class MovieEvaluator(GenericEvaluator):
             return QueryMetricRetrieval(precision=1.0 if len(ground_truth) == 0 else 0.0)
         if len(ground_truth) == 0:
             return QueryMetricRetrieval()
+        
+        system_results = system_results.head(limit)
 
         # Use first column for comparison regardless of column names
         if len(system_results.columns) > 0 and len(ground_truth.columns) > 0:
@@ -196,6 +198,8 @@ class MovieEvaluator(GenericEvaluator):
         # Ensure we have at least 3 columns (id, reviewId1, reviewId2)
         if len(system_results.columns) < 3 or len(ground_truth.columns) < 3:
             return QueryMetricRetrieval()
+
+        system_results = system_results.head(limit)
 
         def create_pair_tuple(row, columns):
             """Create a normalized tuple for pair comparison using column positions."""
