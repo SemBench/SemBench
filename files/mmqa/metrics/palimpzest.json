@@ -1,11 +1,11 @@
 {
-  "Q2a": {
-    "query_id": "2a",
+  "Q5": {
+    "query_id": "5",
     "status": "success",
-    "execution_time": 152.26670050621033,
-    "token_usage": 3097121.0,
-    "money_cost": 0.9462897000000148,
-    "row_count": 5,
+    "execution_time": 1.5958211421966553,
+    "token_usage": 4026.0,
+    "money_cost": 0.001254,
+    "row_count": 1,
     "model_name": "gemini-2.5-flash",
     "concurrent_llm_worker": 20,
     "precision": 1.0,

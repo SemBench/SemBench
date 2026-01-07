@@ -1,0 +1,15 @@
+{
+  "Q7": {
+    "query_id": "7",
+    "status": "success",
+    "execution_time": 28056.73735809326,
+    "token_usage": 791851097.0,
+    "money_cost": 241.77930929915402,
+    "row_count": 500,
+    "model_name": "gemini-2.5-flash",
+    "concurrent_llm_worker": 20,
+    "precision": 0.019762845849802372,
+    "recall": 1.0,
+    "f1_score": 0.03875968992248062
+  }
+}

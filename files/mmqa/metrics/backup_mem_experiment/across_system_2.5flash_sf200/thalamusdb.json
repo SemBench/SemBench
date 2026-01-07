@@ -1,0 +1,40 @@
+{
+  "Q2a": {
+    "query_id": "2a",
+    "status": "success",
+    "execution_time": 19.777414798736572,
+    "token_usage": 54765,
+    "money_cost": 0.016441,
+    "row_count": 2,
+    "model_name": "gemini-2.5-flash",
+    "concurrent_llm_worker": 20,
+    "precision": 1.0,
+    "recall": 0.4,
+    "f1_score": 0.5714285714285715
+  },
+  "Q2b": {
+    "query_id": "2b",
+    "status": "failed",
+    "execution_time": 0.0,
+    "error": "ThalamusDB does not currently support semantic extract/map operators.",
+    "row_count": 0,
+    "model_name": "gemini-2.5-flash",
+    "concurrent_llm_worker": 20,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1_score": 0.0
+  },
+  "Q7": {
+    "query_id": "7",
+    "status": "success",
+    "execution_time": 320.6410057544708,
+    "token_usage": 1001602,
+    "money_cost": 0.300714,
+    "row_count": 21,
+    "model_name": "gemini-2.5-flash",
+    "concurrent_llm_worker": 20,
+    "precision": 0.23809523809523808,
+    "recall": 1.0,
+    "f1_score": 0.3846153846153846
+  }
+}

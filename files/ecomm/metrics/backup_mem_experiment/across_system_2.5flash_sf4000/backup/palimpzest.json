@@ -1,0 +1,58 @@
+{
+  "Q2": {
+    "query_id": "2",
+    "status": "success",
+    "execution_time": 324.68177795410156,
+    "money_cost": 3.070823399999813,
+    "row_count": 26,
+    "model_name": "gemini-2.5-flash",
+    "concurrent_llm_worker": 20,
+    "accuracy": 0.32258064516129037,
+    "metric_type": "f1-score",
+    "precision": 0.19230769230769232,
+    "recall": 1.0,
+    "f1_score": 0.32258064516129037
+  },
+  "Q7": {
+    "query_id": "7",
+    "status": "success",
+    "execution_time": 15328.66892170906,
+    "money_cost": 140.161792500011,
+    "row_count": 6427,
+    "model_name": "gemini-2.5-flash",
+    "concurrent_llm_worker": 20,
+    "accuracy": 0.8013361462728552,
+    "metric_type": "f1-score",
+    "precision": 0.7091955811420569,
+    "recall": 0.9209941402303495,
+    "f1_score": 0.8013361462728552
+  },
+  "Q8": {
+    "query_id": "8",
+    "status": "failed",
+    "execution_time": 0.0,
+    "error": "'NoneType' object is not subscriptable",
+    "row_count": 0,
+    "model_name": "gemini-2.5-flash",
+    "concurrent_llm_worker": 20,
+    "accuracy": 0.0,
+    "metric_type": "f1-score",
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1_score": 0.0
+  },
+  "Q9": {
+    "query_id": "9",
+    "status": "success",
+    "execution_time": 1506.955820798874,
+    "money_cost": 6.826453200001323,
+    "row_count": 1023,
+    "model_name": "gemini-2.5-flash",
+    "concurrent_llm_worker": 20,
+    "accuracy": 0.5303476723629935,
+    "metric_type": "f1-score",
+    "precision": 0.4398826979472141,
+    "recall": 0.6676557863501483,
+    "f1_score": 0.5303476723629935
+  }
+}

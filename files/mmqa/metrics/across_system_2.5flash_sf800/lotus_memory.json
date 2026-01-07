@@ -1,0 +1,35 @@
+{
+  "2a": {
+    "peak_memory_mb": 1897.78
+  },
+  "2b": {
+    "peak_memory_mb": 1751.9
+  },
+  "7": {
+    "peak_memory_mb": 42998.01
+  },
+  "1": {
+    "peak_memory_mb": 823.98
+  },
+  "3a": {
+    "peak_memory_mb": 827.37
+  },
+  "3f": {
+    "peak_memory_mb": 817.07
+  },
+  "4": {
+    "peak_memory_mb": 748.79
+  },
+  "5": {
+    "peak_memory_mb": 720.46
+  },
+  "6a": {
+    "peak_memory_mb": 815.04
+  },
+  "6b": {
+    "peak_memory_mb": 823.22
+  },
+  "6c": {
+    "peak_memory_mb": 824.88
+  }
+}

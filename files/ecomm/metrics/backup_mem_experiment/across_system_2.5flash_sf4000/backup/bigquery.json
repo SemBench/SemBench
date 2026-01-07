@@ -1,0 +1,62 @@
+{
+  "Q2": {
+    "query_id": "2",
+    "status": "success",
+    "execution_time": 53.42127203941345,
+    "token_usage": 26922757,
+    "money_cost": 8.2107169,
+    "row_count": 59,
+    "model_name": "gemini-2.5-flash",
+    "concurrent_llm_worker": 20,
+    "accuracy": 0.125,
+    "metric_type": "f1-score",
+    "precision": 0.06779661016949153,
+    "recall": 0.8,
+    "f1_score": 0.125
+  },
+  "Q7": {
+    "query_id": "7",
+    "status": "success",
+    "execution_time": 1324.1788046360016,
+    "token_usage": 193047647,
+    "money_cost": 64.3581227,
+    "row_count": 7526,
+    "model_name": "gemini-2.5-flash",
+    "concurrent_llm_worker": 20,
+    "accuracy": 0.7838076152304609,
+    "metric_type": "f1-score",
+    "precision": 0.6496146691469572,
+    "recall": 0.9878763386542736,
+    "f1_score": 0.7838076152304609
+  },
+  "Q8": {
+    "query_id": "8",
+    "status": "success",
+    "execution_time": 2435.627660751343,
+    "token_usage": 1281910129,
+    "money_cost": 388.5852557,
+    "row_count": 2932,
+    "model_name": "gemini-2.5-flash",
+    "concurrent_llm_worker": 20,
+    "accuracy": 0.029106029106029104,
+    "metric_type": "f1-score",
+    "precision": 0.014775725593667546,
+    "recall": 0.9655172413793104,
+    "f1_score": 0.029106029106029104
+  },
+  "Q9": {
+    "query_id": "9",
+    "status": "success",
+    "execution_time": 120.70021867752075,
+    "token_usage": 15722010,
+    "money_cost": 5.007484799999999,
+    "row_count": 1406,
+    "model_name": "gemini-2.5-flash",
+    "concurrent_llm_worker": 20,
+    "accuracy": 0.5043562439496612,
+    "metric_type": "f1-score",
+    "precision": 0.3742816091954023,
+    "recall": 0.7729970326409495,
+    "f1_score": 0.5043562439496612
+  }
+}
