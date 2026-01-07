@@ -1,22 +1,4 @@
-WITH two_more_modalities AS (
-    SELECT
-        cars.car_id,
-        cars.year,
-        car_complaints.complaint_id,
-        car_complaints.summary,
-        car_images.image_id,
-        car_images.image_path,
-        car_audio.audio_id,
-        car_audio.audio_path
-    FROM cars
-    LEFT JOIN car_images ON cars.car_id = car_images.car_id
-    LEFT JOIN car_audio ON cars.car_id = car_audio.car_id
-    LEFT JOIN car_complaints ON cars.car_id = car_complaints.car_id
-    WHERE (car_audio.audio_id IS NOT NULL AND car_complaints.complaint_id IS NOT NULL) OR
-          (car_images.image_id IS NOT NULL AND car_complaints.complaint_id IS NOT NULL) OR
-          (car_images.image_id IS NOT NULL AND car_audio.audio_id IS NOT NULL)
-),
-sick_audio AS (
+WITH sick_audio AS (
     SELECT car_id
     FROM two_more_modalities
     WHERE audio_id IS NOT NULL

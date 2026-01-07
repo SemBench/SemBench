@@ -43,6 +43,13 @@ class BigQueryMMQASetup:
         if bucket is None:
             print(f"Bucket {bucket_name} not found. Creating it...")
             bucket = storage_client.create_bucket(bucket_name)
+        else:
+            # Clear existing images in bucket to ensure clean state for new scale factor
+            print(f"Clearing existing images from bucket {bucket_name}...")
+            blobs = list(bucket.list_blobs())
+            if blobs:
+                bucket.delete_blobs(blobs)
+                print(f"Deleted {len(blobs)} existing images from bucket.")
 
         string_paths = []
         for f in os.listdir(images_dir):

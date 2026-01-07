@@ -77,7 +77,7 @@ class GenericThalamusDBRunner(GenericRunner):
             dop=20,
             model_config_path=f"{Path(__file__).resolve().parents[3]}/config/system/thalamusdb/{model_name_to_file_name[self.model_name]}.json",
         )
-        self.constraints = Constraints(max_calls=1000, max_seconds=6000)
+        self.constraints = Constraints(max_calls=100000000000, max_seconds=6000, max_tokens=10000000000000000000000)
 
     def get_system_name(self) -> str:
         """Return the name of the system."""

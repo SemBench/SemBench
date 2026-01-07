@@ -4,8 +4,8 @@ from lotus.types import AudioArray
 
 def run(data_dir: str, scale_factor: int = 157376):
     # Load data
-    cars = pd.read_csv(os.path.join(data_dir, "data", f"car_data_{scale_factor}.csv"))
-    audio = pd.read_csv(os.path.join(data_dir, "data", f"audio_car_data_{scale_factor}.csv"))
+    cars = pd.read_csv(os.path.join(data_dir, "data", f"sf_{scale_factor}", f"car_data_{scale_factor}.csv"))
+    audio = pd.read_csv(os.path.join(data_dir, "data", f"sf_{scale_factor}", f"audio_car_data_{scale_factor}.csv"))
 
     # Join cars with audio
     joined = cars.merge(audio, on='car_id', how='inner')

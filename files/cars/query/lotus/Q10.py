@@ -3,8 +3,8 @@ import pandas as pd
 
 def run(data_dir: str, scale_factor: int = 157376):
     # Load data
-    cars = pd.read_csv(os.path.join(data_dir, "data", f"car_data_{scale_factor}.csv"))
-    complaints = pd.read_csv(os.path.join(data_dir, "data", f"text_complaints_data_{scale_factor}.csv"))
+    cars = pd.read_csv(os.path.join(data_dir, "data", f"sf_{scale_factor}", f"car_data_{scale_factor}.csv"))
+    complaints = pd.read_csv(os.path.join(data_dir, "data", f"sf_{scale_factor}", f"text_complaints_data_{scale_factor}.csv"))
 
     # Join cars with complaints
     joined = cars.merge(complaints, on='car_id', how='inner')
@@ -21,9 +21,12 @@ def run(data_dir: str, scale_factor: int = 157376):
 
     # Create prompt with categories
     categories_str = ", ".join(categories)
-    prompt = f'Classify car complaint to one of given problem categories. Categories: {categories_str}. Answer only one of given problem categories, nothing more. Complaint: {{summary}}'
+    prompt = f'Classify car complaint to one of given problem categories. Categories: {categories_str}. Answer only one of given problem categories, nothing more.'
 
     # Apply classification using sem_extract
-    joined = joined.sem_extract(prompt, column_name='problem_category')
+    joined = joined.sem_extract(
+        input_cols=["summary"],
+        output_cols={"problem_category": prompt}
+    )
 
     return joined[['car_id', 'problem_category']]

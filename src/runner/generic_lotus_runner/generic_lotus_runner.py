@@ -250,7 +250,8 @@ class GenericLotusRunner(GenericRunner):
             metric.error = str(e)
             metric.results = self._get_empty_results_dataframe(query_id)
             print(f"  Error in Q{query_id} execution: {type(e).__name__}: {e}")
-            raise
+            import traceback
+            traceback.print_exc()
 
         finally:
             # Reset stats after storing

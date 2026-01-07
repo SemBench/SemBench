@@ -84,9 +84,9 @@ def _download_from_drive(id: str, file_name: str = "raw_data.zip", folder: str =
 
     # Use -o flag to overwrite files without prompting
     print(f"Extracting {zip_path} to {folder}...")
-    os.system(
-        f"unzip -o {zip_path} -d {folder}"
-    )
+    # Extract to parent directory first
+    parent_folder = os.path.dirname(folder)
+    os.system(f"unzip -o {zip_path} -d {parent_folder}")
     os.system(f"rm {zip_path}")
 
 
@@ -1167,25 +1167,21 @@ def scale_down_data(
         selected_1 = random.sample(cars_1_modality, min(target_1, len(cars_1_modality)))
         selected_cars.extend(selected_1)
     
-    # Filter car table
+    # Filter car table - preserve original car_ids for evaluation
     car_table_sf = car_table[car_table["car_id"].isin(selected_cars)].copy()
     car_table_sf = car_table_sf.reset_index(drop=True)
-    car_table_sf["car_id"] = car_table_sf.index
-    
-    # Create mapping from old car_id to new car_id
-    old_to_new = dict(zip(selected_cars, car_table_sf["car_id"]))
-    
-    # Filter and update related tables
+
+    # Filter related tables - preserve original car_ids
     car_ids_set = set(selected_cars)
-    
+
     image_table_sf = image_table[image_table["car_id"].isin(car_ids_set)].copy()
-    image_table_sf["car_id"] = image_table_sf["car_id"].map(old_to_new)
-    
+    image_table_sf = image_table_sf.reset_index(drop=True)
+
     audio_table_sf = audio_table[audio_table["car_id"].isin(car_ids_set)].copy()
-    audio_table_sf["car_id"] = audio_table_sf["car_id"].map(old_to_new)
-    
+    audio_table_sf = audio_table_sf.reset_index(drop=True)
+
     complaints_table_sf = complaints_table[complaints_table["car_id"].isin(car_ids_set)].copy()
-    complaints_table_sf["car_id"] = complaints_table_sf["car_id"].map(old_to_new)
+    complaints_table_sf = complaints_table_sf.reset_index(drop=True)
     
     return car_table_sf, image_table_sf, audio_table_sf, complaints_table_sf
 
@@ -1301,34 +1297,44 @@ def prepare_data(scaling_factor: int = 157376) -> None:
     
     # Check if data already exists
     base_folder = Path(__file__).resolve().parents[4] / "files" / "cars" / "data"
-    folder = base_folder / f"sf_{scaling_factor}"
-    
-    csv_files = [
+    base_folder_sf = base_folder / f"sf_{scaling_factor}"
+    base_folder_full = base_folder / "full_data" / "full_data"
+
+    # Check if scaled data already exists
+    scaled_csv_files = [
+        f"car_data_{scaling_factor}.csv",
+        f"image_car_data_{scaling_factor}.csv",
+        f"audio_car_data_{scaling_factor}.csv",
+        f"text_complaints_data_{scaling_factor}.csv"
+    ]
+
+    # If scaled data exists, we're done
+    if all(os.path.exists(base_folder_sf / f) for f in scaled_csv_files):
+        print(f"Scaled data for sf={scaling_factor} already exists, skipping preparation.")
+        return
+
+    # Otherwise, check if full data exists
+    full_csv_files = [
         "car_data_full.csv",
         "image_data_full.csv",
         "audio_data_full.csv",
         "text_complaints_data_full.csv"
     ]
 
-    base_folder_full = Path(__file__).resolve().parents[4] / "files" / "cars" / "data" / f"sf_{scaling_factor}" if scaling_factor != 157376 else Path(__file__).resolve().parents[4] / "files" / "cars" / "data" / "full_data"
-    base_folder = Path(__file__).resolve().parents[4] / "files" / "cars" / "data" / f"sf_{scaling_factor}"
-    
-    if all(os.path.exists(base_folder_full / f) for f in csv_files):
-        print("Data already exists, skipping download.")
-    
-    else:
+    if not all(os.path.exists(base_folder_full / f) for f in full_csv_files):
         _download_from_drive(id="1mNJaYSv5W_5sWhrGCCfdo5ljmfMthifI", file_name="full_data.zip")
-    
-    if not Path(f"{Path(__file__).resolve().parents[4] / "files" / "cars" / "data"}/all_car_images").exists():
+
+    if not Path(f"{base_folder}/all_car_images").exists():
         _download_from_drive(id="1EjSOvDH2M-QpSdnxDTLzyrq1Z08m_0-N", file_name="all_car_images.zip")
 
-    if not Path(f"{Path(__file__).resolve().parents[4] / "files" / "cars" / "data"}/all_car_audio").exists():
+    if not Path(f"{base_folder}/all_car_audio").exists():
         _download_from_drive(id="11dUPwTRuCpHSTAQAo3T0GWKr73WokvZ5", file_name="all_car_audio.zip")
 
-    car_table_with_links = pd.read_csv(f"{base_folder_full}/car_data_full.csv")
-    image_table_with_links = pd.read_csv(f"{base_folder_full}/image_data_full.csv")
-    audio_table_with_links = pd.read_csv(f"{base_folder_full}/audio_data_full.csv")
-    complaints_table_with_links = pd.read_csv(f"{base_folder_full}/text_complaints_data_full.csv")
+    # Always read from full_data (the source)
+    car_table_with_links = pd.read_csv(base_folder_full / "car_data_full.csv")
+    image_table_with_links = pd.read_csv(base_folder_full / "image_data_full.csv")
+    audio_table_with_links = pd.read_csv(base_folder_full / "audio_data_full.csv")
+    complaints_table_with_links = pd.read_csv(base_folder_full / "text_complaints_data_full.csv")
 
     # Scale down if needed
     if scaling_factor < len(car_table_with_links):
@@ -1347,11 +1353,11 @@ def prepare_data(scaling_factor: int = 157376) -> None:
         scaling_factor = car_table_with_links.shape[0]
     
     # Save
-    os.makedirs(base_folder, exist_ok=True)
-    car_table_sf.to_csv(f"{base_folder}/car_data_{scaling_factor}.csv", index=False)
-    image_table_sf.to_csv(f"{base_folder}/image_car_data_{scaling_factor}.csv", index=False, columns=["image_path","image_id", "car_id"])
-    audio_table_sf.to_csv(f"{base_folder}/audio_car_data_{scaling_factor}.csv", index=False, columns=["audio_path","audio_id", "car_id"])
-    complaints_table_sf.to_csv(f"{base_folder}/text_complaints_data_{scaling_factor}.csv", index=False, columns=["summary","complaint_id", "car_id"])
+    os.makedirs(base_folder_sf, exist_ok=True)
+    car_table_sf.to_csv(base_folder_sf / f"car_data_{scaling_factor}.csv", index=False)
+    image_table_sf.to_csv(base_folder_sf / f"image_car_data_{scaling_factor}.csv", index=False, columns=["image_path","image_id", "car_id"])
+    audio_table_sf.to_csv(base_folder_sf / f"audio_car_data_{scaling_factor}.csv", index=False, columns=["audio_path","audio_id", "car_id"])
+    complaints_table_sf.to_csv(base_folder_sf / f"text_complaints_data_{scaling_factor}.csv", index=False, columns=["summary","complaint_id", "car_id"])
 
 
 def main():

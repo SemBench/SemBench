@@ -3,8 +3,8 @@ import pandas as pd
 
 def run(data_dir: str, scale_factor: int = 157376):
     # Load data
-    cars = pd.read_csv(os.path.join(data_dir, "data", f"car_data_{scale_factor}.csv"))
-    complaints = pd.read_csv(os.path.join(data_dir, "data", f"text_complaints_data_{scale_factor}.csv"))
+    cars = pd.read_csv(os.path.join(data_dir, "data", f"sf_{scale_factor}", f"car_data_{scale_factor}.csv"))
+    complaints = pd.read_csv(os.path.join(data_dir, "data", f"sf_{scale_factor}", f"text_complaints_data_{scale_factor}.csv"))
 
     # Join cars with complaints
     joined = cars.merge(complaints, on='car_id', how='inner')

@@ -52,23 +52,25 @@ class ThalamusDBCarsSetup:
 
 
     def setup_data(self, data_dir: str, scale_factor: int = 157376):
+        sf_dir = os.path.join(data_dir, "data", f"sf_{scale_factor}")
+
         self._upload_file_to_db(
-            csv_path=os.path.join(data_dir, "data", f"car_data_{scale_factor}.csv"),
+            csv_path=os.path.join(sf_dir, f"car_data_{scale_factor}.csv"),
             table_name="cars"
         )
 
         self._upload_file_to_db(
-            csv_path=os.path.join(data_dir, "data", f"audio_car_data_{scale_factor}.csv"),
+            csv_path=os.path.join(sf_dir, f"audio_car_data_{scale_factor}.csv"),
             table_name="car_audio"
         )
 
         self._upload_file_to_db(
-            csv_path=os.path.join(data_dir, "data", f"text_complaints_data_{scale_factor}.csv"),
+            csv_path=os.path.join(sf_dir, f"text_complaints_data_{scale_factor}.csv"),
             table_name="car_complaints"
         )
 
         self._upload_file_to_db(
-            csv_path=os.path.join(data_dir, "data", f"image_car_data_{scale_factor}.csv"),
+            csv_path=os.path.join(sf_dir, f"image_car_data_{scale_factor}.csv"),
             table_name="car_images"
         )
 

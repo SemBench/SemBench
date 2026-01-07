@@ -29,7 +29,7 @@ class CarsEvaluator(GenericEvaluator):
 
     def _load_domain_data(self) -> None:
         #  Read full data w/ labels
-        full_data_path = self._root / "data" / "full_data"
+        full_data_path = self._root / "data" / "full_data" / "full_data"
         cars_df = pd.read_csv(full_data_path / f"car_data_full.csv")
         audio_df = pd.read_csv(full_data_path / f"audio_data_full.csv")
         image_df = pd.read_csv(full_data_path / f"image_data_full.csv")
@@ -39,8 +39,8 @@ class CarsEvaluator(GenericEvaluator):
             #  Read sample data w/o labels
             data_path = self._root / "data" / f"sf_{int(self.scale_factor)}"
             cars_sample_df = pd.read_csv(data_path / f"car_data_{int(self.scale_factor)}.csv")
-            audio_sample_df = pd.read_csv(data_path / f"audio_data_{int(self.scale_factor)}.csv")
-            image_sample_df = pd.read_csv(data_path / f"image_data_{int(self.scale_factor)}.csv")
+            audio_sample_df = pd.read_csv(data_path / f"audio_car_data_{int(self.scale_factor)}.csv")
+            image_sample_df = pd.read_csv(data_path / f"image_car_data_{int(self.scale_factor)}.csv")
             text_sample_df = pd.read_csv(data_path / f"text_complaints_data_{int(self.scale_factor)}.csv")
 
             cars_df = cars_df[ cars_df["car_id"].isin(cars_sample_df["car_id"])]
@@ -56,7 +56,7 @@ class CarsEvaluator(GenericEvaluator):
 
     def _get_ground_truth(self, query_id: int) -> pd.DataFrame:
         query_name = f"Q{query_id}"
-        gt_path = self._results_path / "ground_truth" / f"{query_name}_{f"{int(self.scale_factor)}"}.csv"
+        gt_path = self._results_path / "ground_truth" / f"{query_name}.csv"
         if gt_path.exists():
             return pd.read_csv(gt_path)
 
@@ -68,7 +68,7 @@ class CarsEvaluator(GenericEvaluator):
         crash = self.text_df[self.text_df["crash"] == True]
         gt = crash["car_id"].drop_duplicates().copy()
 
-        path = self._results_path / "ground_truth" / f"Q1_{int(self.scale_factor)}.csv"
+        path = self._results_path / "ground_truth" / f"Q1.csv"
         path.parent.mkdir(parents=True, exist_ok=True)
         gt.to_csv(path, index=False)
         return gt
@@ -79,7 +79,7 @@ class CarsEvaluator(GenericEvaluator):
         dead_battery_audio = car_audio_df[(car_audio_df["generic_problem"] == "startup state") & (car_audio_df["detailed_problem"] == "dead_battery")]
 
         gt = dead_battery_audio["car_id"].drop_duplicates().copy()
-        path = self._results_path / "ground_truth" / f"Q2_{int(self.scale_factor)}.csv"
+        path = self._results_path / "ground_truth" / f"Q2.csv"
         path.parent.mkdir(parents=True, exist_ok=True)
         gt.to_csv(path, index=False)
         return gt
@@ -92,7 +92,7 @@ class CarsEvaluator(GenericEvaluator):
         manual_cars_with_no_damage = manual_cars[manual_cars["car_id"].isin(no_damaged_cars["car_id"])]
         gt = manual_cars_with_no_damage[["vin"]].reset_index(drop=True).copy()   
 
-        path = self._results_path / "ground_truth" / f"Q3_{int(self.scale_factor)}.csv"
+        path = self._results_path / "ground_truth" / f"Q3.csv"
         path.parent.mkdir(parents=True, exist_ok=True)
         gt.to_csv(path, index=False)
         return gt
@@ -107,7 +107,7 @@ class CarsEvaluator(GenericEvaluator):
 
         gt = pd.DataFrame({"average_age": [avg_age]})
 
-        path = self._results_path / "ground_truth" / f"Q4_{int(self.scale_factor)}.csv"
+        path = self._results_path / "ground_truth" / f"Q4.csv"
         path.parent.mkdir(parents=True, exist_ok=True)
         gt.to_csv(path, index=False)
         return gt
@@ -119,7 +119,7 @@ class CarsEvaluator(GenericEvaluator):
         gt = damaged_cars.loc[damaged_cars["transmission"] == "Automatic", "transmission"].value_counts().to_frame()
         gt = gt.reset_index()
 
-        path = self._results_path / "ground_truth" / f"Q5_{int(self.scale_factor)}.csv"
+        path = self._results_path / "ground_truth" / f"Q5.csv"
         path.parent.mkdir(parents=True, exist_ok=True)
         gt.to_csv(path, index=False)
 
@@ -228,7 +228,7 @@ class CarsEvaluator(GenericEvaluator):
             )
         ]
 
-        path = self._results_path / "ground_truth" / f"Q6_{int(self.scale_factor)}.csv"
+        path = self._results_path / "ground_truth" / f"Q6.csv"
         path.parent.mkdir(parents=True, exist_ok=True)
         gt.to_csv(path, index=False)
 
@@ -244,7 +244,7 @@ class CarsEvaluator(GenericEvaluator):
         all_car_ids = pd.concat([worn_out_brakes_cars, electrical_system_cars, damaged_cars]).drop_duplicates()
         gt = pd.DataFrame({"car_id": all_car_ids}).copy()
 
-        path = self._results_path / "ground_truth" / f"Q7_{int(self.scale_factor)}.csv"
+        path = self._results_path / "ground_truth" / f"Q7.csv"
         path.parent.mkdir(parents=True, exist_ok=True)
         gt.to_csv(path, index=False)
         
@@ -256,7 +256,7 @@ class CarsEvaluator(GenericEvaluator):
             ), ["car_id"]]
             
 
-        path = self._results_path / "ground_truth" / f"Q8_{int(self.scale_factor)}.csv"
+        path = self._results_path / "ground_truth" / f"Q8.csv"
         path.parent.mkdir(parents=True, exist_ok=True)
         gt.to_csv(path, index=False)
         return gt
@@ -268,7 +268,7 @@ class CarsEvaluator(GenericEvaluator):
 
         gt = torn[torn["car_id"].isin(bad_ignition["car_id"])].drop_duplicates()
 
-        path = self._results_path / "ground_truth" / f"Q9_{int(self.scale_factor)}.csv"
+        path = self._results_path / "ground_truth" / f"Q9.csv"
         path.parent.mkdir(parents=True, exist_ok=True)
         gt.to_csv(path, index=False)
         return gt
@@ -279,7 +279,7 @@ class CarsEvaluator(GenericEvaluator):
         gt.reset_index(inplace=True)
         gt.rename(columns={"component_class": "problem_category"}, inplace=True)
 
-        path = self._results_path / "ground_truth" / f"Q10_{int(self.scale_factor)}.csv"
+        path = self._results_path / "ground_truth" / f"Q10.csv"
         path.parent.mkdir(parents=True, exist_ok=True)
         gt.to_csv(path, index=False)
         
@@ -297,7 +297,8 @@ class CarsEvaluator(GenericEvaluator):
     def _evaluate_q1(
         self, system_results: pd.DataFrame, ground_truth: pd.DataFrame
     ) -> QueryMetricRetrieval:
-        system_results.columns = system_results.columns.str.lower()
+        if len(system_results.columns) > 0:
+            system_results.columns = system_results.columns.str.lower()
         id_column = "car_id"
 
         precision = GenericEvaluator.compute_accuracy_score("precision", ground_truth, system_results, id_column=id_column).accuracy
@@ -309,7 +310,8 @@ class CarsEvaluator(GenericEvaluator):
     def _evaluate_q2(
         self, system_results: pd.DataFrame, ground_truth: pd.DataFrame
     ) -> QueryMetricRetrieval:
-        system_results.columns = system_results.columns.str.lower()
+        if len(system_results.columns) > 0:
+            system_results.columns = system_results.columns.str.lower()
         id_column = "car_id"
 
         print(ground_truth)
@@ -328,7 +330,8 @@ class CarsEvaluator(GenericEvaluator):
     ) -> QueryMetricAggregation:
         id_column="vin"
 
-        system_results.columns = system_results.columns.str.lower()
+        if len(system_results.columns) > 0:
+            system_results.columns = system_results.columns.str.lower()
 
         print(f"Systems results sample for Q3: {system_results}")
         print(f"Ground truth sample for Q3: {ground_truth}")
@@ -337,13 +340,22 @@ class CarsEvaluator(GenericEvaluator):
         correct_ids = ground_truth.loc[correct_ids_ix,:]
         ground_truth_sample = None
         if correct_ids.empty:
-            ground_truth_sample = ground_truth.sample(n=10, random_state=42)
+            # Sample as many as possible, up to 10
+            n_to_sample = min(10, len(ground_truth))
+            ground_truth_sample = ground_truth.sample(n=n_to_sample, random_state=42) if n_to_sample > 0 else ground_truth
 
         elif correct_ids.shape[0] > 10:
             raise "Ground truth for Q3 should not contain more than 10 rows. Query contains LIMIT 10."
-        
+
         elif correct_ids.shape[0] < 10:
-            ground_truth_sample = pd.concat([correct_ids, ground_truth[correct_ids_ix==False].sample(n=10-correct_ids.shape[0], random_state=42)])
+            # Sample as many false cases as possible, up to what's needed
+            false_cases = ground_truth[correct_ids_ix==False]
+            n_needed = 10 - correct_ids.shape[0]
+            n_to_sample = min(n_needed, len(false_cases))
+            if n_to_sample > 0:
+                ground_truth_sample = pd.concat([correct_ids, false_cases.sample(n=n_to_sample, random_state=42)])
+            else:
+                ground_truth_sample = correct_ids
             print(f"Smaller: {ground_truth_sample}")
 
         elif correct_ids.shape[0] == 10:
@@ -360,20 +372,23 @@ class CarsEvaluator(GenericEvaluator):
     def _evaluate_q4(
         self, system_results: pd.DataFrame, ground_truth: pd.DataFrame
     ) -> QueryMetricAggregation:
-        system_results.columns = system_results.columns.str.lower()
+        if len(system_results.columns) > 0:
+            system_results.columns = system_results.columns.str.lower()
         return self._generic_aggregation_evaluation(system_results, ground_truth)
 
     def _evaluate_q5(
         self, system_results: pd.DataFrame, ground_truth: pd.DataFrame
     ) -> QueryMetricAggregation:
-        system_results.columns = system_results.columns.str.lower()
+        if len(system_results.columns) > 0:
+            system_results.columns = system_results.columns.str.lower()
         print(ground_truth)
         return self._generic_aggregation_evaluation(system_results, ground_truth)
 
     def _evaluate_q6(
         self, system_results: pd.DataFrame, ground_truth: pd.DataFrame
     ) -> QueryMetricAggregation:
-        system_results.columns = system_results.columns.str.lower()
+        if len(system_results.columns) > 0:
+            system_results.columns = system_results.columns.str.lower()
         id_column = "car_id"
 
         print(system_results)
@@ -388,7 +403,8 @@ class CarsEvaluator(GenericEvaluator):
     def _evaluate_q7(
         self, system_results: pd.DataFrame, ground_truth: pd.DataFrame
     ) -> QueryMetricAggregation:
-        system_results.columns = system_results.columns.str.lower()
+        if len(system_results.columns) > 0:
+            system_results.columns = system_results.columns.str.lower()
         id_column = "car_id"
 
         print(system_results)
@@ -405,7 +421,8 @@ class CarsEvaluator(GenericEvaluator):
     ) -> QueryMetricAggregation:
         id_column="car_id"
 
-        system_results.columns = system_results.columns.str.lower()
+        if len(system_results.columns) > 0:
+            system_results.columns = system_results.columns.str.lower()
 
         print(f"Systems results sample for Q8: {system_results}")
         print(f"Ground truth sample for Q8: {ground_truth}")
@@ -414,13 +431,22 @@ class CarsEvaluator(GenericEvaluator):
         correct_ids = ground_truth.loc[correct_ids_ix,:]
         ground_truth_sample = None
         if correct_ids.empty:
-            ground_truth_sample = ground_truth.sample(n=100, random_state=42)
+            # Sample as many as possible, up to 100
+            n_to_sample = min(100, len(ground_truth))
+            ground_truth_sample = ground_truth.sample(n=n_to_sample, random_state=42) if n_to_sample > 0 else ground_truth
 
         elif correct_ids.shape[0] > 100:
             raise "Ground truth for Q8 should not contain more than 100 rows. Query contains LIMIT 100."
-        
+
         elif correct_ids.shape[0] < 100:
-            ground_truth_sample = pd.concat([correct_ids, ground_truth[correct_ids_ix==False].sample(n=100-correct_ids.shape[0], random_state=42)])
+            # Sample as many false cases as possible, up to what's needed
+            false_cases = ground_truth[correct_ids_ix==False]
+            n_needed = 100 - correct_ids.shape[0]
+            n_to_sample = min(n_needed, len(false_cases))
+            if n_to_sample > 0:
+                ground_truth_sample = pd.concat([correct_ids, false_cases.sample(n=n_to_sample, random_state=42)])
+            else:
+                ground_truth_sample = correct_ids
             print(f"Smaller: {ground_truth_sample}")
 
         elif correct_ids.shape[0] == 100:
@@ -438,7 +464,8 @@ class CarsEvaluator(GenericEvaluator):
         self, system_results: pd.DataFrame, ground_truth: pd.DataFrame
     ) -> QueryMetricAggregation:
         id_column="car_id"
-        system_results.columns = system_results.columns.str.lower()
+        if len(system_results.columns) > 0:
+            system_results.columns = system_results.columns.str.lower()
         print(system_results)
         print(ground_truth)
 
@@ -454,8 +481,10 @@ class CarsEvaluator(GenericEvaluator):
         id_column = "car_id"
         result_column = "problem_category"
 
-        system_results.columns = system_results.columns.str.lower()
-        system_results["problem_category"] = system_results["problem_category"].apply(lambda x: str(x).lower().replace("\n", ""))
+        if len(system_results.columns) > 0:
+            system_results.columns = system_results.columns.str.lower()
+        if "problem_category" in system_results.columns:
+            system_results["problem_category"] = system_results["problem_category"].apply(lambda x: str(x).lower().replace("\n", ""))
 
         gt = ground_truth.sort_values(id_column)[result_column]
         query = system_results.sort_values(id_column)[result_column]
