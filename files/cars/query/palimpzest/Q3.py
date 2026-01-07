@@ -4,47 +4,47 @@ import palimpzest as pz
 
 from palimpzest.core.lib.schemas import ImageFilepath
 
-
-data_cols = [
+# define the schema for the data you read from the file
+car_image_data_cols = [
+    {"name": "image_path", "type": ImageFilepath, "desc": "The filepath containing the car image"},
     {"name": "car_id", "type": int, "desc": "The integer id for the car"},
-    {"name": "transmission", "type": str, "desc": "The transmission type of the car"},
-    {"name": "image_id", "type": int, "desc": "The integer id for the image"},
-    {"name": "image_path", "type": ImageFilepath, "desc": "The filepath containing the image"},
+    {"name": "image_id", "type": int, "desc": "The integer id for the car image"},
+    {"name": "transmission", "type": str, "desc": "The string transmission type"},
+    {"name": "vin", "type": str, "desc": "The vehicle identification number"},
 ]
 
 
 class MyDataset(pz.IterDataset):
-    def __init__(self, id: str, df: pd.DataFrame):
-        super().__init__(id=id, schema=data_cols)
-        self.df = df
+  def __init__(self, id: str, car_df: pd.DataFrame):
+    super().__init__(id=id, schema=car_image_data_cols)
+    self.car_df = car_df
 
-    def __len__(self):
-        return len(self.df)
+  def __len__(self):
+    return len(self.car_df)
 
-    def __getitem__(self, idx: int):
-        return self.df.iloc[idx].to_dict()
-
+  def __getitem__(self, idx: int):
+    # get row from dataframe
+    return self.car_df.iloc[idx].to_dict()
+  
 
 def run(pz_config, data_dir: str, scale_factor: int = 157376):
     # Load data
-    cars = pd.read_csv(os.path.join(data_dir, "data", f"car_data_{scale_factor}.csv"))
-    images = pd.read_csv(os.path.join(data_dir, "data", f"image_car_data_{scale_factor}.csv"))
+    car_images = pd.read_csv(os.path.join(data_dir, f"data/sf_{scale_factor}/image_car_data_{scale_factor}.csv")) 
+    cars = pd.read_csv(os.path.join(data_dir, f"data/sf_{scale_factor}/car_data_{scale_factor}.csv")) 
+    
+    # Join before since PZ does not support joins
+    tmp_join = cars.join(car_images.set_index('car_id'), on='car_id', how='inner')[['image_path', 'car_id', 'image_id', 'transmission', 'vin']]
 
-    # Join cars with images
-    joined = cars.merge(images, on='car_id', how='inner')[['car_id', 'transmission', 'image_id', 'image_path']]
+    tmp_join = MyDataset(id="my-car-data", car_df=tmp_join)
 
-    # Create dataset
-    dataset = MyDataset(id="cars-images-data", df=joined)
+    # Filter transmission
+    tmp_join = tmp_join.filter(lambda row: row['transmission'] == 'Manual')
 
-    # Filter for Manual transmission
-    dataset = dataset.filter(lambda row: row['transmission'] == 'Manual')
+    # Filter image
+    tmp_join = tmp_join.sem_filter('You are given an image of a vehicle or its parts. Return true if car is not damaged.', depends_on=['image_path'])
+    tmp_join = tmp_join.project(['vin'])
+    candidates = tmp_join.limit(10)
 
-    # Apply semantic filter (car is NOT damaged)
-    dataset = dataset.sem_filter('You are given an image of a vehicle or its parts. Return true if car is not damaged.', depends_on=['image_path'])
-
-    # Limit to 10
-    dataset = dataset.limit(10)
-
-    # Execute and return
-    output = dataset.run(pz_config)
+    output = candidates.run(pz_config)
     return output
+

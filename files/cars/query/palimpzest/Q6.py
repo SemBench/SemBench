@@ -1,134 +1,98 @@
 import os
+import numpy as np
 import pandas as pd
 import palimpzest as pz
-import copy
 
 from palimpzest.core.lib.schemas import ImageFilepath, AudioFilepath
+import copy
+from palimpzest.constants import Model
 
-
-# Define schemas for different joins
-audio_text_cols = [
+data_audio_cols = [
     {"name": "car_id", "type": int, "desc": "The integer id for the car"},
-    {"name": "audio_id", "type": int, "desc": "The integer id for the audio"},
-    {"name": "audio_path", "type": AudioFilepath, "desc": "The filepath containing the audio"},
-    {"name": "complaint_id", "type": int, "desc": "The integer id for the complaint"},
-    {"name": "summary", "type": str, "desc": "The text summary of the complaint"},
+    {"name": "audio_path", "type": AudioFilepath, "desc": "The filepath containing audios."},
 ]
 
-image_text_cols = [
+data_image_cols = [
+    {"name": "image_id", "type": int, "desc": "The integer id for the car image"},
     {"name": "car_id", "type": int, "desc": "The integer id for the car"},
-    {"name": "image_id", "type": int, "desc": "The integer id for the image"},
-    {"name": "image_path", "type": ImageFilepath, "desc": "The filepath containing the image"},
-    {"name": "complaint_id", "type": int, "desc": "The integer id for the complaint"},
-    {"name": "summary", "type": str, "desc": "The text summary of the complaint"},
-]
-
-image_audio_cols = [
-    {"name": "car_id", "type": int, "desc": "The integer id for the car"},
-    {"name": "image_id", "type": int, "desc": "The integer id for the image"},
-    {"name": "image_path", "type": ImageFilepath, "desc": "The filepath containing the image"},
-    {"name": "audio_id", "type": int, "desc": "The integer id for the audio"},
-    {"name": "audio_path", "type": AudioFilepath, "desc": "The filepath containing the audio"},
+    {"name": "image_path", "type": ImageFilepath, "desc": "The filepath containing the car image."},
 ]
 
 
-class AudioTextDataset(pz.IterDataset):
-    def __init__(self, id: str, df: pd.DataFrame):
-        super().__init__(id=id, schema=audio_text_cols)
-        self.df = df
-    def __len__(self):
-        return len(self.df)
-    def __getitem__(self, idx: int):
-        return self.df.iloc[idx].to_dict()
+class MyDataset(pz.IterDataset):
+  def __init__(self, id: str, car_df: pd.DataFrame, schema: list):
+    super().__init__(id=id, schema=schema)
+    self.car_df = car_df
 
+  def __len__(self):
+    return len(self.car_df)
 
-class ImageTextDataset(pz.IterDataset):
-    def __init__(self, id: str, df: pd.DataFrame):
-        super().__init__(id=id, schema=image_text_cols)
-        self.df = df
-    def __len__(self):
-        return len(self.df)
-    def __getitem__(self, idx: int):
-        return self.df.iloc[idx].to_dict()
-
-
-class ImageAudioDataset(pz.IterDataset):
-    def __init__(self, id: str, df: pd.DataFrame):
-        super().__init__(id=id, schema=image_audio_cols)
-        self.df = df
-    def __len__(self):
-        return len(self.df)
-    def __getitem__(self, idx: int):
-        return self.df.iloc[idx].to_dict()
-
+  def __getitem__(self, idx: int):
+    # get row from dataframe
+    return self.car_df.iloc[idx].to_dict()
+  
 
 def run(pz_config, data_dir: str, scale_factor: int = 157376):
     # Load data
-    cars = pd.read_csv(os.path.join(data_dir, "data", f"car_data_{scale_factor}.csv"))
-    images = pd.read_csv(os.path.join(data_dir, "data", f"image_car_data_{scale_factor}.csv"))
-    audio = pd.read_csv(os.path.join(data_dir, "data", f"audio_car_data_{scale_factor}.csv"))
-    complaints = pd.read_csv(os.path.join(data_dir, "data", f"text_complaints_data_{scale_factor}.csv"))
+    cars = pd.read_csv(os.path.join(data_dir, f"data/sf_{scale_factor}/car_data_{scale_factor}.csv")) 
+    car_images = pd.read_csv(os.path.join(data_dir, f"data/sf_{scale_factor}/image_car_data_{scale_factor}.csv"))
+    audio = pd.read_csv(os.path.join(data_dir, f"data/sf_{scale_factor}/audio_car_data_{scale_factor}.csv"))
+    complaints = pd.read_csv(os.path.join(data_dir, f"data/sf_{scale_factor}/text_complaints_data_{scale_factor}.csv"))
 
-    # Join all tables
-    all_joined = cars.merge(images, on='car_id', how='left')
-    all_joined = all_joined.merge(audio, on='car_id', how='left')
-    all_joined = all_joined.merge(complaints, on='car_id', how='left')
+    # Join with outer joins to get all combinations
+    tmp_join = cars.join(car_images.set_index('car_id'), on='car_id', how='outer')[['image_path', 'car_id', 'image_id', 'year']]
+    tmp_join = tmp_join.join(audio.set_index('car_id'), on='car_id', how='outer')[['car_id', 'year', 'image_id', 'image_path', 'audio_path', 'audio_id']]
+    tmp_join = tmp_join.join(complaints.set_index('car_id'), on='car_id', how='outer')[['car_id', 'year', 'image_id', 'image_path', 'audio_path', 'audio_id', 'complaint_id', 'summary']]
 
-    # Process each modality check in pandas first to identify damaged cars
-    audio_damaged_ids = set()
-    image_damaged_ids = set()
-    text_damaged_ids = set()
+    tmp_join["non_missing_count"] = tmp_join[["image_id", "complaint_id", "audio_id"]].notna().sum(axis=1)
 
-    # Check audio damage
-    audio_data = all_joined[all_joined['audio_id'].notna()][['car_id', 'audio_id', 'audio_path']].drop_duplicates()
-    if len(audio_data) > 0:
-        config_audio = copy.deepcopy(pz_config)
-        ds_audio = pz.IterDataset(id="audio", schema=[{"name": "car_id", "type": int}, {"name": "audio_id", "type": int}, {"name": "audio_path", "type": AudioFilepath}])
-        ds_audio.df = audio_data
-        ds_audio = ds_audio.sem_filter('You are given an audio recording of car diagnostics. Return true if the recording captures an audio of a damaged car.', depends_on=['audio_path'])
-        result_audio = ds_audio.run(config_audio)
-        audio_damaged_ids = set(result_audio.to_df()['car_id'])
+    # Filter: keep rows with at least 2 present
+    tmp_join = tmp_join[tmp_join["non_missing_count"] >= 2]
+    tmp_join = tmp_join.drop(columns=["non_missing_count"])
 
-    # Check image damage
-    image_data = all_joined[all_joined['image_id'].notna()][['car_id', 'image_id', 'image_path']].drop_duplicates()
-    if len(image_data) > 0:
-        config_image = copy.deepcopy(pz_config)
-        ds_image = pz.IterDataset(id="image", schema=[{"name": "car_id", "type": int}, {"name": "image_id", "type": int}, {"name": "image_path", "type": ImageFilepath}])
-        ds_image.df = image_data
-        ds_image = ds_image.sem_filter('You are given an image of a vehicle or its parts. Return true if car is damaged.', depends_on=['image_path'])
-        result_image = ds_image.run(config_image)
-        image_damaged_ids = set(result_image.to_df()['car_id'])
+    # Filter each modality separately
+    audio_filtered = audio.loc[audio["car_id"].isin(tmp_join["car_id"].tolist()), ["car_id", "audio_path"]]
+    car_images_filtered = car_images[car_images["car_id"].isin(tmp_join["car_id"].tolist())]
+    complaints_filtered = complaints[complaints["car_id"].isin(tmp_join["car_id"].tolist())]
 
-    # Check text damage (fire/burned)
-    text_data = all_joined[all_joined['complaint_id'].notna()][['car_id', 'complaint_id', 'summary']].drop_duplicates()
-    if len(text_data) > 0:
-        config_text = copy.deepcopy(pz_config)
-        ds_text = pz.IterDataset(id="text", schema=[{"name": "car_id", "type": int}, {"name": "complaint_id", "type": int}, {"name": "summary", "type": str}])
-        ds_text.df = text_data
-        ds_text = ds_text.sem_filter('You are be given a textual complaint entailing that the car was in on fire or burned. Complaint: {summary}.', depends_on=['summary'])
-        result_text = ds_text.run(config_text)
-        text_damaged_ids = set(result_text.to_df()['car_id'])
+    audio_pz = MyDataset(id="audio", car_df=audio_filtered, schema=data_audio_cols)
+    audio_pz = audio_pz.sem_filter("You are given an audio recording of car diagnostics. Return true if the recording captures an audio of a damaged car.", depends_on=["audio_path"])
+    output_audio = audio_pz.run(copy.deepcopy(pz_config))
+    audio_cost = output_audio.execution_stats.total_execution_cost
+    output_audio = output_audio.to_df()
+    output_audio["sick_audio"] = 1
+    
+    car_images_pz = MyDataset(id="car_images", car_df=car_images_filtered, schema=data_image_cols)
+    car_images_pz = car_images_pz.sem_filter("You are given an image of a vehicle or its parts. Return true if car is damaged.", depends_on=["image_path"])
+    output_images = car_images_pz.run(copy.deepcopy(pz_config))
+    image_cost = output_images.execution_stats.total_execution_cost
+    output_images = output_images.to_df()
+    output_images["sick_image"] = 1
 
-    # XOR logic: at least one positive AND at least one negative
-    result_ids = []
-    for car_id in all_joined['car_id'].unique():
-        car_data = all_joined[all_joined['car_id'] == car_id].iloc[0]
+    complaints_pz = pz.MemoryDataset(id="complaints", vals=complaints_filtered)
+    complaints_pz = complaints_pz.sem_filter("You are be given a textual complaint entailing that the car was on fire or burned. Complaint:", depends_on=["summary"])
+    output_text = complaints_pz.run(copy.deepcopy(pz_config))
+    text_cost = output_text.execution_stats.total_execution_cost
+    output_text = output_text.to_df()
+    output_text["sick_text"] = 1
 
-        has_audio = pd.notna(car_data['audio_id'])
-        has_image = pd.notna(car_data['image_id'])
-        has_text = pd.notna(car_data['complaint_id'])
+    tmp_join.reset_index(inplace=True)
 
-        is_audio_damaged = car_id in audio_damaged_ids if has_audio else None
-        is_image_damaged = car_id in image_damaged_ids if has_image else None
-        is_text_damaged = car_id in text_damaged_ids if has_text else None
+    res = tmp_join.join(output_audio.set_index('car_id'), on='car_id', how='outer', rsuffix="_au")
+    res = res.join(output_images.set_index('car_id'), on='car_id', how='outer', rsuffix="_im")
+    res = res.join(output_text.set_index('car_id'), on='car_id', how='outer', rsuffix="_txt")
 
-        statuses = [s for s in [is_audio_damaged, is_image_damaged, is_text_damaged] if s is not None]
+    res["sick_text"] = np.where(res["summary_txt"].isna() & res["sick_text"].isna(), 0, res["sick_text"])
+    res["sick_image"] = np.where(res["image_path_im"].isna() & res["sick_image"].isna(), 0, res["sick_image"])
+    res["sick_audio"] = np.where(res["audio_path_au"].isna() & res["sick_audio"].isna(), 0, res["sick_audio"])
 
-        if len(statuses) >= 2:
-            has_positive = any(statuses)
-            has_negative = not all(statuses)
+    # Find sick and healthy according to two different modalities
+    res = res[((
+       (res["sick_audio"] == 1) | (res["sick_text"] == 1) | (res["sick_image"] == 1)) & 
+       ((res["sick_audio"] == 0) | (res["sick_text"] == 0) | (res["sick_image"] == 0)
+    ))]
 
-            if has_positive and has_negative:
-                result_ids.append(car_id)
+    cost = audio_cost + text_cost + image_cost
 
-    return pd.DataFrame({'car_id': result_ids})
+    return (res[["car_id", "year", "complaint_id", "image_id", "audio_id"]], cost)
+
