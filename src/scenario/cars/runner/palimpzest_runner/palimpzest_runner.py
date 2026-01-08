@@ -83,7 +83,7 @@ class PalimpzestRunner(GenericPalimpzestRunner):
     def get_palimpzest_config(
         self, query_id, model_name
     ) -> pz.QueryProcessorConfig:
-        is_audio = True if query_id in [2, 5, 6, 7] else False
+        is_audio = True if query_id in [2, 5, 6, 7, 9] else False
 
         model = None
         if model_name == "gpt-4o-mini":
