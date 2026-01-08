@@ -38,8 +38,21 @@ def run(pz_config, data_dir: str, scale_factor: int = 157376):
     # Filter image
     tmp_join = tmp_join.sem_filter('You are given an image of a vehicle or its parts. Return true if car has both, puncture and paint scratches.', depends_on=['image_path'])
     tmp_join = tmp_join.project(['car_id'])
-    candidates = tmp_join.limit(100)
 
-    output = candidates.run(pz_config)
-    return output
+    output = tmp_join.run(pz_config)
+    
+    # Handle limit in post-processing to avoid LimitScanOp hang
+    result_df = output.to_df().head(100)
+    result_df.columns = [str(col) for col in result_df.columns]
+    
+    # Return as wrapper to preserve execution stats
+    class ResultWrapper:
+        def __init__(self, df, exec_stats):
+            self._df = df
+            self.execution_stats = exec_stats
+        
+        def to_df(self):
+            return self._df
+    
+    return ResultWrapper(result_df, output.execution_stats)
 
