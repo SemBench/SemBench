@@ -186,7 +186,7 @@
     "query_id": "9",
     "status": "failed",
     "execution_time": 0.0,
-    "error": "Sequence length must be less than max_position_embeddings (got `sequence length`: 328 and max_position_embeddings: 77",
+    "error": "'RateLimitError' object has no attribute 'choices'",
     "row_count": 0,
     "model_name": "gemini-2.5-flash",
     "concurrent_llm_worker": 20,

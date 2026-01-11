@@ -1,18 +1,21 @@
 genre,movies_in_genre
-None,"Item 47, Love Is the Drug, Mean Girls, Queens of Country"
+Action,Item 47
+Adventure,Item 47
+None,"Love Is the Drug, Queens of Country, Mean Girls"
+Sci-Fi,Item 47
 Western,The Last Rites of Ransom Pride
 action,"The Interview, Extinction"
 biographical,127 Hours
-comedy,"The Interview, Bachelorette, High Road, Orange County, Hot Tub Time Machine, 3, 2, 1... Frankie Go Boom, The Night Before"
+comedy,"High Road, Hot Tub Time Machine, Orange County, Bachelorette, The Night Before, The Interview, 3, 2, 1... Frankie Go Boom"
 crime,Crossing Over
-drama,"127 Hours, Crossing Over, Crashing"
+drama,"Crossing Over, Crashing, 127 Hours"
 farce,Hot Tub Time Machine
 heist film,Now You See Me 2
-horror,"Cloverfield, Cobweb"
+horror,"Cobweb, Cloverfield"
 monster,Cloverfield
 non-fiction,The Disaster Artist
 political satire,The Interview
-romantic comedy,"My Best Friend's Girl, The People We Hate at the Wedding"
+romantic comedy,"The People We Hate at the Wedding, My Best Friend's Girl"
 romantic comedy-drama,Save the Date
 romantic drama,The Disaster Artist
 romantic war drama thriller,Allied

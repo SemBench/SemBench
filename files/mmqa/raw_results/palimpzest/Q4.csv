@@ -1,15 +1,15 @@
 genre,movies_in_genre
-action,"Extinction, The Interview, Item 47"
+action,"The Interview, Item 47, Extinction"
 adventure,Item 47
 biographical,127 Hours
 christmas,The Night Before
-comedy,"The Interview, High Road, Queens of Country, Hot Tub Time Machine, The Night Before, 3, 2, 1... Frankie Go Boom, Orange County, Bachelorette"
+comedy,"Queens of Country, The Interview, 3, 2, 1... Frankie Go Boom, Hot Tub Time Machine, Bachelorette, High Road, The Night Before, Orange County"
 crime,Crossing Over
-drama,"Love Is the Drug, Allied, Crossing Over, Crashing, 127 Hours"
+drama,"Crossing Over, Allied, 127 Hours, Crashing, Love Is the Drug"
 farce,Hot Tub Time Machine
 found footage,Cloverfield
 heist film,Now You See Me 2
-horror,"Cloverfield, Cobweb"
+horror,"Cobweb, Cloverfield"
 monster,Cloverfield
 non-fiction,The Disaster Artist
 political satire,The Interview
@@ -18,7 +18,7 @@ romantic comedy,"The People We Hate at the Wedding, My Best Friend's Girl"
 romantic comedy-drama,Save the Date
 romantic drama,The Disaster Artist
 sci-fi,Item 47
-science fiction,"Extinction, Hot Tub Time Machine"
+science fiction,"Hot Tub Time Machine, Extinction"
 stoner,The Night Before
 thriller,Allied
 war,Allied

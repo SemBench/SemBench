@@ -36,8 +36,8 @@ def run(data_dir: str):
     )
 
     # Reset index for approximate policy
-    if '_policy' in globals() and globals()['_policy'] == 'approximate':
-        image_mapping = image_mapping.reset_index(drop=True)
+    # if '_policy' in globals() and globals()['_policy'] == 'approximate':
+    #     image_mapping = image_mapping.reset_index(drop=True)
 
     # Self-join
     join_instruction = """
@@ -49,14 +49,16 @@ def run(data_dir: str):
      object type and overall surface color: {images:left} {images:right}
     """
 
-    if '_cascade_args' in globals() and '_policy' in globals() and globals()['_policy'] == 'approximate':
-        processed = image_mapping.sem_join(
-            image_mapping,
-            join_instruction,
-            cascade_args=globals()['_cascade_args']
-        )
-    else:
-        processed = image_mapping.sem_join(image_mapping, join_instruction)
+    # if '_cascade_args' in globals() and '_policy' in globals() and globals()['_policy'] == 'approximate':
+    #     processed = image_mapping.sem_join(
+    #         image_mapping,
+    #         join_instruction,
+    #         cascade_args=globals()['_cascade_args']
+    #     )
+    # else:
+    #     processed = image_mapping.sem_join(image_mapping, join_instruction)
+        
+    processed = image_mapping.sem_join(image_mapping, join_instruction)
 
     # Remove identical join partners
     processed = processed[processed["id:left"] != processed["id:right"]]

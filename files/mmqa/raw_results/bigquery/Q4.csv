@@ -1,29 +1,32 @@
 genre,movies_in_genre
-Action,Now You See Me 2
-Adventure,High Road
-Comedy,"High Road, Queens of Country"
-Crime,Love Is the Drug
+Action,Item 47
+Action comedy,The Interview
+Adventure,"High Road, Item 47"
+Christmas,The Night Before
+Comedy,"High Road, Mean Girls, The Night Before"
+Crime,Item 47
 Drama,Love Is the Drug
-Heist,Now You See Me 2
-Thriller,"Love Is the Drug, Now You See Me 2"
+Political satire,The Interview
+Sci-Fi,Item 47
+Stoner Film,The Night Before
+Thriller,Love Is the Drug
 Western,The Last Rites of Ransom Pride
-action,"Extinction, Item 47, The Interview"
-adventure,Item 47
+action,"Extinction, Now You See Me 2"
+adventure,Now You See Me 2
 biographical,127 Hours
 biography,The Disaster Artist
-christmas,The Night Before
-comedy,"The Night Before, 3, 2, 1... Frankie Go Boom, The Interview, Bachelorette, Hot Tub Time Machine, Orange County, The Disaster Artist"
+comedy,"Queens of Country, 3, 2, 1... Frankie Go Boom, Bachelorette, Hot Tub Time Machine, Orange County, The Disaster Artist"
 crime,Crossing Over
-drama,"Crashing, 127 Hours, Crossing Over, Save the Date, The Disaster Artist"
-farce,Hot Tub Time Machine
+drama,"Allied, Crashing, 127 Hours, Bachelorette, Crossing Over, Save the Date, The Disaster Artist"
+found footage,Cloverfield
+heist film,Now You See Me 2
 horror,"Cloverfield, Cobweb"
 monster,Cloverfield
+mystery,Now You See Me 2
 non-fiction,The Disaster Artist
-political satire,The Interview
 romantic,Allied
 romantic comedy,"The People We Hate at the Wedding, My Best Friend's Girl, Save the Date"
-sci-fi,"Cloverfield, Item 47"
+sci-fi,Cloverfield
 science fiction,"Extinction, Hot Tub Time Machine"
-stoner film,The Night Before
-thriller,Allied
-war drama,Allied
+thriller,"Allied, Now You See Me 2"
+war,Allied

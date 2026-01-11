@@ -1,213 +1,396 @@
 ID,uri,color
-6,gs://bq-mm-benchmark-mmqa-images/0a3833c734bc95406f7fe5ecf0657b51.jpg,Red
-5,gs://bq-mm-benchmark-mmqa-images/0b57c87c2643a49d590325127d9812a8.jpg,Orange
-6,gs://bq-mm-benchmark-mmqa-images/0ac83693b42f451f27c992a887c38887.jpg,Blue
-5,gs://bq-mm-benchmark-mmqa-images/0aa3794a64a4e5a965406bf7eec17f23.jpg,Red
-5,gs://bq-mm-benchmark-mmqa-images/0ad714fcbee3683428d79fb0a55e944c.jpg,Purple
-6,gs://bq-mm-benchmark-mmqa-images/0bfaa418914214344c69f91bff67403d.jpg,Green
-6,gs://bq-mm-benchmark-mmqa-images/0cb5e772ffd753bd3df08aa157692540.jpg,White
-4,gs://bq-mm-benchmark-mmqa-images/42c88eafedfab5203c72e1d2ec1c2f37.jpg,Not applicable
-6,gs://bq-mm-benchmark-mmqa-images/0aa3794a64a4e5a965406bf7eec17f23.jpg,Red
-1,gs://bq-mm-benchmark-mmqa-images/0a3833c734bc95406f7fe5ecf0657b51.jpg,Red
-1,gs://bq-mm-benchmark-mmqa-images/42c88eafedfab5203c72e1d2ec1c2f37.jpg,No logo is clearly visible or identifiable in the image.
-4,gs://bq-mm-benchmark-mmqa-images/0af9e872e3797d06111a70eef390a695.jpg,Black and white
-11,gs://bq-mm-benchmark-mmqa-images/0c7d52ade71694ced9bb64864d32c7be.jpg,There is no logo visible in the image.
-4,gs://bq-mm-benchmark-mmqa-images/0a1a44a0147b93d93a8dcbda6d1519f2.jpg,White
-1,gs://bq-mm-benchmark-mmqa-images/0d8c8085d56ca1486b62046cc9fd1a5f.jpg,Yellow
-4,gs://bq-mm-benchmark-mmqa-images/0a86139ce572199fc2407a51d137639c.jpg,Black
-6,gs://bq-mm-benchmark-mmqa-images/0e7eac2ad4785f63d08c3250039857f2.jpg,Orange
-4,gs://bq-mm-benchmark-mmqa-images/0e588abf26b1fba7d94e502ad20fd5f4.jpg,Red
-1,gs://bq-mm-benchmark-mmqa-images/0b256915936f8a7be8fbd9292104763b.jpg,Purple
-11,gs://bq-mm-benchmark-mmqa-images/0aaac3d9dc711c855728f53ed422f61a.jpg,N/A
-1,gs://bq-mm-benchmark-mmqa-images/0c8a2cdb2c772fe8c11973c1823a48fe.jpg,Not discernible
-4,gs://bq-mm-benchmark-mmqa-images/0e7a227da7e96c1b2db30e3817dd4300.jpg,Black
-11,gs://bq-mm-benchmark-mmqa-images/0e372ef850391ab72ed5ae8bdedc90bb.jpg,Silver
-6,gs://bq-mm-benchmark-mmqa-images/0b4b3fa98627daa78c49b8b6655c5df7.jpg,Red
-5,gs://bq-mm-benchmark-mmqa-images/0a5dfed51e6aa680993b58db2f5192d5.jpg,Black
-4,gs://bq-mm-benchmark-mmqa-images/0b896bf6648d7daabfed0f5ea523139a.jpg,Gray
-6,gs://bq-mm-benchmark-mmqa-images/0a7ad8727ebeccfc16a44c9b68d4d30e.jpg,Red
-5,gs://bq-mm-benchmark-mmqa-images/0e235fbbbed4e5d19b51f8fd91e027a4.jpg,White
-11,gs://bq-mm-benchmark-mmqa-images/0a1e97581a8d18fecf8e4b6dd95b1f6f.jpg,Not applicable
-6,gs://bq-mm-benchmark-mmqa-images/0a185b6389ce9219c35af51be1b2af0b.jpg,Red
-5,gs://bq-mm-benchmark-mmqa-images/0a3833c734bc95406f7fe5ecf0657b51.jpg,Red
-6,gs://bq-mm-benchmark-mmqa-images/0df27fb5314dd4abea0495ab1fd80afa.jpg,White
-1,gs://bq-mm-benchmark-mmqa-images/0a6ab6bb33d4679c7acec25b2a7a1860.jpg,Not applicable
-5,gs://bq-mm-benchmark-mmqa-images/0a8323480f0ef71d2096efacd8ca1742.jpg,No logo is visible in the image.
-4,gs://bq-mm-benchmark-mmqa-images/0a7fd4894ca972346066541d16faea1b.jpg,White
-5,gs://bq-mm-benchmark-mmqa-images/0db17777402b71b0fb0172ccbcd0e3a4.jpg,Gold
-6,gs://bq-mm-benchmark-mmqa-images/0ada4227e74007a4aca07074bf256a6d.jpg,Red
-6,gs://bq-mm-benchmark-mmqa-images/0b7b1e2bb45373134a4c1e94dd7ee85e.jpg,Red
-6,gs://bq-mm-benchmark-mmqa-images/5588a1833b8fa95fe1b0ed520e447d64.jpg,There is no logo visible in the image.
-4,gs://bq-mm-benchmark-mmqa-images/0e55b397c7770893544eb92ddc680b23.jpg,Gold
-1,gs://bq-mm-benchmark-mmqa-images/0d4a9de9497f50ca68f84fa967b41fb2.jpg,Gray
-6,gs://bq-mm-benchmark-mmqa-images/0cb7529e3db48a6c8dc92c0eb6dfd8d0.jpg,Red
-4,gs://bq-mm-benchmark-mmqa-images/0c8a2cdb2c772fe8c11973c1823a48fe.jpg,"The image is black and white, so it is impossible to determine the color of the logo."
-4,gs://bq-mm-benchmark-mmqa-images/0d5b079fe9cca68ac73b3c8d3ed11d96.jpg,White.
-11,gs://bq-mm-benchmark-mmqa-images/0a9b21fb6063bf4260d2620fe2ab567a.jpg,Blue
-6,gs://bq-mm-benchmark-mmqa-images/0a8323480f0ef71d2096efacd8ca1742.jpg,There is no logo visible in the image.
-6,gs://bq-mm-benchmark-mmqa-images/0a9a20c1ee2a00eb504b22ef77b6dd31.jpg,Black and white.
-6,gs://bq-mm-benchmark-mmqa-images/0c323c8f9d0aff3614ce16bd927a0061.jpg,Red
-5,gs://bq-mm-benchmark-mmqa-images/0c40c902d12029635fb05ef55769fad4.jpg,There is no discernible logo in the image.
-11,gs://bq-mm-benchmark-mmqa-images/0c40c902d12029635fb05ef55769fad4.jpg,There is no logo visible in the image.
-1,gs://bq-mm-benchmark-mmqa-images/0e623e02e1d4528ef592ad1a8e5b170b.jpg,Black
-5,gs://bq-mm-benchmark-mmqa-images/0a78c5f6c9e1601b21c0e6cc7d4a13ed.jpg,White
-6,gs://bq-mm-benchmark-mmqa-images/0dd1e204dee106509d29927739e8379c.jpg,White
-5,gs://bq-mm-benchmark-mmqa-images/0c323c8f9d0aff3614ce16bd927a0061.jpg,Red
-6,gs://bq-mm-benchmark-mmqa-images/0c7d52ade71694ced9bb64864d32c7be.jpg,Blue
-4,gs://bq-mm-benchmark-mmqa-images/00c604a9243ff81e5f429f7c23354b8e.jpg,No logo available.
-1,gs://bq-mm-benchmark-mmqa-images/0aaac3d9dc711c855728f53ed422f61a.jpg,The image provided does not contain a visible logo.
-11,gs://bq-mm-benchmark-mmqa-images/0c916c4ffe72838c1f3e4adc68c42015.jpg,Red
-4,gs://bq-mm-benchmark-mmqa-images/0c1e7b43caf99b86bd3db14061c8cae3.jpg,White
-6,gs://bq-mm-benchmark-mmqa-images/0e7a227da7e96c1b2db30e3817dd4300.jpg,Black
-6,gs://bq-mm-benchmark-mmqa-images/0a259908f0d108cd11a98a884a10b33c.jpg,Black
-5,gs://bq-mm-benchmark-mmqa-images/0d7ba799e52bcfdead9a7831b84eb1ce.jpg,N/A
-6,gs://bq-mm-benchmark-mmqa-images/0e372ef850391ab72ed5ae8bdedc90bb.jpg,Silver
-5,gs://bq-mm-benchmark-mmqa-images/0b05bc867cb47ea8b827e7effe7e08e5.jpg,Red
-6,gs://bq-mm-benchmark-mmqa-images/0aaac3d9dc711c855728f53ed422f61a.jpg,There is no logo visible in the image.
-6,gs://bq-mm-benchmark-mmqa-images/0c21c34914735826da603a2cfc57eb43.jpg,Blue
-5,gs://bq-mm-benchmark-mmqa-images/0bccae18d1bc23b9e560891520b2c3dd.jpg,Red
-4,gs://bq-mm-benchmark-mmqa-images/0a46a0d1a9d47aeb7f049f8460489929.jpg,White
-6,gs://bq-mm-benchmark-mmqa-images/0a9b21fb6063bf4260d2620fe2ab567a.jpg,Blue
-11,gs://bq-mm-benchmark-mmqa-images/0c9b4d169ebf6db45752c66ad16f568c.jpg,Blue
-1,gs://bq-mm-benchmark-mmqa-images/0b66d210074be5881fea3324aacb6749.jpg,White
-4,gs://bq-mm-benchmark-mmqa-images/0e4fc151817888f808b35fae241e907e.jpg,Black and white
-4,gs://bq-mm-benchmark-mmqa-images/0aaac3d9dc711c855728f53ed422f61a.jpg,No logo is visible in the image.
-5,gs://bq-mm-benchmark-mmqa-images/0ac83693b42f451f27c992a887c38887.jpg,Blue
-5,gs://bq-mm-benchmark-mmqa-images/0be0377b7ca314045eaadb4a16f0f93c.jpg,Multi-color
-6,gs://bq-mm-benchmark-mmqa-images/0c078d3517c917ac586f1d79f0f7575c.jpg,Purple
-1,gs://bq-mm-benchmark-mmqa-images/0e235fbbbed4e5d19b51f8fd91e027a4.jpg,Gold
-6,gs://bq-mm-benchmark-mmqa-images/0a16c5cfc94d596627c05f152d2c1122.jpg,No logo is visible.
-5,gs://bq-mm-benchmark-mmqa-images/0ba22c5e934592d718f1ff9087bf6161.jpg,There is no logo visible in the image.
-5,gs://bq-mm-benchmark-mmqa-images/0e919d605b0ca87313cf90c3a6ecbec3.jpg,Red
-1,gs://bq-mm-benchmark-mmqa-images/0aac49ab17145acc4c0e6ecd9dc4d987.jpg,No logo present.
-11,gs://bq-mm-benchmark-mmqa-images/0caf09a1166b2aae07b4d0f67568c404.jpg,White
-6,gs://bq-mm-benchmark-mmqa-images/0ac19dc955f7c2bb2c7871000d2ea63e.jpg,Not applicable
-5,gs://bq-mm-benchmark-mmqa-images/0b66d210074be5881fea3324aacb6749.jpg,White
-1,gs://bq-mm-benchmark-mmqa-images/0b896bf6648d7daabfed0f5ea523139a.jpg,Gray
-5,gs://bq-mm-benchmark-mmqa-images/0a408d1fa77bd80284d7056dc79a8721.jpg,Yellow
-11,gs://bq-mm-benchmark-mmqa-images/0e235fbbbed4e5d19b51f8fd91e027a4.jpg,White
-4,gs://bq-mm-benchmark-mmqa-images/00e045cfe25f58c8ccc98fb93bde189d.jpg,Red
-1,gs://bq-mm-benchmark-mmqa-images/0c916c4ffe72838c1f3e4adc68c42015.jpg,Red
-1,gs://bq-mm-benchmark-mmqa-images/0c4403467fc2eb3031c1506744601d7d.jpg,There is no logo visible in the image. The image is completely black.
-4,gs://bq-mm-benchmark-mmqa-images/0c078d3517c917ac586f1d79f0f7575c.jpg,Purple
-1,gs://bq-mm-benchmark-mmqa-images/0d8783b46c0702444093ab357626f8e0.jpg,None
-1,gs://bq-mm-benchmark-mmqa-images/0e588abf26b1fba7d94e502ad20fd5f4.jpg,Red
-6,gs://bq-mm-benchmark-mmqa-images/0b66d210074be5881fea3324aacb6749.jpg,White
-11,gs://bq-mm-benchmark-mmqa-images/0d0bd1b0fbf1aea160bc0eb67cb0e840.jpg,Black
-6,gs://bq-mm-benchmark-mmqa-images/0debf0ad932954065786ddb5232f2fde.jpg,Black
-4,gs://bq-mm-benchmark-mmqa-images/0b4b3fa98627daa78c49b8b6655c5df7.jpg,Red
-4,gs://bq-mm-benchmark-mmqa-images/0c0fbc00f99235ec607b16e17f10979f.jpg,Red
-11,gs://bq-mm-benchmark-mmqa-images/0df3be6f1bc935c171a9583bdb399211.jpg,There is no logo present in the image.
-6,gs://bq-mm-benchmark-mmqa-images/0cf1c096b3b8ed26c0ee28078e68d693.jpg,Not applicable
-5,gs://bq-mm-benchmark-mmqa-images/0ada4227e74007a4aca07074bf256a6d.jpg,Red
-5,gs://bq-mm-benchmark-mmqa-images/0e372ef850391ab72ed5ae8bdedc90bb.jpg,Silver
-5,gs://bq-mm-benchmark-mmqa-images/0e3bd1f5e63abf955b3f902bdc0add68.jpg,N/A
-11,gs://bq-mm-benchmark-mmqa-images/0d4a9de9497f50ca68f84fa967b41fb2.jpg,Black
-1,gs://bq-mm-benchmark-mmqa-images/0c2da2a740161136aaf915beb6c19106.jpg,White
-12,gs://bq-mm-benchmark-mmqa-images/0a7ad8727ebeccfc16a44c9b68d4d30e.jpg,Red
-4,gs://bq-mm-benchmark-mmqa-images/0c786f46b32e1008b1ae739bdbf5fe4e.jpg,Yellow
-4,gs://bq-mm-benchmark-mmqa-images/0a13134ca556ed97736997d990db5d1b.jpg,Gold
-11,gs://bq-mm-benchmark-mmqa-images/0a6ab6bb33d4679c7acec25b2a7a1860.jpg,Not applicable
-4,gs://bq-mm-benchmark-mmqa-images/0d4e2955959ed0404bf8d869c66f85d9.jpg,Red
-6,gs://bq-mm-benchmark-mmqa-images/0c141eb84b21daae6c6062bda51fd80d.jpg,No logo present.
-4,gs://bq-mm-benchmark-mmqa-images/0ada4227e74007a4aca07074bf256a6d.jpg,Red
-1,gs://bq-mm-benchmark-mmqa-images/0d188751b763872b84fbe109741b86a3.jpg,Red
-4,gs://bq-mm-benchmark-mmqa-images/0aac49ab17145acc4c0e6ecd9dc4d987.jpg,No logo present.
-5,gs://bq-mm-benchmark-mmqa-images/0a46a0d1a9d47aeb7f049f8460489929.jpg,White
-4,gs://bq-mm-benchmark-mmqa-images/0d0bd1b0fbf1aea160bc0eb67cb0e840.jpg,Orange
+11,gs://bq-mm-benchmark-mmqa-images/0dd82dd6dec70831338aff8f5187449c.jpg,Black
+4,gs://bq-mm-benchmark-mmqa-images/0b94245596940d1ab44df4bf05ce6e42.jpg,Blue
+1,gs://bq-mm-benchmark-mmqa-images/0b896bf6648d7daabfed0f5ea523139a.jpg,Silver
+6,gs://bq-mm-benchmark-mmqa-images/0d31d9a16dd1ac273787f71433656b07.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0cecfc06290f3deeaa23a736a6b87499.jpg,Black
+6,gs://bq-mm-benchmark-mmqa-images/0c21c34914735826da603a2cfc57eb43.jpg,Light blue
+11,gs://bq-mm-benchmark-mmqa-images/0a78c5f6c9e1601b21c0e6cc7d4a13ed.jpg,White
+11,gs://bq-mm-benchmark-mmqa-images/0c565efa82f7ca12dc98cd908e11ed5e.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0e3bd1f5e63abf955b3f902bdc0add68.jpg,There is no logo visible in the image.
+6,gs://bq-mm-benchmark-mmqa-images/0e5ef5756c89f15f43bb002c748fad6f.jpg,Yellow
+1,gs://bq-mm-benchmark-mmqa-images/0d4585e17a8eee54a86e755fda476f0f.jpg,Not applicable
+5,gs://bq-mm-benchmark-mmqa-images/0dace3c09e03f47efc4d0d6808b75a41.jpg,White
 1,gs://bq-mm-benchmark-mmqa-images/0bea7385faf531b75fbd36e7769ee8ea.jpg,White
-5,gs://bq-mm-benchmark-mmqa-images/0e5f3e283676560d6d04a79c9d1d8b4e.jpg,Blue
-6,gs://bq-mm-benchmark-mmqa-images/0d7ba799e52bcfdead9a7831b84eb1ce.jpg,"The image provided is in black and white, so the color of any logo (if present) cannot be determined."
-1,gs://bq-mm-benchmark-mmqa-images/0ae33ebeef3b42eb5d00d948a54e08d7.jpg,Orange
-4,gs://bq-mm-benchmark-mmqa-images/0a8338eedd3ebeced9ad26a9bb98a642.jpg,Maroon and Green
-1,gs://bq-mm-benchmark-mmqa-images/0d2e09edf3ab74cad451615214b94d6d.jpg,Red
-11,gs://bq-mm-benchmark-mmqa-images/0c4343c6a5d23bda1683dfcef93bed91.jpg,Yellow
-1,gs://bq-mm-benchmark-mmqa-images/0d0bd1b0fbf1aea160bc0eb67cb0e840.jpg,Orange
-6,gs://bq-mm-benchmark-mmqa-images/0af228e1aaedd5e1eb72a73dd8985d78.jpg,White
-11,gs://bq-mm-benchmark-mmqa-images/0c799fb88d645302e363c03b68a608ce.jpg,Red
-5,gs://bq-mm-benchmark-mmqa-images/0aaac3d9dc711c855728f53ed422f61a.jpg,Not applicable.
-4,gs://bq-mm-benchmark-mmqa-images/0d9f69db877e52ae3e265c9ca9e47c78.jpg,Red
-5,gs://bq-mm-benchmark-mmqa-images/0dd1e204dee106509d29927739e8379c.jpg,White
-5,gs://bq-mm-benchmark-mmqa-images/0debf0ad932954065786ddb5232f2fde.jpg,Not applicable
-11,gs://bq-mm-benchmark-mmqa-images/0b256915936f8a7be8fbd9292104763b.jpg,Blue
-5,gs://bq-mm-benchmark-mmqa-images/0bfa5921037a2dbb8301a98a22448f0f.jpg,Gold
-5,gs://bq-mm-benchmark-mmqa-images/0a9b21fb6063bf4260d2620fe2ab567a.jpg,Blue
-5,gs://bq-mm-benchmark-mmqa-images/0cb7529e3db48a6c8dc92c0eb6dfd8d0.jpg,Yellow
-11,gs://bq-mm-benchmark-mmqa-images/0a90891a0035fff9b35ddff1a9f1e736.jpg,"The image you sent is a black and white photograph of a person, not a logo. Therefore, there is no logo color to identify."
-1,gs://bq-mm-benchmark-mmqa-images/0a8338eedd3ebeced9ad26a9bb98a642.jpg,Dark Red and Dark Green
-5,gs://bq-mm-benchmark-mmqa-images/0a16c5cfc94d596627c05f152d2c1122.jpg,Not applicable
-11,gs://bq-mm-benchmark-mmqa-images/0bfaa418914214344c69f91bff67403d.jpg,Green
-1,gs://bq-mm-benchmark-mmqa-images/0a3631e7e4c67a56aa7b15e84d451e62.jpg,White
-4,gs://bq-mm-benchmark-mmqa-images/0d8b82c37d0589c35d023de04cef5d40.jpg,Red
-11,gs://bq-mm-benchmark-mmqa-images/0cf5636ed39f1af90dc53df7ea6ffe5b.jpg,Yellow
-4,gs://bq-mm-benchmark-mmqa-images/0c186febf77f05fd6785735d6e8c6ff9.jpg,White
-8,gs://bq-mm-benchmark-mmqa-images/0a7ad8727ebeccfc16a44c9b68d4d30e.jpg,Red
-6,gs://bq-mm-benchmark-mmqa-images/0c8eb9cd33e9447edabf369bf0609f04.jpg,Yellow
-5,gs://bq-mm-benchmark-mmqa-images/0d4e2955959ed0404bf8d869c66f85d9.jpg,Red
-6,gs://bq-mm-benchmark-mmqa-images/0ba22c5e934592d718f1ff9087bf6161.jpg,There is no logo in the image.
-1,gs://bq-mm-benchmark-mmqa-images/0c40c902d12029635fb05ef55769fad4.jpg,No logo available.
-11,gs://bq-mm-benchmark-mmqa-images/0a3833c734bc95406f7fe5ecf0657b51.jpg,Red
-6,gs://bq-mm-benchmark-mmqa-images/0a86139ce572199fc2407a51d137639c.jpg,Black and White
-6,gs://bq-mm-benchmark-mmqa-images/0a408d1fa77bd80284d7056dc79a8721.jpg,Yellow
-6,gs://bq-mm-benchmark-mmqa-images/0a259e302f78dde3fca7cacc3e0c64d1.jpg,Red
-11,gs://bq-mm-benchmark-mmqa-images/0d2e09edf3ab74cad451615214b94d6d.jpg,Pink
-5,gs://bq-mm-benchmark-mmqa-images/0d9f69db877e52ae3e265c9ca9e47c78.jpg,Red
-6,gs://bq-mm-benchmark-mmqa-images/0e3bd1f5e63abf955b3f902bdc0add68.jpg,Not applicable
-11,gs://bq-mm-benchmark-mmqa-images/0c8a2cdb2c772fe8c11973c1823a48fe.jpg,"The original image is in black and white, so the color of the logo is not discernible."
-11,gs://bq-mm-benchmark-mmqa-images/0bc2d39861a25d74b8b734246304726d.jpg,Black
-5,gs://bq-mm-benchmark-mmqa-images/0c9c4cb1548b3729d791e3ccb356ad6d.jpg,White
-4,gs://bq-mm-benchmark-mmqa-images/0a7ad8727ebeccfc16a44c9b68d4d30e.jpg,Red
-4,gs://bq-mm-benchmark-mmqa-images/0c4403467fc2eb3031c1506744601d7d.jpg,Not applicable
-1,gs://bq-mm-benchmark-mmqa-images/0df3be6f1bc935c171a9583bdb399211.jpg,There is no logo present in the image.
-5,gs://bq-mm-benchmark-mmqa-images/0ac19dc955f7c2bb2c7871000d2ea63e.jpg,There is no logo visible in the image.
-6,gs://bq-mm-benchmark-mmqa-images/0bba79d4eec60537f1abb64c624e8341.jpg,Not applicable.
-11,gs://bq-mm-benchmark-mmqa-images/0ae33ebeef3b42eb5d00d948a54e08d7.jpg,Orange
-11,gs://bq-mm-benchmark-mmqa-images/0e3f1257ff395ce5b4e9edbb5b769071.jpg,No logo is visible in the image.
-6,gs://bq-mm-benchmark-mmqa-images/0bf8dc8a2ea59458ce518928642251a6.jpg,Not applicable
-5,gs://bq-mm-benchmark-mmqa-images/0b4b3fa98627daa78c49b8b6655c5df7.jpg,Red
+1,gs://bq-mm-benchmark-mmqa-images/0ba8b7b06d1fa37dac75532ccc245558.jpg,Blue
+1,gs://bq-mm-benchmark-mmqa-images/0bc527e953c7536759416dc1efc9bd3d.jpg,Brown
+5,gs://bq-mm-benchmark-mmqa-images/0d31d9a16dd1ac273787f71433656b07.jpg,Blue
+6,gs://bq-mm-benchmark-mmqa-images/0ad759e107767f364298a11cf6ab33ed.jpg,"Green, white, and red"
+5,gs://bq-mm-benchmark-mmqa-images/0dc07010ede407cb2bb04f720d419590.jpg,No logo available.
+6,gs://bq-mm-benchmark-mmqa-images/0af4bb1902694e26edad95fa9709076b.jpg,White
+11,gs://bq-mm-benchmark-mmqa-images/0d030ee12e34ac380019e62839eab8fd.jpg,White
+11,gs://bq-mm-benchmark-mmqa-images/0d4a9de9497f50ca68f84fa967b41fb2.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0bf7f9b86b3382de79f647bd154dabcd.jpg,No logo is visible in the image.
+6,gs://bq-mm-benchmark-mmqa-images/0ac83693b42f451f27c992a887c38887.jpg,Blue
+6,gs://bq-mm-benchmark-mmqa-images/0d1bfdfd7ba8dcd9dc022e2060abffac.jpg,Black
+5,gs://bq-mm-benchmark-mmqa-images/000be905aa647e2aca193a74296e2679.jpg,Blue
+4,gs://bq-mm-benchmark-mmqa-images/0b3364e0308c1a7de710b006c7fd6102.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0abd8acc88d0ce0e5aad6a3be960e847.jpg,No logo is visible in the image.
 11,gs://bq-mm-benchmark-mmqa-images/0bea7385faf531b75fbd36e7769ee8ea.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0a289900686c878ab3c01dbb05f3dbca.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0cc7f8ff4288b0ae23bcdec0c1dc4f9c.jpg,Green
+1,gs://bq-mm-benchmark-mmqa-images/0b5a5f9dc161b57984f70c400fa7acbd.jpg,Black
+6,gs://bq-mm-benchmark-mmqa-images/0ad33f85dff5c600cf646889f951c554.jpg,Teal
+5,gs://bq-mm-benchmark-mmqa-images/0bccae18d1bc23b9e560891520b2c3dd.jpg,Red
+11,gs://bq-mm-benchmark-mmqa-images/0a3fde4c90a026601b255516dc13f4e9.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0a3f01280b2731cbb5b6ae0d11070cca.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0cc7714b04c7c33e6ba1ca4bd1676d57.jpg,Blue
+5,gs://bq-mm-benchmark-mmqa-images/0cb7529e3db48a6c8dc92c0eb6dfd8d0.jpg,Red
+4,gs://bq-mm-benchmark-mmqa-images/0d6725cc8336d32f809bf2e015e28944.jpg,Black
+5,gs://bq-mm-benchmark-mmqa-images/0a9a20c1ee2a00eb504b22ef77b6dd31.jpg,Black and white
+1,gs://bq-mm-benchmark-mmqa-images/0a6ab6bb33d4679c7acec25b2a7a1860.jpg,"Red, green, black, white"
+6,gs://bq-mm-benchmark-mmqa-images/0c29b0246a7d1edbfd1904c9aedf5e31.jpg,Not applicable
+6,gs://bq-mm-benchmark-mmqa-images/0d3d7fa68923cd1fc989b3ff599d343e.jpg,No logo is visible in the image.
+5,gs://bq-mm-benchmark-mmqa-images/0b60dceccc1689e61a6a828c50c2d323.jpg,Orange
+6,gs://bq-mm-benchmark-mmqa-images/0d1cf05cbda0a1fb094f472e85185268.jpg,Blue
+5,gs://bq-mm-benchmark-mmqa-images/0cca0ecd883bab2c353f8ba52219f68b.jpg,Gold
+11,gs://bq-mm-benchmark-mmqa-images/0dba13fee0cdd3205babbae08b31f33a.jpg,There is no logo visible in the image.
+11,gs://bq-mm-benchmark-mmqa-images/0e372ef850391ab72ed5ae8bdedc90bb.jpg,Silver
+6,gs://bq-mm-benchmark-mmqa-images/0dd1e204dee106509d29927739e8379c.jpg,White
+4,gs://bq-mm-benchmark-mmqa-images/0b63d00302bd0b644cdfbdd0fdb48101.jpg,No logo available.
+6,gs://bq-mm-benchmark-mmqa-images/00e8f3a4b1d262b7571b7773a7d048bd.jpg,Blue
+5,gs://bq-mm-benchmark-mmqa-images/0a059b906f295c40940cbc813c7da3bc.jpg,Gold
+1,gs://bq-mm-benchmark-mmqa-images/0b256915936f8a7be8fbd9292104763b.jpg,Blue
+5,gs://bq-mm-benchmark-mmqa-images/0e3bd1f5e63abf955b3f902bdc0add68.jpg,White
+1,gs://bq-mm-benchmark-mmqa-images/0d4a9de9497f50ca68f84fa967b41fb2.jpg,Black
+5,gs://bq-mm-benchmark-mmqa-images/0bf8dc8a2ea59458ce518928642251a6.jpg,There is no logo visible in the image.
+5,gs://bq-mm-benchmark-mmqa-images/0e9f367d2b47ecf9a9505bf9a7856bef.jpg,Yellow
+11,gs://bq-mm-benchmark-mmqa-images/0bdad46c8d16e2ada037e6f3f418b2c3.jpg,There is no logo visible in the image.
+1,gs://bq-mm-benchmark-mmqa-images/0d5d29cba85e20ce8b94ab8dbf754d53.jpg,Black
+5,gs://bq-mm-benchmark-mmqa-images/0bde841982a552b2955a0c287f25522b.jpg,Blue
+1,gs://bq-mm-benchmark-mmqa-images/0c9b4d169ebf6db45752c66ad16f568c.jpg,Blue
+1,gs://bq-mm-benchmark-mmqa-images/0df5cc80bcd2a27b91224d658ad3a7b5.jpg,No logo is visible in the image.
+1,gs://bq-mm-benchmark-mmqa-images/0d072f0ef5e83355ebb95e1057be2c3c.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0a7ad8727ebeccfc16a44c9b68d4d30e.jpg,Red
+11,gs://bq-mm-benchmark-mmqa-images/0d4585e17a8eee54a86e755fda476f0f.jpg,There is no logo visible in the image.
+6,gs://bq-mm-benchmark-mmqa-images/0a3bf2c032e79a50990a5b681becbf4e.jpg,Yellow
+6,gs://bq-mm-benchmark-mmqa-images/00c48ead0159eed24b04c95f296500c0.jpg,Blue
+5,gs://bq-mm-benchmark-mmqa-images/0c29b0246a7d1edbfd1904c9aedf5e31.jpg,Not applicable
+6,gs://bq-mm-benchmark-mmqa-images/0c1b0c8af593a2c8144d46d83369ddd0.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0a8323480f0ef71d2096efacd8ca1742.jpg,No logo available.
+11,gs://bq-mm-benchmark-mmqa-images/0ccd87a014ac8233a1153ce324e0dd2f.jpg,No logo is visible in the image.
+6,gs://bq-mm-benchmark-mmqa-images/0cb5e772ffd753bd3df08aa157692540.jpg,White
+11,gs://bq-mm-benchmark-mmqa-images/0df5cc80bcd2a27b91224d658ad3a7b5.jpg,There is no logo present in the image.
+4,gs://bq-mm-benchmark-mmqa-images/0a5fbce86271940e79b6b662271c88bc.jpg,Blue
+6,gs://bq-mm-benchmark-mmqa-images/0ce0118fe47390092da1e8137d804ccf.jpg,Green
+1,gs://bq-mm-benchmark-mmqa-images/0d030ee12e34ac380019e62839eab8fd.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0b0de031bd2ac2cae9a07c4a96de3d7e.jpg,Green
+5,gs://bq-mm-benchmark-mmqa-images/0e2952ac37cfbcab72865fb04c4301f3.jpg,Green
+1,gs://bq-mm-benchmark-mmqa-images/0c2da2a740161136aaf915beb6c19106.jpg,White
+1,gs://bq-mm-benchmark-mmqa-images/0c4b3b5ed365d7f86df86e93e10f4468.jpg,None
+1,gs://bq-mm-benchmark-mmqa-images/0bd7c1d51ec7d3ea3553827709810752.jpg,Orange
+11,gs://bq-mm-benchmark-mmqa-images/0e9f367d2b47ecf9a9505bf9a7856bef.jpg,Yellow
+5,gs://bq-mm-benchmark-mmqa-images/0a80ba8f5fab80388fcada37bd24fdcf.jpg,Pink
+6,gs://bq-mm-benchmark-mmqa-images/0b94245596940d1ab44df4bf05ce6e42.jpg,Blue
+6,gs://bq-mm-benchmark-mmqa-images/0c8002e7c5a5d58d1d8154a8e91ca19c.jpg,Black
+6,gs://bq-mm-benchmark-mmqa-images/0aa3794a64a4e5a965406bf7eec17f23.jpg,Blue
+1,gs://bq-mm-benchmark-mmqa-images/0e372ef850391ab72ed5ae8bdedc90bb.jpg,Silver
+5,gs://bq-mm-benchmark-mmqa-images/0c8a48899c5f913bb52cc3eff1c00001.jpg,Yellow
+6,gs://bq-mm-benchmark-mmqa-images/0ab56f386b554dce53edc6004fa8b0e0.jpg,No logo visible
+6,gs://bq-mm-benchmark-mmqa-images/0a9a20c1ee2a00eb504b22ef77b6dd31.jpg,Black and white
+5,gs://bq-mm-benchmark-mmqa-images/0cf323119b1b7512f7dabcbd5dc28875.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0cc818bb12c8d17495d9d97c3bbbb0c3.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0bf7f9b86b3382de79f647bd154dabcd.jpg,Blue
+5,gs://bq-mm-benchmark-mmqa-images/0b94119008d5529a7afe0bf6d6a4c5fa.jpg,White
+4,gs://bq-mm-benchmark-mmqa-images/0a86139ce572199fc2407a51d137639c.jpg,White
+1,gs://bq-mm-benchmark-mmqa-images/0cfcfa60fdfb08ecaa9175bd4e2d24fd.jpg,Blue
+6,gs://bq-mm-benchmark-mmqa-images/0a185b6389ce9219c35af51be1b2af0b.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0ba7288a0afb2913dc61841b160157a6.jpg,Not applicable
+6,gs://bq-mm-benchmark-mmqa-images/0dc07010ede407cb2bb04f720d419590.jpg,There is no logo visible in the image.
+6,gs://bq-mm-benchmark-mmqa-images/0a059b906f295c40940cbc813c7da3bc.jpg,Gold
+6,gs://bq-mm-benchmark-mmqa-images/0e2952ac37cfbcab72865fb04c4301f3.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0a7ad8727ebeccfc16a44c9b68d4d30e.jpg,Red
+1,gs://bq-mm-benchmark-mmqa-images/0e55b397c7770893544eb92ddc680b23.jpg,Gold
+6,gs://bq-mm-benchmark-mmqa-images/0cca0ecd883bab2c353f8ba52219f68b.jpg,Orange
+1,gs://bq-mm-benchmark-mmqa-images/0c4be285733b3edc6794639d8e45b07f.jpg,Gray
+6,gs://bq-mm-benchmark-mmqa-images/0aac2f7b9171a772b41f5a5ce44a9f0b.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0d7ba799e52bcfdead9a7831b84eb1ce.jpg,None
+5,gs://bq-mm-benchmark-mmqa-images/0cb39d184f28c33fc8847b114fb8247e.jpg,Red
+1,gs://bq-mm-benchmark-mmqa-images/0e16ef2fccef0760ef3f920221cb2e67.jpg,Blue and Orange
+4,gs://bq-mm-benchmark-mmqa-images/0e818f121b8da3af509569acdc5e9b47.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0c078d3517c917ac586f1d79f0f7575c.jpg,Purple
+5,gs://bq-mm-benchmark-mmqa-images/0ceb4f8b45492cb830d8f2643254e7d5.jpg,Pink
+5,gs://bq-mm-benchmark-mmqa-images/0baf556014f34afb5f24c8a1b72b5724.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0b4b3fa98627daa78c49b8b6655c5df7.jpg,Blue
+11,gs://bq-mm-benchmark-mmqa-images/0bd7c1d51ec7d3ea3553827709810752.jpg,Orange
+5,gs://bq-mm-benchmark-mmqa-images/0c8a2cdb2c772fe8c11973c1823a48fe.jpg,Cannot determine.
+1,gs://bq-mm-benchmark-mmqa-images/0bf989d357c6994ddaa58b3bf3b9027b.jpg,Not applicable
+4,gs://bq-mm-benchmark-mmqa-images/0a3f01280b2731cbb5b6ae0d11070cca.jpg,Yellow
+4,gs://bq-mm-benchmark-mmqa-images/0d42ac69d1bfb255f2b7ddbd7b3879b6.jpg,Black and white
+5,gs://bq-mm-benchmark-mmqa-images/0bfb08172cef05fb6344015bde07cbd4.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0d62d5f40e1614290473e4f5b84aa75a.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0bedde694a0d9987f2b030d6cc0deb96.jpg,Black
+1,gs://bq-mm-benchmark-mmqa-images/0c05af0967ed64f36eb5d49be055f21f.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0e0a6b5e3da8c0674a7080eaee67b128.jpg,Dark Blue
+5,gs://bq-mm-benchmark-mmqa-images/0c89902ca9bcb707f7987f67d878e6e9.jpg,Green
+6,gs://bq-mm-benchmark-mmqa-images/0cfd65a6d9a5d68ff8a8ae90a82ec189.jpg,White
+11,gs://bq-mm-benchmark-mmqa-images/0b55273d088b39238c69219f0957bb2d.jpg,Yellow
+11,gs://bq-mm-benchmark-mmqa-images/0c9b4d169ebf6db45752c66ad16f568c.jpg,Gold
+6,gs://bq-mm-benchmark-mmqa-images/0b83f7a9ceea681da03f8fd68ad8ec11.jpg,There is no logo present in the image.
+1,gs://bq-mm-benchmark-mmqa-images/0caf09a1166b2aae07b4d0f67568c404.jpg,White
+4,gs://bq-mm-benchmark-mmqa-images/0a5476cae1df80dbf9edce2935f934b2.jpg,Orange
+4,gs://bq-mm-benchmark-mmqa-images/0e0d34c13524fbc6fa5d259216db6cab.jpg,Gold
+4,gs://bq-mm-benchmark-mmqa-images/0a7ad8727ebeccfc16a44c9b68d4d30e.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0ada4227e74007a4aca07074bf256a6d.jpg,Red
+1,gs://bq-mm-benchmark-mmqa-images/0e4920c18faa47c6ba880da4561d9338.jpg,Green
+11,gs://bq-mm-benchmark-mmqa-images/0e16ef2fccef0760ef3f920221cb2e67.jpg,Orange
+6,gs://bq-mm-benchmark-mmqa-images/0c141eb84b21daae6c6062bda51fd80d.jpg,None
+6,gs://bq-mm-benchmark-mmqa-images/0db748148ad450ca06977751d2636dbd.jpg,Black
 6,gs://bq-mm-benchmark-mmqa-images/0d9f69db877e52ae3e265c9ca9e47c78.jpg,Red
-6,gs://bq-mm-benchmark-mmqa-images/0e919d605b0ca87313cf90c3a6ecbec3.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0c7000dc04ab0053cffedab9faec2851.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0db748148ad450ca06977751d2636dbd.jpg,Black
+1,gs://bq-mm-benchmark-mmqa-images/0d2e09edf3ab74cad451615214b94d6d.jpg,Pink
+11,gs://bq-mm-benchmark-mmqa-images/0b256915936f8a7be8fbd9292104763b.jpg,Blue
+1,gs://bq-mm-benchmark-mmqa-images/0d2dae48dc048cad3d0e9a1abc603832.jpg,White
+11,gs://bq-mm-benchmark-mmqa-images/0e4920c18faa47c6ba880da4561d9338.jpg,Green
+6,gs://bq-mm-benchmark-mmqa-images/0b1eaf0cadce1b185f1c1e179b406eef.jpg,No logo is visible in the image.
+11,gs://bq-mm-benchmark-mmqa-images/0e235fbbbed4e5d19b51f8fd91e027a4.jpg,Gold
+5,gs://bq-mm-benchmark-mmqa-images/0a78c5f6c9e1601b21c0e6cc7d4a13ed.jpg,White
+11,gs://bq-mm-benchmark-mmqa-images/00a42b856e481580689927e49a29a0f8.jpg,Blue
+4,gs://bq-mm-benchmark-mmqa-images/0a259908f0d108cd11a98a884a10b33c.jpg,Black
+11,gs://bq-mm-benchmark-mmqa-images/0c05af0967ed64f36eb5d49be055f21f.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0c029068d30adeaa0ebdde16d765e7df.jpg,Gold
+5,gs://bq-mm-benchmark-mmqa-images/0c141eb84b21daae6c6062bda51fd80d.jpg,Not applicable.
+11,gs://bq-mm-benchmark-mmqa-images/0caf09a1166b2aae07b4d0f67568c404.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0caf5d289498683b81aa216ee99c251e.jpg,No logo present.
+5,gs://bq-mm-benchmark-mmqa-images/0cffe4ead12e55633eb71f4e0781e902.jpg,Blue
+4,gs://bq-mm-benchmark-mmqa-images/0d15a48e5df64cc43b813254e17fe5df.jpg,There is no logo present in the image.
+6,gs://bq-mm-benchmark-mmqa-images/0baf556014f34afb5f24c8a1b72b5724.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0aa0aca634022d522ccdbc2f556d7ce0.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0c89900e72bcb8c956a97c6d7dc3b5f2.jpg,Red
+11,gs://bq-mm-benchmark-mmqa-images/0ba8b7b06d1fa37dac75532ccc245558.jpg,Blue
+5,gs://bq-mm-benchmark-mmqa-images/0c21c34914735826da603a2cfc57eb43.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0ddb5f4e1a90fc03dfb0f6aa6209f872.jpg,Blue
+6,gs://bq-mm-benchmark-mmqa-images/00bf7c082b16e464e366675e8e5d1f52.jpg,Blue
+1,gs://bq-mm-benchmark-mmqa-images/0e7bfbb0c39b1cfd5d9e415f413c1667.jpg,Blue
+6,gs://bq-mm-benchmark-mmqa-images/0d15a48e5df64cc43b813254e17fe5df.jpg,There is no logo present in the image.
+5,gs://bq-mm-benchmark-mmqa-images/0b43e3ebfda3d6f8eec8b157ca1498c3.jpg,No logo present.
+4,gs://bq-mm-benchmark-mmqa-images/0c40c902d12029635fb05ef55769fad4.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0bc873c69b07977717fcb4a08da5cc57.jpg,White
+4,gs://bq-mm-benchmark-mmqa-images/0cacb298cdbd1cc17c82728dac6da46c.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/00b03d91360bbe23db5c83ad2f0e4c93.jpg,No logo is visible in the image.
+6,gs://bq-mm-benchmark-mmqa-images/0ba86aea4eb0e6ca527120a78d2935f9.jpg,Yellow
+1,gs://bq-mm-benchmark-mmqa-images/0cf5636ed39f1af90dc53df7ea6ffe5b.jpg,Yellow
+5,gs://bq-mm-benchmark-mmqa-images/0c0fbc00f99235ec607b16e17f10979f.jpg,Red
+1,gs://bq-mm-benchmark-mmqa-images/0ae3290accde3db2b7ed149be99f843c.jpg,Yellow
+1,gs://bq-mm-benchmark-mmqa-images/0b55273d088b39238c69219f0957bb2d.jpg,Yellow
+6,gs://bq-mm-benchmark-mmqa-images/0cffe4ead12e55633eb71f4e0781e902.jpg,Blue and Gold
+6,gs://bq-mm-benchmark-mmqa-images/0dc4e5b3dc8cf6bb7af2b7220daef9dd.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0baca2a1327078b6bce3855e9b6552ea.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0cb9414197494feedcd71b646c8c84cb.jpg,Not applicable
+5,gs://bq-mm-benchmark-mmqa-images/0ad77ac5d701e780b3d080eb8f378573.jpg,Red
+4,gs://bq-mm-benchmark-mmqa-images/0a3ca8a55e9dfc93e474b316cc54d58d.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0e5d8b7d8e669f374b06ed13a250e741.jpg,White
+4,gs://bq-mm-benchmark-mmqa-images/0aeaaaf85d126a9e6a816c0b18f20acd.jpg,Red
 5,gs://bq-mm-benchmark-mmqa-images/0c89ca3bb811f418c54ced12ba79dbea.jpg,Red
 6,gs://bq-mm-benchmark-mmqa-images/0d4e2955959ed0404bf8d869c66f85d9.jpg,Red
-4,gs://bq-mm-benchmark-mmqa-images/0ac19dc955f7c2bb2c7871000d2ea63e.jpg,Not applicable
-6,gs://bq-mm-benchmark-mmqa-images/0c40c902d12029635fb05ef55769fad4.jpg,There is no visible logo in the image.
-5,gs://bq-mm-benchmark-mmqa-images/0c078d3517c917ac586f1d79f0f7575c.jpg,Purple
-5,gs://bq-mm-benchmark-mmqa-images/0bf9765eedd342330a29038a7f8c3542.jpg,Yellow
-1,gs://bq-mm-benchmark-mmqa-images/0e3f1257ff395ce5b4e9edbb5b769071.jpg,Not applicable
-5,gs://bq-mm-benchmark-mmqa-images/0c141eb84b21daae6c6062bda51fd80d.jpg,No logo available.
-5,gs://bq-mm-benchmark-mmqa-images/0c0fbc00f99235ec607b16e17f10979f.jpg,Red
-6,gs://bq-mm-benchmark-mmqa-images/0dc8667808e511ec3d525aff0e221b93.jpg,White
-4,gs://bq-mm-benchmark-mmqa-images/5588a1833b8fa95fe1b0ed520e447d64.jpg,N/A
-4,gs://bq-mm-benchmark-mmqa-images/00a5d23fa78de769d00d2ced7d067dbf.jpg,Not available
-1,gs://bq-mm-benchmark-mmqa-images/0d4e2955959ed0404bf8d869c66f85d9.jpg,Red
-5,gs://bq-mm-benchmark-mmqa-images/0c7d52ade71694ced9bb64864d32c7be.jpg,No logo is visible in the image.
-11,gs://bq-mm-benchmark-mmqa-images/0c186febf77f05fd6785735d6e8c6ff9.jpg,White
-5,gs://bq-mm-benchmark-mmqa-images/0dc8667808e511ec3d525aff0e221b93.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0dace3c09e03f47efc4d0d6808b75a41.jpg,White
+4,gs://bq-mm-benchmark-mmqa-images/0d9f69db877e52ae3e265c9ca9e47c78.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0b1eaf0cadce1b185f1c1e179b406eef.jpg,The image does not contain a logo.
+6,gs://bq-mm-benchmark-mmqa-images/0c8a48899c5f913bb52cc3eff1c00001.jpg,Yellow
+5,gs://bq-mm-benchmark-mmqa-images/0c57ae4ddf9a14beacd0975239f44aad.jpg,Black
+11,gs://bq-mm-benchmark-mmqa-images/0e7bfbb0c39b1cfd5d9e415f413c1667.jpg,Blue
+6,gs://bq-mm-benchmark-mmqa-images/0c029068d30adeaa0ebdde16d765e7df.jpg,Gold
+1,gs://bq-mm-benchmark-mmqa-images/00d6278041ebd15acda0882da2012ff9.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/00bf7c082b16e464e366675e8e5d1f52.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0d1bfdfd7ba8dcd9dc022e2060abffac.jpg,Not applicable (No logo visible)
+6,gs://bq-mm-benchmark-mmqa-images/0cb39d184f28c33fc8847b114fb8247e.jpg,Red
+1,gs://bq-mm-benchmark-mmqa-images/0dba13fee0cdd3205babbae08b31f33a.jpg,No logo present.
+5,gs://bq-mm-benchmark-mmqa-images/0df27fb5314dd4abea0495ab1fd80afa.jpg,White
+11,gs://bq-mm-benchmark-mmqa-images/0cf5636ed39f1af90dc53df7ea6ffe5b.jpg,Yellow
+6,gs://bq-mm-benchmark-mmqa-images/0bc873c69b07977717fcb4a08da5cc57.jpg,White
 1,gs://bq-mm-benchmark-mmqa-images/0bc2d39861a25d74b8b734246304726d.jpg,Black
+6,gs://bq-mm-benchmark-mmqa-images/0c7000dc04ab0053cffedab9faec2851.jpg,Red
+4,gs://bq-mm-benchmark-mmqa-images/0d5cb7c2bfea543ba3b971261cd9a207.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0a720424d8dd3acf1f542ad33c63741b.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0ddb5f4e1a90fc03dfb0f6aa6209f872.jpg,Dark blue
+5,gs://bq-mm-benchmark-mmqa-images/0d0dd3ccfb9709cd069584f463d89a59.jpg,There is no logo visible in the image.
+6,gs://bq-mm-benchmark-mmqa-images/0b431ec7e90f941507ef7badcefa6f77.jpg,White
+11,gs://bq-mm-benchmark-mmqa-images/0c799fb88d645302e363c03b68a608ce.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0a720424d8dd3acf1f542ad33c63741b.jpg,Red
+4,gs://bq-mm-benchmark-mmqa-images/0ccaf0c21cfbe06b11e50c8e47317213.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0a16c5cfc94d596627c05f152d2c1122.jpg,Not applicable.
+6,gs://bq-mm-benchmark-mmqa-images/0c89ca3bb811f418c54ced12ba79dbea.jpg,Red
+11,gs://bq-mm-benchmark-mmqa-images/0d072f0ef5e83355ebb95e1057be2c3c.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0abd8acc88d0ce0e5aad6a3be960e847.jpg,No logo is visible in the image.
+5,gs://bq-mm-benchmark-mmqa-images/0ad759e107767f364298a11cf6ab33ed.jpg,"Green, white, and red."
+1,gs://bq-mm-benchmark-mmqa-images/0e235fbbbed4e5d19b51f8fd91e027a4.jpg,Gold
+5,gs://bq-mm-benchmark-mmqa-images/0ba3594652e6b91ab9ed7ca0ce5c897e.jpg,Gold
+5,gs://bq-mm-benchmark-mmqa-images/0a16c5cfc94d596627c05f152d2c1122.jpg,None
+11,gs://bq-mm-benchmark-mmqa-images/0bc2d39861a25d74b8b734246304726d.jpg,Red
+1,gs://bq-mm-benchmark-mmqa-images/0ccd87a014ac8233a1153ce324e0dd2f.jpg,No logo is visible in the image.
+6,gs://bq-mm-benchmark-mmqa-images/0b43e3ebfda3d6f8eec8b157ca1498c3.jpg,No logo is visible in the image.
+4,gs://bq-mm-benchmark-mmqa-images/0b4b3fa98627daa78c49b8b6655c5df7.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0e449b305012d34296eb016823d4cc9c.jpg,White
+11,gs://bq-mm-benchmark-mmqa-images/0e33da3b0ad36e3ab3bfe35feeb3a5ac.jpg,White and Red
+5,gs://bq-mm-benchmark-mmqa-images/0a289900686c878ab3c01dbb05f3dbca.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0ba3594652e6b91ab9ed7ca0ce5c897e.jpg,Gold
+6,gs://bq-mm-benchmark-mmqa-images/0cc7e29a24494314ab6b87cab278dd26.jpg,No logo present.
+5,gs://bq-mm-benchmark-mmqa-images/0af4bb1902694e26edad95fa9709076b.jpg,White
+1,gs://bq-mm-benchmark-mmqa-images/0a3bf2c032e79a50990a5b681becbf4e.jpg,Yellow
+5,gs://bq-mm-benchmark-mmqa-images/0c8002e7c5a5d58d1d8154a8e91ca19c.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0aa3794a64a4e5a965406bf7eec17f23.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0a2c3d9697a848dec1f0fc055990d657.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0dc4e5b3dc8cf6bb7af2b7220daef9dd.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0e42460f616dfc8c7d36bec178071724.jpg,Blue
+6,gs://bq-mm-benchmark-mmqa-images/0c7d52ade71694ced9bb64864d32c7be.jpg,Blue
+5,gs://bq-mm-benchmark-mmqa-images/0cc7f8ff4288b0ae23bcdec0c1dc4f9c.jpg,Green
+6,gs://bq-mm-benchmark-mmqa-images/0c078d3517c917ac586f1d79f0f7575c.jpg,Purple
+5,gs://bq-mm-benchmark-mmqa-images/0c046c90193b1f2d87802301ae1c7d06.jpg,White
+11,gs://bq-mm-benchmark-mmqa-images/00d6278041ebd15acda0882da2012ff9.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0ba22c5e934592d718f1ff9087bf6161.jpg,None
+11,gs://bq-mm-benchmark-mmqa-images/0cfcfa60fdfb08ecaa9175bd4e2d24fd.jpg,Blue
+6,gs://bq-mm-benchmark-mmqa-images/0ceb4f8b45492cb830d8f2643254e7d5.jpg,Pink
+5,gs://bq-mm-benchmark-mmqa-images/0c1b0c8af593a2c8144d46d83369ddd0.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/00e8f3a4b1d262b7571b7773a7d048bd.jpg,Black
+6,gs://bq-mm-benchmark-mmqa-images/0bccae18d1bc23b9e560891520b2c3dd.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0bf8dc8a2ea59458ce518928642251a6.jpg,Not applicable.
+6,gs://bq-mm-benchmark-mmqa-images/0a78c5f6c9e1601b21c0e6cc7d4a13ed.jpg,"The image is black and white, so the color of the logo is not discernible."
+5,gs://bq-mm-benchmark-mmqa-images/0e16ef2fccef0760ef3f920221cb2e67.jpg,Blue and Orange
+6,gs://bq-mm-benchmark-mmqa-images/0bba79d4eec60537f1abb64c624e8341.jpg,No logo found.
+6,gs://bq-mm-benchmark-mmqa-images/0c0fbc00f99235ec607b16e17f10979f.jpg,Red
+1,gs://bq-mm-benchmark-mmqa-images/0e66cb300f849e0dad3c670aa61309df.jpg,White and yellow
+11,gs://bq-mm-benchmark-mmqa-images/0ae33ebeef3b42eb5d00d948a54e08d7.jpg,Orange
+1,gs://bq-mm-benchmark-mmqa-images/0cc7f8ff4288b0ae23bcdec0c1dc4f9c.jpg,Green
+6,gs://bq-mm-benchmark-mmqa-images/000be905aa647e2aca193a74296e2679.jpg,Blue
+6,gs://bq-mm-benchmark-mmqa-images/0aa0aca634022d522ccdbc2f556d7ce0.jpg,Yellow
+6,gs://bq-mm-benchmark-mmqa-images/0c046c90193b1f2d87802301ae1c7d06.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0c8a2cdb2c772fe8c11973c1823a48fe.jpg,"The original image is in black and white, so it's impossible to determine the color of the logo."
+6,gs://bq-mm-benchmark-mmqa-images/0c57ae4ddf9a14beacd0975239f44aad.jpg,Black
+11,gs://bq-mm-benchmark-mmqa-images/0e55b397c7770893544eb92ddc680b23.jpg,Gold
+6,gs://bq-mm-benchmark-mmqa-images/0c82b4de98a6bb0995b1d6506cb24ed5.jpg,Orange
 5,gs://bq-mm-benchmark-mmqa-images/0cb5e772ffd753bd3df08aa157692540.jpg,White
-11,gs://bq-mm-benchmark-mmqa-images/0c82dd9e77b50088cd2f6ed6c223169c.jpg,Blue
-5,gs://bq-mm-benchmark-mmqa-images/0c8eb9cd33e9447edabf369bf0609f04.jpg,Yellow
-1,gs://bq-mm-benchmark-mmqa-images/0a9b21fb6063bf4260d2620fe2ab567a.jpg,Blue
-4,gs://bq-mm-benchmark-mmqa-images/0a9b21fb6063bf4260d2620fe2ab567a.jpg,Blue
-11,gs://bq-mm-benchmark-mmqa-images/0b896bf6648d7daabfed0f5ea523139a.jpg,Gray
-6,gs://bq-mm-benchmark-mmqa-images/0a78c5f6c9e1601b21c0e6cc7d4a13ed.jpg,White
-6,gs://bq-mm-benchmark-mmqa-images/0c799fb88d645302e363c03b68a608ce.jpg,Red
-5,gs://bq-mm-benchmark-mmqa-images/0bfaa418914214344c69f91bff67403d.jpg,Green
-11,gs://bq-mm-benchmark-mmqa-images/0b66d210074be5881fea3324aacb6749.jpg,White
-11,gs://bq-mm-benchmark-mmqa-images/0d03699bfc51444df6ca45c9f7566a55.jpg,Blue
-4,gs://bq-mm-benchmark-mmqa-images/0b14a3718339734c11e2c147379b2611.jpg,Red
-1,gs://bq-mm-benchmark-mmqa-images/0d2bf861d46be4fb513858da7d0692a3.jpg,White
-1,gs://bq-mm-benchmark-mmqa-images/0c799fb88d645302e363c03b68a608ce.jpg,Red
-5,gs://bq-mm-benchmark-mmqa-images/0bba79d4eec60537f1abb64c624e8341.jpg,N/A
-11,gs://bq-mm-benchmark-mmqa-images/0dd82dd6dec70831338aff8f5187449c.jpg,Black
-1,gs://bq-mm-benchmark-mmqa-images/0caf09a1166b2aae07b4d0f67568c404.jpg,White
-1,gs://bq-mm-benchmark-mmqa-images/0b4b3fa98627daa78c49b8b6655c5df7.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0e372ef850391ab72ed5ae8bdedc90bb.jpg,Silver
+6,gs://bq-mm-benchmark-mmqa-images/0d0dd3ccfb9709cd069584f463d89a59.jpg,There is no visible logo in the image.
+5,gs://bq-mm-benchmark-mmqa-images/0cfd65a6d9a5d68ff8a8ae90a82ec189.jpg,White
+4,gs://bq-mm-benchmark-mmqa-images/0cb39d184f28c33fc8847b114fb8247e.jpg,Yellow
+6,gs://bq-mm-benchmark-mmqa-images/0e5d8b7d8e669f374b06ed13a250e741.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0ce1a7a4ce9f000bf9f4cba5a6aeebd3.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0d15be50eb306d789fc36bf383773f29.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0dc8667808e511ec3d525aff0e221b93.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0df27fb5314dd4abea0495ab1fd80afa.jpg,White
+1,gs://bq-mm-benchmark-mmqa-images/0c89902ca9bcb707f7987f67d878e6e9.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0e372ef850391ab72ed5ae8bdedc90bb.jpg,Silver
+5,gs://bq-mm-benchmark-mmqa-images/0cb9414197494feedcd71b646c8c84cb.jpg,Not applicable.
+5,gs://bq-mm-benchmark-mmqa-images/0e5ef5756c89f15f43bb002c748fad6f.jpg,Yellow
+5,gs://bq-mm-benchmark-mmqa-images/0ce0118fe47390092da1e8137d804ccf.jpg,Green
+5,gs://bq-mm-benchmark-mmqa-images/0d1cf05cbda0a1fb094f472e85185268.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0d9f69db877e52ae3e265c9ca9e47c78.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0b83f7a9ceea681da03f8fd68ad8ec11.jpg,There is no logo present in the image.
+5,gs://bq-mm-benchmark-mmqa-images/0c7d52ade71694ced9bb64864d32c7be.jpg,Not applicable (no logo)
+1,gs://bq-mm-benchmark-mmqa-images/0a97ae01091d16fd67dda129fc5e2c8a.jpg,Gold
+6,gs://bq-mm-benchmark-mmqa-images/0ce1a7a4ce9f000bf9f4cba5a6aeebd3.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0cbe3a7d497c97c9877faa395df6b64c.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0ad77ac5d701e780b3d080eb8f378573.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0e9f367d2b47ecf9a9505bf9a7856bef.jpg,Yellow
+5,gs://bq-mm-benchmark-mmqa-images/0aac2f7b9171a772b41f5a5ce44a9f0b.jpg,Red and Blue
+5,gs://bq-mm-benchmark-mmqa-images/0d62d5f40e1614290473e4f5b84aa75a.jpg,Black
+5,gs://bq-mm-benchmark-mmqa-images/0e449b305012d34296eb016823d4cc9c.jpg,White
+1,gs://bq-mm-benchmark-mmqa-images/0dc4e5b3dc8cf6bb7af2b7220daef9dd.jpg,Red
 4,gs://bq-mm-benchmark-mmqa-images/0c0d07c53688b008e74d643157b76c57.jpg,Red
-11,gs://bq-mm-benchmark-mmqa-images/0aac49ab17145acc4c0e6ecd9dc4d987.jpg,Grey
-1,gs://bq-mm-benchmark-mmqa-images/0e372ef850391ab72ed5ae8bdedc90bb.jpg,Silver
-1,gs://bq-mm-benchmark-mmqa-images/0bfaa418914214344c69f91bff67403d.jpg,Green
-11,gs://bq-mm-benchmark-mmqa-images/42c88eafedfab5203c72e1d2ec1c2f37.jpg,Red
-1,gs://bq-mm-benchmark-mmqa-images/0c9b4d169ebf6db45752c66ad16f568c.jpg,Gold
-5,gs://bq-mm-benchmark-mmqa-images/0c21c34914735826da603a2cfc57eb43.jpg,Blue
-5,gs://bq-mm-benchmark-mmqa-images/0dd6c8a4810a044ceeb7e21afdc36126.jpg,No logo is visible in the image.
+5,gs://bq-mm-benchmark-mmqa-images/0b76db9d4aa9905862fe4cc4dddc03c3.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0bfb08172cef05fb6344015bde07cbd4.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0a408d1fa77bd80284d7056dc79a8721.jpg,Yellow
+5,gs://bq-mm-benchmark-mmqa-images/00b03d91360bbe23db5c83ad2f0e4c93.jpg,No logo is visible in the image.
+5,gs://bq-mm-benchmark-mmqa-images/0b94245596940d1ab44df4bf05ce6e42.jpg,Blue
+5,gs://bq-mm-benchmark-mmqa-images/0cc7714b04c7c33e6ba1ca4bd1676d57.jpg,Blue
+1,gs://bq-mm-benchmark-mmqa-images/0a354ddd615f58f2fdcc4805b0c20f38.jpg,Red
+11,gs://bq-mm-benchmark-mmqa-images/0d2e09edf3ab74cad451615214b94d6d.jpg,Orange
+6,gs://bq-mm-benchmark-mmqa-images/0b76db9d4aa9905862fe4cc4dddc03c3.jpg,Red
+1,gs://bq-mm-benchmark-mmqa-images/0c565efa82f7ca12dc98cd908e11ed5e.jpg,Red
+11,gs://bq-mm-benchmark-mmqa-images/0a6ab6bb33d4679c7acec25b2a7a1860.jpg,N/A
+4,gs://bq-mm-benchmark-mmqa-images/0d8b82c37d0589c35d023de04cef5d40.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0d7ba799e52bcfdead9a7831b84eb1ce.jpg,There is no logo present in the image.
+1,gs://bq-mm-benchmark-mmqa-images/0bdad46c8d16e2ada037e6f3f418b2c3.jpg,No logo is visible in the image.
+5,gs://bq-mm-benchmark-mmqa-images/0ac83693b42f451f27c992a887c38887.jpg,Blue
+11,gs://bq-mm-benchmark-mmqa-images/0bf05d7a378af512d70d1e819ff7d1db.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0dc8667808e511ec3d525aff0e221b93.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0d15a48e5df64cc43b813254e17fe5df.jpg,There is no logo present in the image.
+11,gs://bq-mm-benchmark-mmqa-images/0bf989d357c6994ddaa58b3bf3b9027b.jpg,There is no logo visible in the image.
+11,gs://bq-mm-benchmark-mmqa-images/0d2dae48dc048cad3d0e9a1abc603832.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0a5fbce86271940e79b6b662271c88bc.jpg,Blue
+11,gs://bq-mm-benchmark-mmqa-images/0c2da2a740161136aaf915beb6c19106.jpg,White
+11,gs://bq-mm-benchmark-mmqa-images/0b5a5f9dc161b57984f70c400fa7acbd.jpg,Black
+5,gs://bq-mm-benchmark-mmqa-images/0b4b3fa98627daa78c49b8b6655c5df7.jpg,Blue
+4,gs://bq-mm-benchmark-mmqa-images/0d072f0ef5e83355ebb95e1057be2c3c.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0caf5d289498683b81aa216ee99c251e.jpg,Not applicable.
+6,gs://bq-mm-benchmark-mmqa-images/0cf323119b1b7512f7dabcbd5dc28875.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0a185b6389ce9219c35af51be1b2af0b.jpg,Red
+11,gs://bq-mm-benchmark-mmqa-images/0cc7f8ff4288b0ae23bcdec0c1dc4f9c.jpg,Green
+6,gs://bq-mm-benchmark-mmqa-images/0b0de031bd2ac2cae9a07c4a96de3d7e.jpg,Green
+6,gs://bq-mm-benchmark-mmqa-images/0cb7529e3db48a6c8dc92c0eb6dfd8d0.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0cbe3a7d497c97c9877faa395df6b64c.jpg,Blue
+6,gs://bq-mm-benchmark-mmqa-images/0c89902ca9bcb707f7987f67d878e6e9.jpg,Green
+11,gs://bq-mm-benchmark-mmqa-images/0c89902ca9bcb707f7987f67d878e6e9.jpg,White
+11,gs://bq-mm-benchmark-mmqa-images/0e66cb300f849e0dad3c670aa61309df.jpg,White and Yellow
+4,gs://bq-mm-benchmark-mmqa-images/0c8a85252ffaa7f8db98e91b7f1bbe9b.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0ada4227e74007a4aca07074bf256a6d.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0a408d1fa77bd80284d7056dc79a8721.jpg,Yellow
+5,gs://bq-mm-benchmark-mmqa-images/0ad33f85dff5c600cf646889f951c554.jpg,Teal
+6,gs://bq-mm-benchmark-mmqa-images/0d15be50eb306d789fc36bf383773f29.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0c82b4de98a6bb0995b1d6506cb24ed5.jpg,Orange
+1,gs://bq-mm-benchmark-mmqa-images/0e9f367d2b47ecf9a9505bf9a7856bef.jpg,Yellow
+1,gs://bq-mm-benchmark-mmqa-images/0baf082bb3699a67be381be964a0215c.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0ab56f386b554dce53edc6004fa8b0e0.jpg,There is no logo visible in the provided image or its crops. The image is completely black.
+6,gs://bq-mm-benchmark-mmqa-images/0a3f01280b2731cbb5b6ae0d11070cca.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0b94119008d5529a7afe0bf6d6a4c5fa.jpg,White
+1,gs://bq-mm-benchmark-mmqa-images/0bf05d7a378af512d70d1e819ff7d1db.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0dd1e204dee106509d29927739e8379c.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0e42460f616dfc8c7d36bec178071724.jpg,Blue
+5,gs://bq-mm-benchmark-mmqa-images/0bba79d4eec60537f1abb64c624e8341.jpg,None
+5,gs://bq-mm-benchmark-mmqa-images/0d3d7fa68923cd1fc989b3ff599d343e.jpg,"The image is in black and white (monochrome). Therefore, there is no color for a logo to be identified."
+5,gs://bq-mm-benchmark-mmqa-images/0aac730e290dc557b97388d8513361de.jpg,Light blue
+6,gs://bq-mm-benchmark-mmqa-images/0e16ef2fccef0760ef3f920221cb2e67.jpg,Blue
+11,gs://bq-mm-benchmark-mmqa-images/0d5d29cba85e20ce8b94ab8dbf754d53.jpg,"The logo on the woman's lapel is primarily **red, white, and blue**, resembling an American flag, and also has **black, white, and red** colors for what appears to be a state flag or another emblem next to it."
+5,gs://bq-mm-benchmark-mmqa-images/0cc7c21ed8795f3412159181f0e91bbc.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0cc818bb12c8d17495d9d97c3bbbb0c3.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0ba86aea4eb0e6ca527120a78d2935f9.jpg,Yellow
+5,gs://bq-mm-benchmark-mmqa-images/0a8323480f0ef71d2096efacd8ca1742.jpg,There is no logo visible in the image.
+6,gs://bq-mm-benchmark-mmqa-images/0a5fbce86271940e79b6b662271c88bc.jpg,Blue
+5,gs://bq-mm-benchmark-mmqa-images/0a3bf2c032e79a50990a5b681becbf4e.jpg,Yellow
+5,gs://bq-mm-benchmark-mmqa-images/0cecfc06290f3deeaa23a736a6b87499.jpg,"Black, White, Blue"
+6,gs://bq-mm-benchmark-mmqa-images/0bde841982a552b2955a0c287f25522b.jpg,Blue
+6,gs://bq-mm-benchmark-mmqa-images/0d5cb7c2bfea543ba3b971261cd9a207.jpg,Orange
+6,gs://bq-mm-benchmark-mmqa-images/0c8eb9cd33e9447edabf369bf0609f04.jpg,Yellow
+11,gs://bq-mm-benchmark-mmqa-images/0a354ddd615f58f2fdcc4805b0c20f38.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0aefcc32e7b242826c6ce057ddfe99b1.jpg,Black
+11,gs://bq-mm-benchmark-mmqa-images/0dc4e5b3dc8cf6bb7af2b7220daef9dd.jpg,Red
+4,gs://bq-mm-benchmark-mmqa-images/0e6eeab9c3ad872ecc9d8079120e7597.jpg,Not applicable
+11,gs://bq-mm-benchmark-mmqa-images/0b896bf6648d7daabfed0f5ea523139a.jpg,Gray
+1,gs://bq-mm-benchmark-mmqa-images/0c799fb88d645302e363c03b68a608ce.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0bedde694a0d9987f2b030d6cc0deb96.jpg,Black
+6,gs://bq-mm-benchmark-mmqa-images/0a2c3d9697a848dec1f0fc055990d657.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0ba7288a0afb2913dc61841b160157a6.jpg,Not applicable
+1,gs://bq-mm-benchmark-mmqa-images/0a3fde4c90a026601b255516dc13f4e9.jpg,White
+6,gs://bq-mm-benchmark-mmqa-images/0aefcc32e7b242826c6ce057ddfe99b1.jpg,Black
+5,gs://bq-mm-benchmark-mmqa-images/0d4e2955959ed0404bf8d869c66f85d9.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0a80ba8f5fab80388fcada37bd24fdcf.jpg,Pink
+6,gs://bq-mm-benchmark-mmqa-images/0b60dceccc1689e61a6a828c50c2d323.jpg,Orange
+1,gs://bq-mm-benchmark-mmqa-images/0e33da3b0ad36e3ab3bfe35feeb3a5ac.jpg,Red
+1,gs://bq-mm-benchmark-mmqa-images/00a42b856e481580689927e49a29a0f8.jpg,Blue
+11,gs://bq-mm-benchmark-mmqa-images/0a97ae01091d16fd67dda129fc5e2c8a.jpg,Gold
+4,gs://bq-mm-benchmark-mmqa-images/0e58fcf9c1e7d0059281c148efceb025.jpg,Yellow
+5,gs://bq-mm-benchmark-mmqa-images/0d5cb7c2bfea543ba3b971261cd9a207.jpg,Orange
+11,gs://bq-mm-benchmark-mmqa-images/0c4be285733b3edc6794639d8e45b07f.jpg,Not applicable.
+5,gs://bq-mm-benchmark-mmqa-images/0c8d1696ab480dce40ce4bbe2c30c28e.jpg,Red
+1,gs://bq-mm-benchmark-mmqa-images/0a78c5f6c9e1601b21c0e6cc7d4a13ed.jpg,"The image is black and white, so the color of the logo is not discernible."
+4,gs://bq-mm-benchmark-mmqa-images/00e045cfe25f58c8ccc98fb93bde189d.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0c89900e72bcb8c956a97c6d7dc3b5f2.jpg,Red
+5,gs://bq-mm-benchmark-mmqa-images/0c8eb9cd33e9447edabf369bf0609f04.jpg,Yellow
+5,gs://bq-mm-benchmark-mmqa-images/0b431ec7e90f941507ef7badcefa6f77.jpg,White
+1,gs://bq-mm-benchmark-mmqa-images/0ae33ebeef3b42eb5d00d948a54e08d7.jpg,Orange
+11,gs://bq-mm-benchmark-mmqa-images/0c4b3b5ed365d7f86df86e93e10f4468.jpg,No logo is visible in the image.
+6,gs://bq-mm-benchmark-mmqa-images/0cc7c21ed8795f3412159181f0e91bbc.jpg,White
+5,gs://bq-mm-benchmark-mmqa-images/0cc7e29a24494314ab6b87cab278dd26.jpg,No logo is visible in the image.
+4,gs://bq-mm-benchmark-mmqa-images/0d2dae48dc048cad3d0e9a1abc603832.jpg,White
+1,gs://bq-mm-benchmark-mmqa-images/0dd82dd6dec70831338aff8f5187449c.jpg,Black
+5,gs://bq-mm-benchmark-mmqa-images/0e0a6b5e3da8c0674a7080eaee67b128.jpg,Dark blue
+11,gs://bq-mm-benchmark-mmqa-images/0bc527e953c7536759416dc1efc9bd3d.jpg,Brown
+6,gs://bq-mm-benchmark-mmqa-images/0c8d1696ab480dce40ce4bbe2c30c28e.jpg,Red
+6,gs://bq-mm-benchmark-mmqa-images/0ba22c5e934592d718f1ff9087bf6161.jpg,Not applicable.
+6,gs://bq-mm-benchmark-mmqa-images/0aac730e290dc557b97388d8513361de.jpg,Blue
+5,gs://bq-mm-benchmark-mmqa-images/0baca2a1327078b6bce3855e9b6552ea.jpg,White
+11,gs://bq-mm-benchmark-mmqa-images/0ae3290accde3db2b7ed149be99f843c.jpg,Yellow
+11,gs://bq-mm-benchmark-mmqa-images/0baf082bb3699a67be381be964a0215c.jpg,Blue
+5,gs://bq-mm-benchmark-mmqa-images/00c48ead0159eed24b04c95f296500c0.jpg,"Red, White, Blue"
+11,gs://bq-mm-benchmark-mmqa-images/0a3bf2c032e79a50990a5b681becbf4e.jpg,Yellow

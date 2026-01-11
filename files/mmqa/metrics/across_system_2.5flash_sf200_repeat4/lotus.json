@@ -129,14 +129,15 @@
   },
   "Q7": {
     "query_id": "7",
-    "status": "failed",
-    "execution_time": 0.0,
-    "error": "Sequence length must be less than max_position_embeddings (got `sequence length`: 508 and max_position_embeddings: 77",
-    "row_count": 0,
+    "status": "success",
+    "execution_time": 2054.528969526291,
+    "token_usage": 40103600,
+    "money_cost": 12.29508,
+    "row_count": 14,
     "model_name": "gemini-2.5-flash",
     "concurrent_llm_worker": 20,
-    "precision": 0.0,
-    "recall": 0.0,
-    "f1_score": 0.0
+    "precision": 0.5555555555555556,
+    "recall": 1.0,
+    "f1_score": 0.7142857142857143
   }
 }

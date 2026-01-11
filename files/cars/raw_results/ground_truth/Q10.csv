@@ -1,0 +1,251 @@
+index,car_id,problem_category
+89,82226,engine
+531,23534,engine
+1067,15115,electrical system
+1885,4779,electrical system
+3184,142900,engine
+4162,4816,air bags
+4435,170973,fuel system
+5003,132692,visibility/wiper
+5237,92984,steering
+5325,859,engine
+7116,155135,engine
+7513,173795,service brakes
+7731,8883,visibility/wiper
+9154,225975,power train
+10402,120033,vehicle speed control
+10871,226954,power train
+11408,68814,engine and engine cooling
+11705,97364,service brakes
+12918,172251,engine
+13079,157346,fuel/propulsion system
+14665,99681,electrical system
+14842,145891,engine
+15148,224517,vehicle speed control
+15776,197972,electrical system
+15917,279505,vehicle speed control
+16474,50915,exterior lighting
+16678,287937,power train
+17363,60494,engine
+17399,65443,visibility
+17881,298314,power train
+18198,90761,electrical system
+18254,87992,electrical system
+18691,91053,power train
+18878,1972,electrical system
+20356,52998,power train
+22539,145608,power train
+22753,277468,electrical system
+23292,130302,electrical system
+23764,91098,engine
+24919,118703,power train
+24920,206769,power train
+25786,125616,air bags
+26092,97828,engine
+26360,260293,visibility/wiper
+26388,17153,air bags
+26546,24196,structure
+26672,153309,power train
+27087,136785,visibility/wiper
+27912,271852,power train
+29112,25725,engine
+31343,107325,structure
+32433,287322,power train
+33860,194291,suspension
+34163,225653,steering
+34393,5750,engine
+34661,247420,steering
+35755,278194,visibility/wiper
+35802,97638,power train
+36550,52019,visibility/wiper
+37059,60909,fuel/propulsion system
+37185,51710,fuel/propulsion system
+37368,25169,power train
+37436,190684,exterior lighting
+37889,96523,suspension
+37969,257413,engine
+39619,130354,visibility
+39913,69147,steering
+40219,223635,suspension
+40994,63960,structure
+41604,19411,vehicle speed control
+42853,103245,engine
+42956,76203,electrical system
+43141,218876,power train
+43200,123270,engine
+43507,232696,power train
+43533,63995,fuel system
+43651,91322,service brakes
+44028,167002,steering
+45352,71216,electrical system
+46622,169716,air bags
+47046,216147,steering
+47103,160983,visibility
+47235,97387,wheels
+47853,146398,steering
+47901,92932,power train
+48720,15357,vehicle speed control
+51344,17264,air bags
+51467,16513,engine and engine cooling
+52896,261813,power train
+52918,132858,structure
+54926,284104,electrical system
+55526,179094,power train
+56150,166310,electrical system
+57669,121836,seat belts
+57970,149930,forward collision avoidance
+58568,30862,engine
+59000,183986,back over prevention
+59056,218072,engine
+59229,80926,service brakes
+59540,34141,electrical system
+60412,270173,steering
+61008,122565,service brakes
+61765,168023,electrical system
+61909,192761,structure
+61980,1497,steering
+62014,146432,electrical system
+62264,156089,power train
+62764,87179,electrical system
+64515,118024,service brakes
+65136,167892,engine
+65418,216837,exterior lighting
+68839,64725,power train
+69832,234357,power train
+70874,16932,service brakes
+71408,120070,steering
+71824,277324,suspension
+71948,288701,visibility
+73909,252036,engine and engine cooling
+73961,37165,electrical system
+74796,85767,electrical system
+74890,49236,air bags
+75344,126182,electrical system
+76308,103949,air bags
+76381,8434,vehicle speed control
+79640,150748,service brakes
+80458,118282,service brakes
+81398,55184,structure
+81620,177152,power train
+82785,78696,electrical system
+82788,263087,service brakes
+83089,77626,power train
+86008,162445,back over prevention
+86244,84749,electrical system
+86450,74206,fuel/propulsion system
+87085,156921,electrical system
+87425,103987,power train
+87547,48251,structure
+87890,33519,air bags
+87953,52753,service brakes
+90028,149500,suspension
+90221,56631,exterior lighting
+90850,92796,exterior lighting
+91567,273573,power train
+92467,222112,lane departure
+92513,253276,power train
+92557,156442,visibility/wiper
+94168,126037,steering
+95168,163622,service brakes
+95268,279327,visibility
+95334,223092,power train
+97200,276200,engine
+97275,156875,engine
+97698,211043,electrical system
+98502,45693,visibility/wiper
+99365,249155,engine
+99392,58711,electrical system
+99799,104480,seat belts
+100021,279788,tires
+100563,209175,equipment
+100919,299425,power train
+102011,290252,steering
+102033,145829,visibility/wiper
+102377,25921,power train
+102576,152256,electrical system
+103640,82477,engine
+103751,26583,electrical system
+104275,241770,power train
+104451,265237,electrical system
+104602,191043,engine
+104913,280189,electrical system
+105764,79664,fuel/propulsion system
+106945,203186,structure
+107870,160250,electrical system
+109330,108477,power train
+110091,66295,forward collision avoidance
+110966,230006,engine
+110997,109135,electrical system
+111194,162320,exterior lighting
+111491,293240,electrical system
+111666,182653,power train
+112240,280432,engine
+114457,153671,electrical system
+114858,76061,air bags
+114903,156133,power train
+117089,135547,power train
+117375,199203,electrical system
+117548,241896,electrical system
+117756,12372,steering
+118517,116525,fuel system
+118893,250688,engine and engine cooling
+118989,287447,steering
+119097,266111,air bags
+121501,221041,structure
+121523,216123,latches/locks/linkages
+121823,145406,electrical system
+122448,17666,engine
+123256,231251,electrical system
+124280,76008,engine
+124368,171191,power train
+124947,110076,back over prevention
+125301,163793,service brakes
+125351,257098,forward collision avoidance
+125673,172622,seat belts
+125791,245230,vehicle speed control
+126098,294238,electrical system
+126588,177135,electrical system
+127025,195478,power train
+128564,214581,service brakes
+129213,174787,steering
+129383,296737,back over prevention
+131302,170069,service brakes
+131609,227534,engine and engine cooling
+131669,46135,forward collision avoidance
+134043,169894,steering
+135284,142880,steering
+135648,42046,fuel system
+136040,76833,structure
+136732,142256,seat belts
+137266,40137,steering
+137365,90029,service brakes
+137454,2669,service brakes
+138226,33195,power train
+139510,76723,electrical system
+140370,65290,power train
+140423,257926,exterior lighting
+140513,7108,engine
+141302,91262,engine
+141954,67886,engine
+142823,163476,vehicle speed control
+142905,230388,fuel/propulsion system
+143302,83535,air bags
+144317,277486,steering
+144336,16062,electrical system
+144448,280477,steering
+146429,33180,power train
+147593,166827,steering
+148803,244640,structure
+148888,252733,engine
+149112,245226,forward collision avoidance
+149755,270018,power train
+150371,157999,electrical system
+150395,153683,power train
+150872,213092,wheels
+151490,5895,electrical system
+151520,22043,service brakes
+152742,73229,power train
+153679,214995,power train
+153766,145366,power train
+155532,112585,electrical system
+155583,147734,electrical system
