@@ -86,6 +86,18 @@ class BenchmarkTableGenerator:
                 "9": "F",
                 "10": "C",
             },
+            "cars": {
+                "1": "F",
+                "2": "F",
+                "3": "F L",
+                "4": "F",
+                "5": "F",
+                "6": "F J",
+                "7": "F",
+                "8": "F L",
+                "9": "F",
+                "10": "C",
+            },
             "ecomm": {
                 "1": "F",
                 "2": "F",
@@ -969,6 +981,7 @@ def main():
         "medical",
         "ecomm",
         "mmqa"
+        "cars"
     ]  # Add more as needed
     model_tag = "2.5flash"  # Or whatever model tag you're using
 
