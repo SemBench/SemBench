@@ -7,7 +7,7 @@
 
 SemBench is a benchmark targeting a novel class of systems: **semantic query processing engines**. Those systems rely inherently on generative and reasoning  capabilities of state-of-the-art large language models (LLMs). They extend SQL with semantic operators, configured by natural language instructions, that are evaluated via LLMs and enable users to perform various operations on multimodal data.
 
-SemBench introduces diversity across three key dimensions: **scenarios, modalities, and operators**. Included are scenarios ranging from movie review analysis to medical question-answering. Within these scenarios, we cover different data modalities, including images, audio, text, and table. Finally, the queries involve a diverse set of operators, including semantic filters, joins, mappings, ranking, and classification operators. 
+SemBench introduces diversity across three key dimensions: **scenarios, modalities, and operators**. Included are scenarios ranging from movie review analysis to car damage detection. Within these scenarios, we cover different data modalities, including images, audio, text, and table. Finally, the queries involve a diverse set of operators, including semantic filters, joins, mappings, ranking, and classification operators. 
 
 Currently SemBench is evalulated on **three academic systems (LOTUS, Palimpzest, and ThalamusDB) and one industrial system, Google BigQuery**. Although these results reflect a snapshot of systems under continuous development, our study offers crucial insights into their current strengths and weaknesses, illuminating promising directions for future research.
 
@@ -28,10 +28,10 @@ So, enjoy using SemBench! We believe a good benchmark should minimize user effor
 
 Modern data systems increasingly need to process and reason over multi-modal data - combining traditional relational data with images, audio, and text. SemBench provides a standardized evaluation framework with:
 
-- **5 Real-world Scenarios**: wildlife monitoring, medical diagnosis, sentiment analysis of movie reviews, question anwering, E-commerce product analysis
+- **5 Real-world Scenarios**: wildlife monitoring, car damage diagnosis, sentiment analysis of movie reviews, multi-modal question anwering, E-commerce product analysis
 - **Multi-modal Queries**: Complex semantic operations across multi-modal databases: table, text, image, and audio  
 - **System-agnostic Design**: Extensible and already supports LOTUS, Palimpzest, ThalamusDB, CAESURA, BigQuery, DuckDB FlockMTL
-- **Comprehensive Metrics**: Quality (precision/recall/F1, relative error...), cost (money, token consumption), and efficiency evaluation (execution time)
+- **Comprehensive Metrics**: Quality (precision/recall/F1, relative error...), cost (money, token consumption), efficiency evaluation (execution time), and memory usage
 - **Rich Visualizations**: Automated generation of performance comparisons
 
 | Scenario | #Queries | Mod: Table | Mod: Text | Mod: Image | Mod: Audio | Op: Filter | Op: Join | Op: Map | Op: Rank | Op: Classify | Size: Text | Size: Image | Size: Audio |
@@ -40,8 +40,8 @@ Modern data systems increasingly need to process and reason over multi-modal dat
 | Wildlife | 10 | ✓ | -- | ✓ | ✓ | 17 | -- | -- | -- | -- | -- | 8,718 | 650 |
 | E-Commerce | 14 | ✓ | ✓ | ✓ | -- | 12 | 9 | 3 | 1 | 2 | 44,446 | 44,446 | -- |
 | MMQA | 11 | ✓ | ✓ | ✓ | -- | 5 | 3 | 4 | -- | -- | 5,000 | 1,000 | -- |
-| Medical | 10 | ✓ | ✓ | ✓ | ✓ | 12 | -- | -- | -- | 1 | 1,200 | 10,012 | 336 |
-| **Total** | **55** | **✓** | **✓** | **✓** | **✓** | **49** | **15** | **7** | **3** | **4** | **1,426,384** | **64,176** | **986** |
+| Cars | 10 | ✓ | ✓ | ✓ | ✓ | 12 | -- | -- | -- | 1 | 157,376 | 30,131 | 1,387 |
+| **Total** | **55** | **✓** | **✓** | **✓** | **✓** | **50** | **15** | **7** | **3** | **4** | **1,582,560** | **84295** | **2037** |
 
 ## 📁 Architecture
 
@@ -73,14 +73,14 @@ Studies animal species detection and co-occurrence using camera traps and audio 
 **Queries**: 10 queries ranging from simple counts to complex multi-way joins
 → *[Detailed documentation](src/scenario/animals/README.md)*
 
-### 2. **Medical** - Electronic Health Records
+### 2. **Cars** - Multi-Modal Car Damage Detection
 *Data Modalities: Tables, Text, Images, Audio*  
 
-Comprehensive EHR analysis combining patient demographics, symptom descriptions, chest X-rays, and lung sound recordings. Evaluates disease diagnosis and multi-modal health assessment capabilities.
+In this scenario, the task is to diagnose whether a car has issues based on text, images, and audio recordings. A car may have zero, one, or multiple issues, and the multi-modal inputs may indicate either damage or a normal condition.
 
-**Key Features**: Disease detection from multiple modalities, co-occurrence analysis, health status correlation
-**Queries**: 7 queries focusing on diagnostic accuracy and patient profiling
-→ *[Detailed documentation](src/scenario/medical/README.md)*
+**Key Features**: Car damage detection from multiple modalities
+**Queries**: 10 queries focusing on diagnostic accuracy and patient profiling
+→ *[Detailed documentation](src/scenario/cars/README.md)*
 
 ### 3. **Movie** - Sentiment Analysis
 *Data Modalities: Tables, Text*
@@ -88,7 +88,7 @@ Comprehensive EHR analysis combining patient demographics, symptom descriptions,
 Movie review sentiment analysis testing systems' understanding of emotional tone in textual content. Includes sentiment classification, comparison, and aggregation operations.
 
 **Key Features**: Sentiment classification, review comparison, positivity ratio calculation  
-**Queries**: 7 queries spanning filtering, joins, and aggregation operations
+**Queries**: 10 queries spanning filtering, joins, and aggregation operations
 → *[Detailed documentation](src/scenario/movie/README.md)*
 
 ### 4. **MMQA** - Multi-Modal Question Answering
