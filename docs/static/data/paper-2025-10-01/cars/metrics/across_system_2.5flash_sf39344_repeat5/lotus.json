@@ -1,0 +1,67 @@
+{
+    "Q1": {
+      "query_id": "1",
+      "status": "success",
+      "execution_time": 824.4393422603607,
+      "token_usage": 10700353,
+      "money_cost": 3.4695848999999996,
+      "row_count": 2161,
+      "model_name": "gemini-2.5-flash",
+      "concurrent_llm_worker": 20,
+      "precision": 0.8463674224895882,
+      "recall": 0.9521082769390942,
+      "f1_score": 0.8961293483586477
+    },
+    "Q3": {
+        "query_id": "3",
+        "status": "success",
+        "execution_time": 755.9705855846405,
+        "token_usage": 4022546,
+        "money_cost": 1.2238643999999999,
+        "row_count": 10,
+        "model_name": "gemini-2.5-flash",
+        "concurrent_llm_worker": 20,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      },
+      "Q4": {
+        "query_id": "4",
+        "status": "success",
+        "execution_time": 761.9034819602966,
+        "token_usage": 10503778,
+        "money_cost": 3.4106123999999998,
+        "row_count": 1,
+        "model_name": "gemini-2.5-flash",
+        "concurrent_llm_worker": 20,
+        "relative_error": 0.004154273111231873,
+        "absolute_error": 0.056123650975678174,
+        "mean_absolute_percentage_error": 0.41542731112318726
+      },
+      "Q8": {
+        "query_id": "8",
+        "status": "success",
+        "execution_time": 2237.8229150772095,
+        "token_usage": 11661648,
+        "money_cost": 3.5482716,
+        "row_count": 100,
+        "model_name": "gemini-2.5-flash",
+        "concurrent_llm_worker": 20,
+        "precision": 0.45,
+        "recall": 0.45,
+        "f1_score": 0.45
+      },
+      "Q10": {
+        "query_id": "10",
+        "status": "success",
+        "execution_time": 881.6937637329102,
+        "token_usage": 16276743,
+        "money_cost": 6.166469899999999,
+        "row_count": 39315,
+        "model_name": "gemini-2.5-flash",
+        "concurrent_llm_worker": 20,
+        "precision": 0.3974744725601791,
+        "recall": 0.4095993440216384,
+        "f1_score": 0.3841139038418695
+      }
+  }
