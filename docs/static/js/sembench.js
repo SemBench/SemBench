@@ -881,33 +881,28 @@ function calculateSystemSummary(systemData, summaryType) {
                 latencies.push(queryData.execution_time);
             }
 
-            // For std dev calculation - match Python's exact logic
+            // For std dev calculation - sum_var method:
+            // collect per-query variances (std^2), then sqrt(sum) / N
             if (summaryType === 'stddev') {
-                // Cost relative variance - check: not null AND not undefined AND > 0
                 const cost = queryData.money_cost;
                 const cost_std = queryData.money_cost_std;
                 if (cost !== null && cost !== undefined &&
-                    cost_std !== null && cost_std !== undefined &&
-                    cost > 0) {
-                    costVars.push(cost_std / cost);
+                    cost_std !== null && cost_std !== undefined) {
+                    costVars.push(cost_std * cost_std);
                 }
 
-                // Quality relative variance - use "accuracy" like Python, not getQualityMetric
                 const quality = queryData.accuracy;
                 const quality_std = queryData.quality_std;
                 if (quality !== null && quality !== undefined &&
-                    quality_std !== null && quality_std !== undefined &&
-                    quality > 0) {
-                    qualityVars.push(quality_std / quality);
+                    quality_std !== null && quality_std !== undefined) {
+                    qualityVars.push(quality_std * quality_std);
                 }
 
-                // Latency relative variance
                 const latency = queryData.execution_time;
                 const latency_std = queryData.execution_time_std;
                 if (latency !== null && latency !== undefined &&
-                    latency_std !== null && latency_std !== undefined &&
-                    latency > 0) {
-                    latencyVars.push(latency_std / latency);
+                    latency_std !== null && latency_std !== undefined) {
+                    latencyVars.push(latency_std * latency_std);
                 }
             }
         }
@@ -923,11 +918,19 @@ function calculateSystemSummary(systemData, summaryType) {
                     `${calculateMean(latencies).toFixed(2)}s`) : '--'
         };
     } else if (summaryType === 'stddev') {
-        // Return relative variance as percentages
+        // sum_var method: sqrt(sum of per-query variances) / N as absolute std dev
+        const costStd = costVars.length > 0 ?
+            Math.sqrt(costVars.reduce((a, b) => a + b, 0)) / costVars.length : null;
+        const qualityStd = qualityVars.length > 0 ?
+            Math.sqrt(qualityVars.reduce((a, b) => a + b, 0)) / qualityVars.length : null;
+        const latencyStd = latencyVars.length > 0 ?
+            Math.sqrt(latencyVars.reduce((a, b) => a + b, 0)) / latencyVars.length : null;
+
         return {
-            cost: costVars.length > 0 ? `±${(calculateMean(costVars) * 100).toFixed(1)}%` : '--',
-            quality: qualityVars.length > 0 ? `±${(calculateMean(qualityVars) * 100).toFixed(1)}%` : '--',
-            latency: latencyVars.length > 0 ? `±${(calculateMean(latencyVars) * 100).toFixed(1)}%` : '--'
+            cost: costStd !== null ? `±${formatCostStdDev(costStd)}` : '--',
+            quality: qualityStd !== null ? `±${qualityStd.toFixed(2)}` : '--',
+            latency: latencyStd !== null ?
+                (latencyStd >= 1 ? `±${latencyStd.toFixed(1)}s` : `±${latencyStd.toFixed(2)}s`) : '--'
         };
     }
 }
@@ -1301,6 +1304,21 @@ function formatCost(cost) {
     }
     
     return '$' + cost.toFixed(2);
+}
+
+function formatCostStdDev(cost) {
+    if (cost === 0 || cost === null || cost === undefined) {
+        return '$0.00';
+    }
+    if (Math.round(cost * 100) / 100 > 0) {
+        return '$' + cost.toFixed(2);
+    }
+    // Scientific notation for very small values: e.g. "$6×10⁻⁵"
+    const exp = Math.floor(Math.log10(Math.abs(cost)));
+    const base = Math.round(cost / Math.pow(10, exp));
+    const superscriptDigits = {'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','-':'⁻'};
+    const expStr = exp.toString().split('').map(c => superscriptDigits[c] || c).join('');
+    return `$${base}×10${expStr}`;
 }
 
 function formatCostWithError(meanCost, stdCost, hasMultipleRounds) {

@@ -21,7 +21,7 @@ from natsort import natsorted
 
 
 class AggregateTableGenerator:
-    def __init__(self, base_path: str = "./files", only_common_queries: bool = True):
+    def __init__(self, base_path: str = "./files", only_common_queries: bool = True, use_repeat_folders: bool = False):
         self.base_path = Path(base_path)
         self.figures_dir = Path("./figures")
         self.figures_dir.mkdir(exist_ok=True)
@@ -32,6 +32,18 @@ class AggregateTableGenerator:
 
         # Only use queries supported by all systems
         self.only_common_queries = only_common_queries
+
+        # Use repeat folders (across_system_{tag}_{sf}_repeat{i}) vs original (_i)
+        self.use_repeat_folders = use_repeat_folders
+
+        # Scale factor mappings for repeat folder mode
+        self.sf_mappings = {
+            "animals": "sf200",
+            "cars": "sf19672",
+            "ecomm": "sf500",
+            "mmqa": "sf200",
+            "movie": "sf2000",
+        }
 
         # Define query groupings by operator type (from aggregate_analysis.py)
         
@@ -130,22 +142,36 @@ class AggregateTableGenerator:
 
                 # Look for repeat directories with any of the model tag variants
                 repeat_dirs = []
-                for tag_variant in model_tag_variants:
-                    for i in range(1, 10):  # Check _1 through _9
-                        repeat_dir = metrics_base / f"across_system_{tag_variant}_{i}"
-                        if repeat_dir.exists():
-                            repeat_dirs.append(repeat_dir)
-                    # Stop if we found repeats with this variant
-                    if repeat_dirs:
-                        break
+                scenario_name = scenario_dir.name
 
-                # Also check for standard directory without suffix as fallback
-                if not repeat_dirs:
+                if self.use_repeat_folders:
+                    sf = self.sf_mappings.get(scenario_name)
+                    if sf is None:
+                        continue  # skip scenarios without sf mapping in repeat mode
                     for tag_variant in model_tag_variants:
-                        standard_metrics = metrics_base / f"across_system_{tag_variant}"
-                        if standard_metrics.exists():
-                            repeat_dirs.append(standard_metrics)
+                        for i in range(1, 10):
+                            repeat_dir = metrics_base / f"across_system_{tag_variant}_{sf}_repeat{i}"
+                            if repeat_dir.exists():
+                                repeat_dirs.append(repeat_dir)
+                        if repeat_dirs:
                             break
+                else:
+                    for tag_variant in model_tag_variants:
+                        for i in range(1, 10):  # Check _1 through _9
+                            repeat_dir = metrics_base / f"across_system_{tag_variant}_{i}"
+                            if repeat_dir.exists():
+                                repeat_dirs.append(repeat_dir)
+                        # Stop if we found repeats with this variant
+                        if repeat_dirs:
+                            break
+
+                    # Also check for standard directory without suffix as fallback
+                    if not repeat_dirs:
+                        for tag_variant in model_tag_variants:
+                            standard_metrics = metrics_base / f"across_system_{tag_variant}"
+                            if standard_metrics.exists():
+                                repeat_dirs.append(standard_metrics)
+                                break
 
                 if repeat_dirs:
                     self.scenarios.append(scenario_dir.name)
@@ -936,19 +962,24 @@ class AggregateTableGenerator:
         print("\n" + "=" * 90 + "\n")
 
 
-def main(only_common_queries=True):
+def main(only_common_queries=True, use_repeat_folders=True):
     """Main function to generate aggregate operator table
 
     Args:
         only_common_queries: If True, only include queries supported by all systems (default: True)
+        use_repeat_folders: If True, use across_system_{tag}_{sf}_repeat{i} folders (default: True)
     """
     print("Starting aggregate operator table generation...")
     if only_common_queries:
         print("Mode: Only queries supported by all systems")
     else:
         print("Mode: All queries")
+    if use_repeat_folders:
+        print("Mode: Using repeat folders (sf-based)")
+    else:
+        print("Mode: Using original folders")
 
-    generator = AggregateTableGenerator(only_common_queries=only_common_queries)
+    generator = AggregateTableGenerator(only_common_queries=only_common_queries, use_repeat_folders=use_repeat_folders)
 
     # Generate table
     model_tag = "2.5flash"

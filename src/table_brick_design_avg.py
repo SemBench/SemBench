@@ -33,6 +33,15 @@ class BenchmarkTableGenerator:
             "snowflake": "#8c564b",
         }
 
+        # Define scale factor mappings for repeat folder mode
+        self.sf_mappings = {
+            "animals": "sf200",
+            "cars": "sf19672",
+            "ecomm": "sf500",
+            "mmqa": "sf200",
+            "movie": "sf2000",
+        }
+
         # Define operator mappings for each use case and query
         # F: Semantic Filter, J: Semantic Join, M: Semantic Map,
         # R: Semantic Rank, C: Semantic Classify, L: limit clause
@@ -153,10 +162,13 @@ class BenchmarkTableGenerator:
         else:
             return None, None
 
-    def load_aggregated_metrics_across_rounds(self, use_case, model_tag):
+    def load_aggregated_metrics_across_rounds(self, use_case, model_tag, use_repeat_folders=False):
         """
         Load metrics data from multiple round folders and aggregate them.
-        Auto-detects folders with pattern: across_system_{model_tag}_{round_number}
+        If use_repeat_folders is False:
+            Auto-detects folders with pattern: across_system_{model_tag}_{round_number}
+        If use_repeat_folders is True:
+            Auto-detects folders with pattern: across_system_{model_tag}_{sf}_repeat{round_number}
         Returns aggregated data with means and standard deviations.
         """
         # Auto-detect round folders
@@ -164,14 +176,21 @@ class BenchmarkTableGenerator:
         round_folders = []
 
         for i in range(1, 6):  # rounds 1-5
-            round_folder = f"across_system_{model_tag}_{i}"
+            if use_repeat_folders:
+                sf = self.sf_mappings.get(use_case)
+                if sf is None:
+                    print(f"No scale factor mapping for use case '{use_case}', skipping.")
+                    return {}, [], [], {}
+                round_folder = f"across_system_{model_tag}_{sf}_repeat{i}"
+            else:
+                round_folder = f"across_system_{model_tag}_{i}"
             round_path = base_dir / round_folder
             if round_path.exists():
                 round_folders.append(round_folder)
 
         if not round_folders:
             print(f"No round folders found for across_system_{model_tag}")
-            return {}, [], []
+            return {}, [], [], {}
 
         print(f"Found {len(round_folders)} round folders: {round_folders}")
 
@@ -199,7 +218,7 @@ class BenchmarkTableGenerator:
 
         if not all_round_data or not systems:
             print("No valid data found across rounds!")
-            return {}, [], []
+            return {}, [], [], {}
 
         systems = sorted(systems)
 
@@ -275,7 +294,7 @@ class BenchmarkTableGenerator:
                                     "quality"
                                 ].append(value)
 
-        return aggregated_data, systems, query_ids
+        return aggregated_data, systems, query_ids, all_round_data
 
     def calculate_statistics(self, values):
         """Calculate mean and standard deviation from a list of values."""
@@ -371,14 +390,14 @@ class BenchmarkTableGenerator:
         else:
             return mean_str
 
-    def generate_heatmap_table_extended(self, use_case, model_tag):
+    def generate_heatmap_table_extended(self, use_case, model_tag, use_repeat_folders=False, std_method="run_avg"):
         """
         Generate enhanced heatmap-based LaTeX table with explicit column headers
         and error bars for cost, quality, and latency metrics.
         """
         # Load aggregated data across rounds
-        aggregated_data, systems, query_ids = (
-            self.load_aggregated_metrics_across_rounds(use_case, model_tag)
+        aggregated_data, systems, query_ids, all_round_data = (
+            self.load_aggregated_metrics_across_rounds(use_case, model_tag, use_repeat_folders)
         )
 
         if not aggregated_data:
@@ -786,7 +805,82 @@ class BenchmarkTableGenerator:
             tex_file.write(f"    \\midrule\n")
             tex_file.write(f"    \\addlinespace[0.3ex]\n")
 
-            # Calculate and write average metrics row
+            # Compute per-run averages for each system.
+            # For each run, average the metric over successful queries in that run
+            # (denominator = number of successful queries in that specific run).
+            # Then report mean and std dev of those per-run averages.
+
+            # Build per-run averages: {system_lower: {"cost": [run1_avg, run2_avg, ...], ...}}
+            per_run_avgs = {}
+            for system in available_systems:
+                sys_key = system.lower()
+                # Find actual system name in all_round_data
+                actual_sys_name = None
+                for s in systems:
+                    if s.lower() == sys_key:
+                        actual_sys_name = s
+                        break
+                if actual_sys_name is None:
+                    continue
+
+                run_cost_avgs = []
+                run_quality_avgs = []
+                run_latency_avgs = []
+
+                for round_folder, round_data in all_round_data.items():
+                    if actual_sys_name not in round_data:
+                        continue
+                    sys_round = round_data[actual_sys_name]
+
+                    costs_this_run = []
+                    qualities_this_run = []
+                    latencies_this_run = []
+
+                    for qid_raw in query_ids:
+                        qid = qid_raw.replace("Q", "")
+                        query_data = sys_round.get(f"Q{qid}", {})
+                        cost = query_data.get("money_cost", 0)
+                        if cost <= 0:
+                            continue  # system doesn't support this query in this run
+
+                        costs_this_run.append(cost)
+
+                        latency = query_data.get("execution_time", 0)
+                        if latency > 0:
+                            latencies_this_run.append(latency)
+
+                        value = None
+                        if "accuracy" in query_data:
+                            value = query_data["accuracy"]
+                        elif "f1_score" in query_data:
+                            value = query_data["f1_score"]
+                        elif "relative_error" in query_data:
+                            rel_err = query_data["relative_error"]
+                            value = (
+                                1 / (1 + rel_err)
+                                if rel_err is not None
+                                else None
+                            )
+                        elif "spearman_correlation" in query_data:
+                            value = query_data["spearman_correlation"]
+
+                        if value is not None:
+                            qualities_this_run.append(value)
+
+                    if costs_this_run:
+                        run_cost_avgs.append(np.mean(costs_this_run))
+                    if qualities_this_run:
+                        run_quality_avgs.append(np.mean(qualities_this_run))
+                    if latencies_this_run:
+                        run_latency_avgs.append(np.mean(latencies_this_run))
+
+                per_run_avgs[sys_key] = {
+                    "cost": run_cost_avgs,
+                    "quality": run_quality_avgs,
+                    "latency": run_latency_avgs,
+                }
+
+            # Write average row (original: mean across queries of per-query means)
             avg_row = ["\\textbf{Avg}"]
 
             for system in available_systems:
@@ -816,146 +910,193 @@ class BenchmarkTableGenerator:
                         ):
                             latencies.append(query_metrics["execution_time"])
 
-                # Calculate averages
                 avg_cost = np.mean(costs) if costs else None
                 avg_quality = np.mean(qualities) if qualities else None
                 avg_latency = np.mean(latencies) if latencies else None
 
-                # Format average values
                 if avg_cost is not None:
                     if round(avg_cost, 2) > 0.0:
-                        cost_text = (
-                            f"\\fancycellNormal"
-                            + "{"
-                            + f"\\${avg_cost:.2f}"
-                            + "}"
-                        )
+                        cost_text = f"\\fancycellNormal{{\\${avg_cost:.2f}}}"
                     else:
-                        cost_text = (
-                            f"\\fancycellNormal"
-                            + "{"
-                            + f"\\${self.latex_float(avg_cost)}"
-                            + "}"
-                        )
+                        cost_text = f"\\fancycellNormal{{\\${self.latex_float(avg_cost)}}}"
                 else:
                     cost_text = "--"
 
                 if avg_quality is not None:
-                    quality_text = (
-                        f"\\fancycellNormal"
-                        + "{"
-                        + f"{avg_quality:.2f}"
-                        + "}"
-                    )
+                    quality_text = f"\\fancycellNormal{{{avg_quality:.2f}}}"
                 else:
-                    quality_text = (
-                        f"\\fancycellNormal"
-                        + "{"
-                        + "--"
-                        + "}"
-                    )
+                    quality_text = f"\\fancycellNormal{{--}}"
 
                 if avg_latency is not None:
                     if avg_latency >= 1.0:
-                        latency_text = (
-                            f"\\fancycellNormal"
-                            + "{"
-                            + f"{avg_latency:.1f}\\,\\text{{s}}"
-                            + "}"
-                        )
+                        latency_text = f"\\fancycellNormal{{{avg_latency:.1f}\\,\\text{{s}}}}"
                     else:
-                        latency_text = (
-                            f"\\fancycellNormal"
-                            + "{"
-                            + f"{avg_latency:.2f}\\,\\text{{s}}"
-                            + "}"
-                        )
+                        latency_text = f"\\fancycellNormal{{{avg_latency:.2f}\\,\\text{{s}}}}"
                 else:
                     latency_text = "--"
 
-                avg_row.extend(
-                    [f"{cost_text}", f"{quality_text}", f"{latency_text}"]
-                )
+                avg_row.extend([cost_text, quality_text, latency_text])
 
             tex_file.write(f"    {' & '.join(avg_row)} \\\\\n")
 
-            # Calculate and write relative variance row (as standard deviation percentages)
+            # Write std dev row (as relative %)
+            # std_method="run_avg":      std dev of per-run averages (each run has its own denominator)
+            # std_method="avg_query_std": average of per-query relative std devs (original method)
+            # std_method="sum_var":       sqrt of sum of per-query variances, then relative to mean
             std_row = ["\\textbf{Std Dev}"]
 
-            for system in available_systems:
-                if system.lower() not in metrics_data:
-                    std_row.extend(["--", "--", "--"])
-                    continue
+            if std_method == "run_avg":
+                for system in available_systems:
+                    sys_key = system.lower()
+                    if sys_key not in per_run_avgs:
+                        std_row.extend(["--", "--", "--"])
+                        continue
 
-                sys_metrics = metrics_data[system.lower()]
-                cost_vars, quality_vars, latency_vars = [], [], []
+                    run_avgs = per_run_avgs[sys_key]
 
-                for query_id in query_ids:
-                    if query_id in sys_metrics:
-                        query_metrics = sys_metrics[query_id]
+                    # Cost relative std dev
+                    if len(run_avgs["cost"]) >= 2:
+                        mean_c = np.mean(run_avgs["cost"])
+                        std_c = np.std(run_avgs["cost"])
+                        cost_var_text = f"{std_c / mean_c * 100:.1f}\\%" if mean_c > 0 else "--"
+                    else:
+                        cost_var_text = "--"
 
-                        # Cost relative variance
-                        cost = query_metrics.get("money_cost")
-                        cost_std = query_metrics.get("money_cost_std")
-                        if (
-                            cost is not None
-                            and cost_std is not None
-                            and cost > 0
-                        ):
-                            cost_vars.append(cost_std / cost)
+                    # Quality relative std dev
+                    if len(run_avgs["quality"]) >= 2:
+                        mean_q = np.mean(run_avgs["quality"])
+                        std_q = np.std(run_avgs["quality"])
+                        quality_var_text = f"{std_q / mean_q * 100:.1f}\\%" if mean_q > 0 else "--"
+                    else:
+                        quality_var_text = "--"
 
-                        # Quality relative variance
-                        quality = query_metrics.get("accuracy")
-                        quality_std = query_metrics.get("quality_std")
-                        if (
-                            quality is not None
-                            and quality_std is not None
-                            and quality > 0
-                        ):
-                            quality_vars.append(quality_std / quality)
+                    # Latency relative std dev
+                    if len(run_avgs["latency"]) >= 2:
+                        mean_l = np.mean(run_avgs["latency"])
+                        std_l = np.std(run_avgs["latency"])
+                        latency_var_text = f"{std_l / mean_l * 100:.1f}\\%" if mean_l > 0 else "--"
+                    else:
+                        latency_var_text = "--"
 
-                        # Latency relative variance
-                        latency = query_metrics.get("execution_time")
-                        latency_std = query_metrics.get("execution_time_std")
-                        if (
-                            latency is not None
-                            and latency_std is not None
-                            and latency > 0
-                        ):
-                            latency_vars.append(latency_std / latency)
+                    std_row.extend(
+                        [
+                            f"\\(\\pm{cost_var_text}\\)",
+                            f"\\(\\pm{quality_var_text}\\)",
+                            f"\\(\\pm{latency_var_text}\\)",
+                        ]
+                    )
 
-                # Calculate average relative variances
-                avg_cost_var = np.mean(cost_vars) if cost_vars else None
-                avg_quality_var = (
-                    np.mean(quality_vars) if quality_vars else None
-                )
-                avg_latency_var = (
-                    np.mean(latency_vars) if latency_vars else None
-                )
+            elif std_method == "avg_query_std":
+                # Original method: average of per-query relative std devs
+                for system in available_systems:
+                    if system.lower() not in metrics_data:
+                        std_row.extend(["--", "--", "--"])
+                        continue
 
-                # Format relative variance values (as percentages)
-                if avg_cost_var is not None:
-                    cost_var_text = f"{avg_cost_var * 100:.1f}\\%"
-                else:
-                    cost_var_text = "--"
+                    sys_metrics = metrics_data[system.lower()]
+                    cost_vars, quality_vars, latency_vars = [], [], []
 
-                if avg_quality_var is not None:
-                    quality_var_text = f"{avg_quality_var * 100:.1f}\\%"
-                else:
-                    quality_var_text = "--"
+                    for query_id in query_ids:
+                        if query_id in sys_metrics:
+                            query_metrics = sys_metrics[query_id]
 
-                if avg_latency_var is not None:
-                    latency_var_text = f"{avg_latency_var * 100:.1f}\\%"
-                else:
-                    latency_var_text = "--"
+                            cost = query_metrics.get("money_cost")
+                            cost_std = query_metrics.get("money_cost_std")
+                            if cost is not None and cost_std is not None and cost > 0:
+                                cost_vars.append(cost_std / cost)
 
-                std_row.extend(
-                    [
-                        f"\\(\\pm{cost_var_text}\\)",
-                        f"\\(\\pm{quality_var_text}\\)",
-                        f"\\(\\pm{latency_var_text}\\)",
-                    ]
-                )
+                            quality = query_metrics.get("accuracy")
+                            quality_std = query_metrics.get("quality_std")
+                            if quality is not None and quality_std is not None and quality > 0:
+                                quality_vars.append(quality_std / quality)
+
+                            latency = query_metrics.get("execution_time")
+                            latency_std = query_metrics.get("execution_time_std")
+                            if latency is not None and latency_std is not None and latency > 0:
+                                latency_vars.append(latency_std / latency)
+
+                    avg_cost_var = np.mean(cost_vars) if cost_vars else None
+                    avg_quality_var = np.mean(quality_vars) if quality_vars else None
+                    avg_latency_var = np.mean(latency_vars) if latency_vars else None
+
+                    cost_var_text = f"{avg_cost_var * 100:.1f}\\%" if avg_cost_var is not None else "--"
+                    quality_var_text = f"{avg_quality_var * 100:.1f}\\%" if avg_quality_var is not None else "--"
+                    latency_var_text = f"{avg_latency_var * 100:.1f}\\%" if avg_latency_var is not None else "--"
+
+                    std_row.extend(
+                        [
+                            f"\\(\\pm{cost_var_text}\\)",
+                            f"\\(\\pm{quality_var_text}\\)",
+                            f"\\(\\pm{latency_var_text}\\)",
+                        ]
+                    )
+
+            elif std_method == "sum_var":
+                # Sum per-query variances (across runs), take sqrt, then relative to sum of means
+                for system in available_systems:
+                    if system.lower() not in metrics_data:
+                        std_row.extend(["--", "--", "--"])
+                        continue
+
+                    sys_metrics = metrics_data[system.lower()]
+                    cost_vars, quality_vars, latency_vars = [], [], []
+                    cost_means, quality_means, latency_means = [], [], []
+
+                    for query_id in query_ids:
+                        if query_id in sys_metrics:
+                            query_metrics = sys_metrics[query_id]
+
+                            cost = query_metrics.get("money_cost")
+                            cost_std = query_metrics.get("money_cost_std")
+                            if cost is not None and cost_std is not None:
+                                cost_vars.append(cost_std ** 2)
+                                cost_means.append(cost)
+
+                            quality = query_metrics.get("accuracy")
+                            quality_std = query_metrics.get("quality_std")
+                            if quality is not None and quality_std is not None:
+                                quality_vars.append(quality_std ** 2)
+                                quality_means.append(quality)
+
+                            latency = query_metrics.get("execution_time")
+                            latency_std = query_metrics.get("execution_time_std")
+                            if latency is not None and latency_std is not None:
+                                latency_vars.append(latency_std ** 2)
+                                latency_means.append(latency)
+
+                    # sqrt(sum(var_i)) / N as absolute std dev of the average
+                    n_cost = len(cost_vars)
+                    if cost_vars and n_cost > 0:
+                        std_cost = np.sqrt(sum(cost_vars)) / n_cost
+                        if std_cost == 0.0:
+                            cost_var_text = "$\\pm$\\$0.00"
+                        elif round(std_cost, 2) > 0.0:
+                            cost_var_text = f"$\\pm$\\${std_cost:.2f}"
+                        else:
+                            cost_var_text = f"$\\pm$\\${self.latex_float(std_cost)}"
+                    else:
+                        cost_var_text = "--"
+
+                    n_quality = len(quality_vars)
+                    if quality_vars and n_quality > 0:
+                        std_quality = np.sqrt(sum(quality_vars)) / n_quality
+                        quality_var_text = f"$\\pm${std_quality:.2f}"
+                    else:
+                        quality_var_text = "--"
+
+                    n_latency = len(latency_vars)
+                    if latency_vars and n_latency > 0:
+                        std_latency = np.sqrt(sum(latency_vars)) / n_latency
+                        if std_latency >= 1.0:
+                            latency_var_text = f"$\\pm${std_latency:.1f}s"
+                        else:
+                            latency_var_text = f"$\\pm${std_latency:.2f}s"
+                    else:
+                        latency_var_text = "--"
+
+                    std_row.extend(
+                        [cost_var_text, quality_var_text, latency_var_text]
+                    )
 
             tex_file.write(f"    {' & '.join(std_row)} \\\\\n")
 
@@ -973,24 +1114,46 @@ def main():
     """Example usage of the table generator."""
     generator = BenchmarkTableGenerator()
 
-    # Example: Generate tables for different use cases and model tags
-    use_cases = [
-        "movie",
-        "detective",
-        "animals",
-        "medical",
-        "ecomm",
-        "mmqa"
-        "cars"
-    ]  # Add more as needed
-    model_tag = "2.5flash"  # Or whatever model tag you're using
+    # Set to True to use repeat folders (across_system_{tag}_{sf}_repeat{i})
+    # Set to False to use original folders (across_system_{tag}_{i})
+    use_repeat_folders = False
+
+    # Std dev calculation method:
+    #   "run_avg":       std dev of per-run averages (each run has its own denominator)
+    #   "avg_query_std": average of per-query relative std devs (original method)
+    #   "sum_var":       sqrt(sum of per-query variances) / sum of per-query means
+    std_method = "sum_var"
+
+    if use_repeat_folders:
+        # Only scenarios with sf mappings
+        use_cases = [
+            "movie",
+            "animals",
+            "ecomm",
+            "mmqa",
+            "cars",
+        ]
+    else:
+        use_cases = [
+            "movie",
+            "detective",
+            "animals",
+            "medical",
+            "ecomm",
+            "mmqa",
+            "cars",
+        ]
+
+    model_tag = "2.5flash"
 
     for use_case in use_cases:
-        if use_case == "mmqa":
-            model_tag = "gemini-2.5-flash"
-        
+        if use_case == "mmqa" and not use_repeat_folders:
+            tag = "gemini-2.5-flash"
+        else:
+            tag = model_tag
+
         print(f"\nGenerating extended heatmap table for {use_case}...")
-        generator.generate_heatmap_table_extended(use_case, model_tag)
+        generator.generate_heatmap_table_extended(use_case, tag, use_repeat_folders, std_method)
 
 
 if __name__ == "__main__":
