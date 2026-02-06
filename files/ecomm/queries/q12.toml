@@ -10,7 +10,11 @@ for all items (images and description and title), create the following json:
 
 [definition]
 # For systems that accept free-text queries
-natural_language = ""
+natural_language = """
+For each Adidas or Puma product, use the product image and description
+to generate a JSON object with the product id, brand name (lowercase),
+and master category classified as 'accessories', 'apparel', or 'footwear'.
+"""
 # Equivalent to the natural language query
 sql = ""
 

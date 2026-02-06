@@ -20,7 +20,12 @@ Optimization ideas:
 
 [definition]
 # For systems that accept free-text queries
-natural_language = ""
+natural_language = """
+Based on product images and descriptions, find men's running shirts
+with round neck and short sleeves, in blue or black (not bright colors
+like white, and definitely not green), with a striped design,
+suitable for outdoor running in warm weather.
+"""
 # Equivalent to the natural language query
 sql = """
 """

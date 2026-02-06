@@ -14,7 +14,11 @@ the result contains around 90000 items.
 
 [definition]
 # For systems that accept free-text queries
-natural_language = ""
+natural_language = """
+Based on product images, find pairs of distinct products under $800
+in a single base color (Black, Blue, Red, White, Orange, or Green)
+that depict objects of the same category and the same dominant surface color.
+"""
 # Equivalent to the natural language query
 sql = ""
 

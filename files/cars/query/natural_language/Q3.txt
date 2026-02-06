@@ -1,1 +1,1 @@
-Find ten cars with manual transmission that are damaged according to images.
+Find ten cars with manual transmission that are not damaged according to images. Return the VIN.
