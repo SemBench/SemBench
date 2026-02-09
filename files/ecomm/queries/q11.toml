@@ -18,7 +18,7 @@ Provide both text and image so that filters can be evaluated flexibly with diffe
 natural_language = """
 Based on product images and descriptions, find matching all-black outfits
 consisting of shoes, bottomwear (excluding swimwear), topwear (excluding swimwear),
-and an accessory (watch, jewellery, or bag priced at $500 or less),
+and an accessory (watch, jewellery, or bag priced at $5 or less),
 where all four items are from the same brand.
 """
 # Equivalent to the natural language query
