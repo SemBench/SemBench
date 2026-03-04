@@ -99,7 +99,7 @@
 </head>
 <body>
 
-<section class="hero">
+<section class="hero" id="top">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
@@ -141,6 +141,16 @@
                   <span>Data</span>
                 </a>
               </span>
+              <!-- Submit link -->
+              <span class="link-block">
+                <a href="submit.html"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-upload"></i>
+                  </span>
+                  <span>Submit</span>
+                </a>
+              </span>
             </div>
           </div>
         </div>
@@ -180,7 +190,32 @@
   </div>
 </section>
 
-<section class="section hero is-light">
+<!-- Navigation Bar -->
+<nav class="navbar is-fixed-top is-light" id="siteNavbar" style="display: none; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+  <div class="container is-max-desktop">
+    <div class="navbar-brand">
+      <a class="navbar-item has-text-weight-bold" href="#top">SemBench</a>
+      <a role="button" class="navbar-burger" data-target="navbarMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu" id="navbarMenu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#about">About</a>
+        <a class="navbar-item" href="#leaderboard">Results</a>
+        <a class="navbar-item" href="#scalability">Scalability</a>
+        <a class="navbar-item" href="#performance">Performance</a>
+        <a class="navbar-item" href="#faq">FAQ</a>
+        <a class="navbar-item" href="#team">Team</a>
+        <a class="navbar-item" href="submit.html">Submit</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="section hero is-light" id="about">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
@@ -203,7 +238,7 @@
 
 <hr style="margin: 0; border: none; border-top: 2px solid #dbdbdb;">
 
-<section class="hero is-light">
+<section class="hero is-light" id="leaderboard">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
@@ -337,7 +372,7 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="scalability">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-ninety">
@@ -366,7 +401,7 @@
 
 <hr style="margin: 0; border: none; border-top: 2px solid #dbdbdb;">
 
-<section class="section">
+<section class="section" id="performance">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-ninety">
@@ -420,7 +455,7 @@
     </div>
 </section>
 
-<section class="section hero">
+<section class="section hero" id="faq">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
@@ -476,7 +511,7 @@
   </div>
 </section>
 
-<footer class="footer">
+<footer class="footer" id="team">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-10">
@@ -657,6 +692,52 @@
 </footer>
 
 <script src="static/js/sembench.js"></script>
+
+<script>
+// Show/hide sticky navbar on scroll
+(function() {
+  var navbar = document.getElementById('siteNavbar');
+  var hero = document.getElementById('top');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > hero.offsetHeight) {
+      navbar.style.display = '';
+    } else {
+      navbar.style.display = 'none';
+    }
+  });
+  // Mobile burger toggle
+  var burger = document.querySelector('.navbar-burger');
+  if (burger) {
+    burger.addEventListener('click', function() {
+      var target = document.getElementById(burger.dataset.target);
+      burger.classList.toggle('is-active');
+      target.classList.toggle('is-active');
+    });
+  }
+  // Highlight active nav link on scroll
+  var sections = document.querySelectorAll('section[id]');
+  var navLinks = document.querySelectorAll('#navbarMenu .navbar-item[href^="#"]');
+  window.addEventListener('scroll', function() {
+    var scrollPos = window.scrollY + 80;
+    var active = null;
+    sections.forEach(function(s) {
+      if (s.offsetTop <= scrollPos) active = s.id;
+    });
+    navLinks.forEach(function(link) {
+      link.classList.remove('is-active-nav');
+      if (active && link.getAttribute('href') === '#' + active) {
+        link.classList.add('is-active-nav');
+      }
+    });
+  });
+})();
+</script>
+
+<style>
+  .navbar-item.is-active-nav { color: #3273dc !important; font-weight: 600; }
+  html { scroll-behavior: smooth; }
+  body.has-navbar-fixed-top { padding-top: 0 !important; }
+</style>
 
 </body>
 </html>

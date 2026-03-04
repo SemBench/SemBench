@@ -21,6 +21,7 @@ So, enjoy using SemBench! We believe a good benchmark should minimize user effor
 
 ## Materials
 - [Online Leaderboard](https://sembench.ngrok.io/)
+- [Submit Your System](https://sembench.ngrok.io/submit.html) — Guide for implementing SemBench in your system and submitting results
 - [Multi-Modal Datasets](https://drive.google.com/drive/folders/1pqf8DKFai16MR80Z7pcls5FgBbom-IJt?usp=sharing)
 - [Paper](https://arxiv.org/abs/2511.01716)
 

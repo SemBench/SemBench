@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="title" content="SemBench: Submit Your System">
+  <meta name="description" content="Guide for implementing SemBench queries in your system and submitting results.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SemBench: Submit Your System</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+  <style>
+    .doc-section { padding: 2rem 0; }
+    .doc-section + .doc-section { border-top: 1px solid #dbdbdb; }
+    pre { background: #f5f5f5; padding: 1.25rem; border-radius: 6px; overflow-x: auto; font-size: 0.875rem; }
+    code { font-family: 'Courier New', Courier, monospace; }
+    .matrix-table th, .matrix-table td { text-align: center; padding: 0.5rem 0.75rem; }
+    .matrix-table th:first-child, .matrix-table td:first-child { text-align: left; }
+
+    /* File Explorer */
+    .file-explorer {
+      display: flex;
+      border: 1px solid #dbdbdb;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      min-height: 420px;
+      max-height: 600px;
+    }
+    .file-tree {
+      width: 340px;
+      min-width: 260px;
+      background: #f7f8fa;
+      border-right: 1px solid #dbdbdb;
+      overflow-y: auto;
+      padding: 0.75rem 0;
+      font-size: 0.85rem;
+    }
+    .code-viewer {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .code-viewer-header {
+      background: #eef0f4;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #4a4a4a;
+      border-bottom: 1px solid #dbdbdb;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    .code-viewer-body {
+      flex: 1;
+      overflow: auto;
+      padding: 1rem;
+      margin: 0;
+      background: #fafafa;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      white-space: pre;
+      font-family: 'Courier New', Courier, monospace;
+      border-radius: 0;
+    }
+    .code-viewer-body code[class*="language-"] {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      font-family: 'Courier New', Courier, monospace;
+      background: none;
+      padding: 0;
+    }
+    .code-viewer-body.code-viewer-body {
+      background: #fafafa;
+      border-radius: 0;
+    }
+    /* Prevent Prism from affecting elements outside the code viewer */
+    :not(.code-viewer-body) > code {
+      color: inherit;
+      background: rgba(0,0,0,0.04);
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+      font-size: 0.875em;
+    }
+    /* Fix Bulma .content styling leaking into Prism tokens */
+    .code-viewer-body .token.number {
+      display: inline;
+      font-size: inherit;
+      line-height: inherit;
+      margin: 0;
+      padding: 0;
+      min-width: 0;
+      background: none;
+      border-radius: 0;
+      vertical-align: baseline;
+      align-items: initial;
+      justify-content: initial;
+      height: auto;
+      width: auto;
+    }
+    /* Tree items */
+    .tree-item {
+      padding: 3px 0 3px 0;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .tree-item:hover {
+      background: #e8ebf0;
+    }
+    .tree-item.active {
+      background: #d2d8e4;
+      font-weight: 600;
+    }
+    .tree-item .icon-span {
+      display: inline-block;
+      width: 1.1em;
+      text-align: center;
+      margin-right: 4px;
+      color: #6c757d;
+    }
+    .tree-item .icon-span.folder-icon { color: #e8a838; }
+    .tree-item .icon-span.file-icon { color: #6c757d; }
+    .tree-item .icon-span.py-icon { color: #3572A5; }
+    .tree-item .icon-span.sql-icon { color: #e38c00; }
+    /* Folder caret */
+    .tree-caret {
+      display: inline-block;
+      width: 1em;
+      text-align: center;
+      font-size: 0.7em;
+      color: #888;
+      transition: transform 0.15s;
+    }
+    .tree-caret.collapsed { transform: rotate(-90deg); }
+    /* Badge */
+    .file-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: 6px;
+      font-weight: 600;
+      vertical-align: middle;
+      line-height: 1.5;
+    }
+    .badge-base { background: #e8f5e9; color: #2e7d32; }
+    .badge-code { background: #e3f2fd; color: #1565c0; }
+    .badge-sql { background: #fff3e0; color: #e65100; }
+    .badge-codestar { background: #f3e5f5; color: #7b1fa2; }
+    /* Responsive */
+    @media screen and (max-width: 768px) {
+      .file-explorer { flex-direction: column; max-height: none; }
+      .file-tree { width: 100%; min-width: auto; border-right: none; border-bottom: 1px solid #dbdbdb; max-height: 280px; }
+      .code-viewer { min-height: 300px; }
+    }
+    .coming-soon-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 12px;
+      padding: 2.5rem;
+      color: white;
+      text-align: center;
+    }
+    .coming-soon-card h3 { color: white; }
+    .step-card {
+      border-left: 4px solid #3273dc;
+      background: #f9fafb;
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .step-card h4 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+      color: #363636;
+    }
+    .step-card h4 .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background: #3273dc;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-right: 0.5rem;
+      flex-shrink: 0;
+    }
+    .step-card p { margin: 0 0 0.5rem 0; font-size: 0.92rem; }
+    .step-card p:last-child { margin-bottom: 0; }
+    .file-link {
+      display: inline-block;
+      font-size: 0.82rem;
+      color: #3273dc;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      margin-right: 1rem;
+    }
+    .file-link:hover {
+      text-decoration: underline;
+      color: #1a56c4;
+    }
+    .file-link::after {
+      content: ' →';
+    }
+    .sidebar-toc {
+      position: sticky;
+      top: 2rem;
+      padding: 1.25rem;
+      background: #f9f9f9;
+      border-radius: 8px;
+      border-left: 3px solid #363636;
+    }
+    .sidebar-toc .toc-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      color: #363636;
+    }
+    .sidebar-toc ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-toc li {
+      margin-bottom: 0.5rem;
+    }
+    .sidebar-toc a {
+      color: #4a4a4a;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .sidebar-toc a:hover,
+    .sidebar-toc a.is-active {
+      color: #3273dc;
+      font-weight: 600;
+    }
+    @media screen and (max-width: 768px) {
+      .sidebar-toc { position: static; margin-bottom: 1.5rem; }
+    }
+
+    /* Architecture Diagram */
+    .arch-diagram {
+      max-width: 800px;
+      margin: 1.5rem auto 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      background: #fdfdfe;
+      padding: 1.5rem 1.5rem 1rem;
+    }
+    .arch-section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #888;
+      margin-bottom: 0.75rem;
+    }
+    .arch-section + .arch-section {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px dashed #ddd;
+    }
+
+    /* Class hierarchy rows */
+    .class-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      position: relative;
+    }
+    .class-box {
+      border-left: 4px solid #ccc;
+      background: #fafafa;
+      border-radius: 0 6px 6px 0;
+      padding: 0.5rem 0.85rem;
+      min-width: 180px;
+      max-width: 240px;
+      flex-shrink: 0;
+    }
+    .class-box.border-green { border-left-color: #2e7d32; }
+    .class-box.border-blue  { border-left-color: #1565c0; }
+    .class-box.border-orange { border-left-color: #e65100; }
+    .class-box-name {
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 0.2rem;
+    }
+    .class-box-methods {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.72rem;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    /* Vertical connectors between class rows */
+    .tree-connector-v {
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      position: relative;
+      height: 28px;
+    }
+    .tree-connector-v::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #bbb;
+    }
+
+    /* Fork: horizontal line spanning two children */
+    .tree-fork {
+      position: relative;
+      height: 28px;
+      margin: 0 auto;
+    }
+    .tree-fork::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 50%;
+      background: #bbb;
+    }
+    .tree-fork::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 25%;
+      width: 50%;
+      height: 2px;
+      background: #bbb;
+    }
+    .tree-fork-legs {
+      position: absolute;
+      top: 50%;
+      left: 25%;
+      width: 50%;
+      display: flex;
+      justify-content: space-between;
+    }
+    .tree-fork-leg {
+      width: 2px;
+      height: 14px;
+      background: #bbb;
+    }
+
+    /* Workflow (horizontal flow) */
+    .workflow-flow {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .workflow-box {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 0.35rem 0.65rem;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+    .workflow-arrow {
+      display: flex;
+      align-items: center;
+      padding: 0 0.3rem;
+      color: #999;
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .workflow-branch {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      align-items: flex-start;
+    }
+    .workflow-branch-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .workflow-branch-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border-radius: 3px;
+      margin-right: 0.35rem;
+      white-space: nowrap;
+    }
+    .workflow-branch-label.label-blue {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+    .workflow-branch-label.label-orange {
+      background: #fff3e0;
+      color: #e65100;
+    }
+
+    /* Responsive: architecture diagram */
+    @media screen and (max-width: 768px) {
+      .arch-diagram { padding: 1rem; }
+      .class-row { flex-direction: column; align-items: center; gap: 0.5rem; }
+      .class-box { max-width: 90%; min-width: 0; width: 100%; }
+      .tree-fork::after { left: 50%; width: 0; }
+      .tree-fork-legs { display: none; }
+      .workflow-flow { flex-direction: column; align-items: center; }
+      .workflow-arrow { transform: rotate(90deg); padding: 0.2rem 0; }
+      .workflow-branch { align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero Header -->
+<section class="hero">
+  <div class="hero-body" style="padding-bottom: 1.5rem;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">SemBench</h1>
+          <p class="subtitle is-4 publication-title" style="margin-top: 0.5rem;">Implement the Benchmark & Submit Results</p>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="index.html"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-home"></i></span>
+                  <span>Home</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section institutions-section">
+  <div class="institution-logos-wrapper">
+    <div class="institution-logos">
+      <img src="static/images/institutions/cornell-university.png" alt="Cornell University" class="institution-logo">
+      <img src="static/images/institutions/utn.png" alt="UTN" class="institution-logo">
+      <img src="static/images/institutions/bifold.png" alt="BIFOLD" class="institution-logo">
+      <img src="static/images/institutions/tub.png" alt="TU Berlin" class="institution-logo">
+      <img src="static/images/institutions/michigan.png" alt="University of Michigan" class="institution-logo">
+      <img src="static/images/institutions/mit.svg" alt="MIT" class="institution-logo">
+      <img src="static/images/institutions/vu.svg" alt="VU Amsterdam" class="institution-logo">
+      <img src="static/images/institutions/google.svg" alt="Google" class="institution-logo">
+    </div>
+  </div>
+</section>
+
+<!-- Main Content -->
+<section class="section">
+  <div class="container" style="max-width: 1400px;">
+    <div class="columns">
+      <!-- Sidebar TOC -->
+      <div class="column is-3">
+        <nav class="sidebar-toc">
+          <div class="toc-title">Contents</div>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#implementation-guide">Implementation Guide</a></li>
+            <li><a href="#matrix">System &times; Scenario Matrix</a></li>
+            <li><a href="#submit-results">Submit Results</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Content -->
+      <div class="column is-9">
+        <div class="content has-text-justified">
+
+          <!-- Overview -->
+          <div class="doc-section" id="overview">
+            <h2 class="title is-3">Overview</h2>
+            <p>
+              There are two ways to implement SemBench queries in your system, depending on how your system is deployed.
+              <strong>Code-based</strong> systems (Python packages) implement queries as Python methods.
+              <strong>Query-based</strong> systems (SQL engines) write queries as standalone SQL files.
+              Both approaches inherit from the same <code>GenericRunner</code> base class and produce results in a unified format.
+            </p>
+          </div>
+
+          <!-- Implementation Guide -->
+          <div class="doc-section" id="implementation-guide">
+            <h2 class="title is-3">Implementation Guide</h2>
+            <p>
+              This guide walks you through the SemBench architecture step-by-step.
+              <strong>Code-based</strong> systems (Python packages like LOTUS) implement queries as Python methods in a runner class.
+              <strong>Query-based</strong> systems (SQL engines like BigQuery) write queries as standalone SQL files with a minimal runner.
+              Newer scenarios also support <strong>Code*</strong> mode where Python query files live in <code>files/</code> and are loaded dynamically.
+              Click any file in the explorer to view its contents, or use the links in each step below.
+            </p>
+            <p style="font-size: 0.88rem; color: #666; margin-top: -0.5rem;">
+              <em><strong>Note:</strong> The file contents shown below are simplified excerpts for illustration purposes.
+              Please refer to the
+              <a href="https://github.com/SemBench/SemBench/" target="_blank">original source files</a>
+              for the complete implementation reference.</em>
+            </p>
+
+            <!-- Architecture Diagram -->
+            <div class="arch-diagram">
+              <!-- Class Hierarchy -->
+              <div class="arch-section">
+                <div class="arch-section-label">Class Hierarchy</div>
+
+                <!-- Row 1: GenericRunner -->
+                <div class="class-row">
+                  <div class="class-box border-green">
+                    <div class="class-box-name">GenericRunner</div>
+                    <div class="class-box-methods">get_system_name()<br>_discover_query_impl()<br>_discover_query_text()</div>
+                  </div>
+                </div>
+
+                <!-- Fork from 1 → 2 -->
+                <div class="tree-fork">
+                  <div class="tree-fork-legs">
+                    <div class="tree-fork-leg"></div>
+                    <div class="tree-fork-leg"></div>
+                  </div>
+                </div>
+
+                <!-- Row 2: Generic system runners -->
+                <div class="class-row">
+                  <div class="class-box border-blue">
+                    <div class="class-box-name">GenericLotusRunner</div>
+                    <div class="class-box-methods">execute_query()<br>_configure_lm()</div>
+                  </div>
+                  <div class="class-box border-orange">
+                    <div class="class-box-name">GenericBigQueryRunner</div>
+                    <div class="class-box-methods">execute_queries()<br>Jinja2 templating</div>
+                  </div>
+                </div>
+
+                <!-- Fork from 2 → 3 -->
+                <div class="tree-fork">
+                  <div class="tree-fork-legs">
+                    <div class="tree-fork-leg"></div>
+                    <div class="tree-fork-leg"></div>
+                  </div>
+                </div>
+
+                <!-- Row 3: Per-scenario runners -->
+                <div class="class-row">
+                  <div class="class-box border-blue">
+                    <div class="class-box-name">LotusRunner</div>
+                    <div class="class-box-methods">(per scenario)<br>_execute_q*()</div>
+                  </div>
+                  <div class="class-box border-orange">
+                    <div class="class-box-name">BigQueryRunner</div>
+                    <div class="class-box-methods">(per scenario)<br>(minimal subclass)</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Execution Workflow -->
+              <div class="arch-section">
+                <div class="arch-section-label">Execution Flow</div>
+
+                <div class="workflow-flow">
+                  <div class="workflow-box">run.py</div>
+                  <div class="workflow-arrow">→</div>
+                  <div class="workflow-box">get_runner_class()</div>
+                  <div class="workflow-arrow">→</div>
+                  <div class="workflow-box">execute_query(s)()</div>
+                  <div class="workflow-arrow">→</div>
+                  <div class="workflow-branch">
+                    <div class="workflow-branch-row">
+                      <span class="workflow-branch-label label-blue">Code</span>
+                      <div class="workflow-box">_discover_query_impl()</div>
+                      <div class="workflow-arrow">→</div>
+                      <div class="workflow-box">_execute_q*()</div>
+                    </div>
+                    <div class="workflow-branch-row">
+                      <span class="workflow-branch-label label-orange">SQL</span>
+                      <div class="workflow-box">_discover_query_text()</div>
+                      <div class="workflow-arrow">→</div>
+                      <div class="workflow-box">Q{id}.sql</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="file-explorer">
+              <div class="file-tree" id="fileTree"></div>
+              <div class="code-viewer">
+                <div class="code-viewer-header" id="codeViewerHeader">Select a file</div>
+                <pre class="code-viewer-body" id="codeViewerPre"><code id="codeViewerBody"></code></pre>
+              </div>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="step-card">
+              <h4><span class="step-num">1</span> Run the Benchmark</h4>
+              <p>
+                The CLI entry point is <code>src/run.py</code>. You specify which system, scenario, and queries to run.
+                The script dynamically loads the correct runner class for each system using <code>get_runner_class()</code>.
+              </p>
+              <a class="file-link" onclick="selectFileByPath('src/run.py')">run.py</a>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card">
+              <h4><span class="step-num">2</span> The Runner Base Class</h4>
+              <p>
+                Every system runner inherits from <code>GenericRunner</code>
+                (located at <code>src/runner/generic_runner.py</code>).
+                It defines the abstract interface
+                (<code>get_system_name()</code>, <code>execute_query()</code>), sets up paths to data, queries, and results,
+                and provides <code>load_data()</code> for reading CSVs.
+                It also provides two query-discovery mechanisms:
+                <code>_discover_query_impl(query_id)</code> finds a Python method named <code>_execute_q{id}</code> via reflection (used by Code mode),
+                and <code>_discover_query_text(query_id)</code> locates a <code>Q{id}.sql</code> file in the system&rsquo;s query directory (used by SQL mode).
+                You should not need to modify this file.
+              </p>
+              <a class="file-link" onclick="selectFileByPath('src/runner/generic_runner.py')">generic_runner.py</a>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card">
+              <h4><span class="step-num">3</span> Build Your System&rsquo;s Base Runner</h4>
+              <p>
+                Each system should implement its own intermediate base runner between <code>GenericRunner</code> and the per-scenario runners.
+                Create it at <code>src/runner/generic_{system}_runner/generic_{system}_runner.py</code>.
+                This is where you put shared logic specific to your system: engine initialization, hyper-parameter configuration,
+                token usage extraction, and monetary cost calculation.
+                For example, <code>GenericLotusRunner</code>
+                (at <code>src/runner/generic_lotus_runner/</code>)
+                initializes the LOTUS LM, configures reasoning effort per model,
+                calls <code>_discover_query_impl()</code> to dispatch to <code>_execute_q*()</code> methods, and extracts token stats from <code>lotus.settings.lm.stats</code>.
+                <code>GenericBigQueryRunner</code>
+                (at <code>src/runner/generic_bigquery_runner/</code>)
+                sets up the BigQuery client, calls <code>_discover_query_text()</code> to load <code>.sql</code> templates,
+                uses Jinja2 to substitute <code>&lt;&lt;variables&gt;&gt;</code>, and queries inference logs for cost tracking.
+              </p>
+              <a class="file-link" onclick="selectFileByPath('src/runner/generic_lotus_runner/generic_lotus_runner.py')">generic_lotus_runner.py</a>
+              <a class="file-link" onclick="selectFileByPath('src/runner/generic_bigquery_runner/generic_bigquery_runner.py')">generic_bigquery_runner.py</a>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step-card">
+              <h4><span class="step-num">4</span> Implement Your Queries</h4>
+              <p>
+                There are two approaches depending on your system&rsquo;s mode:
+              </p>
+              <p>
+                <strong>Code mode</strong> &mdash; Create a per-scenario runner at
+                <code>src/scenario/{scenario}/runner/{system}_runner/{system}_runner.py</code>
+                and implement <code>_execute_q*()</code> methods.
+                Each method loads data, applies semantic operators (e.g., <code>sem_filter</code>, <code>sem_join</code>, <code>sem_map</code>),
+                and returns a DataFrame. See the movie LOTUS runner for examples.
+              </p>
+              <p>
+                <strong>SQL / Code* mode</strong> &mdash; Write standalone query files in <code>files/{scenario}/query/{system}/</code>.
+                SQL queries (<code>Q{id}.sql</code>) are templates with <code>&lt;&lt;variable&gt;&gt;</code> placeholders substituted at runtime.
+                Code* queries (<code>Q{id}.py</code>) are Python files with a <code>run()</code> function that receives the data directory.
+                The per-scenario runner itself
+                (at <code>src/scenario/{scenario}/runner/{system}_runner/{system}_runner.py</code>)
+                is minimal &mdash; just inherit from your system&rsquo;s base runner and set defaults.
+              </p>
+              <a class="file-link" onclick="selectFileByPath('src/scenario/movie/runner/lotus_runner/lotus_runner.py')">lotus_runner.py</a>
+              <a class="file-link" onclick="selectFileByPath('src/scenario/movie/runner/bigquery_runner/bigquery_runner.py')">bigquery_runner.py</a>
+              <a class="file-link" onclick="selectFileByPath('files/movie/query/bigquery/Q1.sql')">Q1.sql</a>
+              <a class="file-link" onclick="selectFileByPath('files/cars/query/lotus/Q1.py')">Q1.py</a>
+            </div>
+          </div>
+
+          <!-- System x Scenario Matrix -->
+          <div class="doc-section" id="matrix">
+            <h2 class="title is-3">System &times; Scenario Matrix</h2>
+            <p>
+              The table below shows how each system implements queries for each scenario.
+              <strong>Code</strong> = Python methods in the runner;
+              <strong>Code*</strong> = external Python query files loaded dynamically;
+              <strong>SQL</strong> = standalone SQL files;
+              <strong>Hybrid</strong> = combination of approaches.
+            </p>
+            <div class="table-container">
+              <table class="table is-bordered is-striped is-hoverable is-fullwidth matrix-table">
+                <thead>
+                  <tr>
+                    <th>System</th>
+                    <th>Movie</th>
+                    <th>Animals</th>
+                    <th>MMQA</th>
+                    <th>Ecomm</th>
+                    <th>Medical</th>
+                    <th>Cars</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>LOTUS</strong></td>
+                    <td>Code</td>
+                    <td>Code</td>
+                    <td>Code</td>
+                    <td>Code*</td>
+                    <td>Code*</td>
+                    <td>Code*</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Palimpzest</strong></td>
+                    <td>Code</td>
+                    <td>Code</td>
+                    <td>Code</td>
+                    <td>Code*</td>
+                    <td>Code*</td>
+                    <td>Code*</td>
+                  </tr>
+                  <tr>
+                    <td><strong>BigQuery</strong></td>
+                    <td>SQL</td>
+                    <td>SQL</td>
+                    <td>SQL</td>
+                    <td>SQL</td>
+                    <td>SQL</td>
+                    <td>SQL</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ThalamusDB</strong></td>
+                    <td>Hybrid</td>
+                    <td>Hybrid</td>
+                    <td>Hybrid</td>
+                    <td>Hybrid</td>
+                    <td>Hybrid</td>
+                    <td>Hybrid</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Submit Results -->
+          <div class="doc-section" id="submit-results">
+            <h2 class="title is-3">Submit Results</h2>
+            <div class="coming-soon-card">
+              <h3 class="title is-4">Coming Soon</h3>
+              <p style="font-size: 1.1rem;">
+                The submission process for uploading benchmark results to the SemBench leaderboard
+                is currently under discussion. Stay tuned for updates!
+              </p>
+              <p style="margin-top: 1rem;">
+                <a href="https://github.com/SemBench/SemBench/" class="button is-light is-rounded">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Follow on GitHub</span>
+                </a>
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// Highlight active TOC link on scroll
+(function() {
+  var sections = document.querySelectorAll('.doc-section[id]');
+  var tocLinks = document.querySelectorAll('.sidebar-toc a');
+  window.addEventListener('scroll', function() {
+    var scrollPos = window.scrollY + 100;
+    var active = null;
+    sections.forEach(function(section) {
+      if (section.offsetTop <= scrollPos) {
+        active = section.getAttribute('id');
+      }
+    });
+    tocLinks.forEach(function(link) {
+      link.classList.remove('is-active');
+      if (active && link.getAttribute('href') === '#' + active) {
+        link.classList.add('is-active');
+      }
+    });
+  });
+})();
+
+// ── File Explorer ──
+(function() {
+  // File contents keyed by path
+  var fileContents = {
+    "src/run.py": "# Main entry point for running SemBench\n# Usage:\n#   python src/run.py --systems lotus --use-cases movie --queries Q1 Q2 ...\n\ndef get_runner_class(system_name: str, use_case: str):\n    \"\"\"Dynamically import and return the runner class for a system.\"\"\"\n    module_path = f\"scenario.{use_case}.runner.{system_name}_runner.{system_name}_runner\"\n    module = importlib.import_module(module_path)\n\n    # Find the Runner subclass in the module\n    for name, obj in inspect.getmembers(module, inspect.isclass):\n        if issubclass(obj, GenericRunner) and obj is not GenericRunner:\n            return obj\n    raise ValueError(f\"No runner found for {system_name}\")\n\n# Main loop: iterate over systems, scenarios, queries\nfor system in args.systems:\n    RunnerClass = get_runner_class(system, use_case)\n    runner = RunnerClass(use_case, scale_factor, model_name)\n    runner.execute_queries(query_ids)",
+
+    "src/runner/generic_runner.py": "@dataclass\nclass GenericQueryMetric:\n    \"\"\"Stores results and metadata for a single query execution.\"\"\"\n    query_id: int\n    status: str           # 'success' or 'failed'\n    execution_time: float = None\n    results: pd.DataFrame = field(default_factory=pd.DataFrame)\n    token_usage: int = None\n    money_cost: float = None\n    error: Optional[str] = None\n\n\nclass GenericRunner(ABC):\n    \"\"\"Base class for all system runners.\"\"\"\n\n    def __init__(self, use_case, scale_factor, model_name,\n                 concurrent_llm_worker, skip_setup=False):\n        self.use_case = use_case\n        self.system_name = self.get_system_name()\n\n        # Set up paths\n        self.base_path = Path(__file__).resolve().parents[2]\n        self.files_path = self.base_path / \"files\" / use_case\n        self.data_path  = self.files_path / \"data\" / f\"sf_{scale_factor}\"\n        self.query_path = self.files_path / \"query\"\n        self.results_path = self.files_path / \"raw_results\" / self.system_name\n        self.metrics_path = self.files_path / \"metrics\"\n        ...\n\n    @abstractmethod\n    def get_system_name(self) -> str: ...\n\n    def execute_query(self, query_id): ...\n    def execute_queries(self, query_ids): ...\n    def load_data(self, filename: str) -> pd.DataFrame: ...\n\n    def _discover_query_impl(self, query_id) -> callable:\n        \"\"\"Find _execute_q{id} method via reflection (Code mode).\"\"\"\n        method_name = f\"_execute_q{query_id}\"\n        try:\n            query_fn = getattr(self, method_name)\n            if not callable(query_fn):\n                raise TypeError(f\"{method_name} is not callable\")\n            return query_fn\n        except AttributeError:\n            raise NotImplementedError(\n                f\"Query {query_id} not implemented for {self.system_name}.\"\n            )\n\n    def _discover_query_text(self, query_id) -> str:\n        \"\"\"Find Q{id}.sql file in system's query dir (SQL mode).\"\"\"\n        expected_path = os.path.join(\n            self.query_path, self.system_name, f\"Q{query_id}.sql\"\n        )\n        if not os.path.exists(expected_path):\n            raise FileNotFoundError(\n                f\"Query file not found for {self.system_name} q{query_id}\"\n            )\n        with open(expected_path, \"r\") as f:\n            return f.read().strip()",
+
+    "src/runner/generic_lotus_runner/generic_lotus_runner.py": "class GenericLotusRunner(GenericRunner):\n    \"\"\"Base runner for LOTUS system.\n\n    Initializes LM, dispatches queries, tracks token usage & cost.\"\"\"\n\n    def __init__(self, use_case, scale_factor, model_name,\n                 concurrent_llm_worker=20, skip_setup=False,\n                 policy='approximate', ranking='map'):\n        super().__init__(use_case, scale_factor, model_name,\n                         concurrent_llm_worker, skip_setup)\n        self.policy = policy    # 'exact' or 'approximate'\n        self.ranking = ranking  # 'topk' or 'map'\n        self.lm = self._configure_lm()\n        lotus.settings.configure(lm=self.lm)\n        self._initialize_lotus_with_warmup()\n\n    def execute_query(self, query_id: int) -> GenericQueryMetric:\n        \"\"\"Dispatch to _execute_q{id}() and capture metrics.\"\"\"\n        metric = GenericQueryMetric(query_id=query_id, status='pending')\n        lotus.settings.lm.reset_stats()\n        query_fn = self._discover_query_impl(query_id)\n        start_time = time.time()\n        results = query_fn()\n        metric.execution_time = time.time() - start_time\n        metric.results = results\n        metric.status = 'success'\n        self._update_token_usage(metric)\n        return metric\n\n    def _discover_queries(self) -> List[int]:\n        \"\"\"Find all _execute_q{i} methods via regex.\"\"\"\n        pattern = re.compile(r'_execute_q(\\d+)$')\n        return sorted(int(m.group(1)) for attr in dir(self)\n                       if (m := pattern.match(attr)) and callable(getattr(self, attr)))",
+
+    "src/runner/generic_bigquery_runner/generic_bigquery_runner.py": "class GenericBigQueryRunner(GenericRunner):\n    \"\"\"Base runner for BigQuery system.\n\n    Reads .sql templates via _discover_query_text(),\n    substitutes <<variables>> with Jinja2,\n    executes against BigQuery, and tracks cost via inference logs.\"\"\"\n\n    def __init__(self, use_case, scale_factor, model_name,\n                 concurrent_llm_worker=20, skip_setup=False,\n                 thinking_budget=0):\n        super().__init__(use_case, scale_factor, model_name,\n                         concurrent_llm_worker, skip_setup)\n        self.thinking_budget = thinking_budget\n        self.bq_client = bigquery.Client(\n            project=os.environ.get('GCLOUD_PROJECT'))\n\n    def execute_queries(self, query_ids):\n        \"\"\"Load .sql templates, substitute params, execute.\"\"\"\n        run_uuid = uuid.uuid4()\n        query_texts = {\n            qid: self._discover_query_text(qid)\n            for qid in query_ids\n        }\n        for qid, query_text in query_texts.items():\n            templated = jinja_env.from_string(query_text).render(\n                connection='us.connection',\n                query_id=f'{run_uuid}-q{qid}',\n                other_params=f\", endpoint => '{self.model_name}'\",\n                thinking_budget=self.thinking_budget,\n            )\n            df = self.bq_client.query(templated).result().to_dataframe()\n            ...\n        # Then query inference_logs for token/cost tracking",
+
+    "src/scenario/movie/runner/lotus_runner/lotus_runner.py": "class LotusRunner(GenericLotusRunner):\n    \"\"\"Runner for LOTUS system — movie scenario.\"\"\"\n\n    def _execute_q1(self) -> pd.DataFrame:\n        \"\"\"Q1: Find clearly positive movie reviews (sem_filter).\"\"\"\n        reviews = self.load_data(\"Reviews.csv\")\n        filtered_reviews = reviews.sem_filter(\n            'Determine if the following movie review is '\n            'clearly positive. Review: \"{reviewText}\".'\n        )\n        if len(filtered_reviews) == 0:\n            return self._get_empty_results_dataframe(1)\n        top5_reviews = filtered_reviews.head(5)\n        results = []\n        for _, row in top5_reviews.iterrows():\n            results.append({\"reviewId\": row[\"reviewId\"]})\n        return pd.DataFrame(results)\n\n    def _execute_q8(self) -> pd.DataFrame:\n        \"\"\"Q8: Sentiment distribution for 'taken_3' (sem_map).\"\"\"\n        reviews = self.load_data(\"Reviews.csv\")\n        filtered_reviews = reviews[reviews[\"id\"] == \"taken_3\"]\n        sentiment_reviews = filtered_reviews.sem_map(\n            \"Classify the sentiment of this review as either \"\n            \"'POSITIVE' or 'NEGATIVE'. Only output the exact \"\n            \"word 'POSITIVE' or 'NEGATIVE' with no additional \"\n            \"text. Review: {reviewText}\"\n        )\n        sentiment_counts = (\n            sentiment_reviews[\"_map\"].value_counts().reset_index()\n        )\n        sentiment_counts.columns = [\"scoreSentiment\", \"count\"]\n        return sentiment_counts\n\n    # ... Q2-Q7, Q9-Q10 also implemented",
+
+    "src/scenario/movie/runner/bigquery_runner/bigquery_runner.py": "from runner.generic_bigquery_runner.generic_bigquery_runner import (\n    GenericBigQueryRunner,\n)\n\nclass BigQueryRunner(GenericBigQueryRunner):\n    \"\"\"BigQuery runner — movie scenario.\n\n    Inherits all SQL execution logic; just sets defaults.\"\"\"\n\n    def __init__(self, use_case, scale_factor,\n                 model_name=\"gemini-2.5-flash\",\n                 concurrent_llm_worker=20, skip_setup=True):\n        super().__init__(use_case, scale_factor, model_name,\n                         concurrent_llm_worker, skip_setup)",
+
+    "files/movie/query/bigquery/Q1.sql": "-- Movie Q1: Find clearly positive reviews\n-- <<variables>> are substituted at runtime by GenericBigQueryRunner\nSELECT reviewId\nFROM movie.reviews AS r\nWHERE AI.IF(\n    ('Determine if the following movie review is clearly positive, review: ',\n     r.reviewText),\n    connection_id => '<<connection>>',\n    model_params => JSON '{\"labels\":{\"query_uuid\": \"<<query_id>>\"},\n      \"generation_config\":{\"thinking_config\":\n        {\"thinking_budget\": <<thinking_budget>>}}}'\n    <<other_params>>\n)\nLIMIT 5;",
+
+    "files/cars/query/lotus/Q1.py": "# Code* mode query — loaded dynamically by the runner.\n# The run() function receives data_dir and scale_factor.\nimport os\nimport pandas as pd\n\ndef run(data_dir: str, scale_factor: int = 157376):\n    complaints = pd.read_csv(\n        os.path.join(data_dir, \"data\",\n                     f\"sf_{scale_factor}\",\n                     f\"text_complaints_data_{scale_factor}.csv\")\n    )\n\n    # Semantic filter for crash-related complaints\n    complaints = complaints.sem_filter(\n        'You are given a textual complaint entailing that '\n        'the car was in a crash/accident/collision. '\n        'Complaint: {summary}.'\n    )\n    return complaints['car_id']"
+  };
+
+  // Tree structure definition
+  // Each node: { name, children?, file?, badge?, badgeClass? }
+  var tree = [
+    { name: "SemBench", children: [
+      { name: "src", children: [
+        { name: "run.py", file: "src/run.py" },
+        { name: "runner", children: [
+          { name: "generic_runner.py", file: "src/runner/generic_runner.py", badge: "Base Class", badgeClass: "badge-base" },
+          { name: "generic_lotus_runner", children: [
+            { name: "generic_lotus_runner.py", file: "src/runner/generic_lotus_runner/generic_lotus_runner.py", badge: "Code Mode", badgeClass: "badge-code" }
+          ]},
+          { name: "generic_bigquery_runner", children: [
+            { name: "generic_bigquery_runner.py", file: "src/runner/generic_bigquery_runner/generic_bigquery_runner.py", badge: "SQL Mode", badgeClass: "badge-sql" }
+          ]}
+        ]},
+        { name: "scenario", children: [
+          { name: "movie", children: [
+            { name: "runner", children: [
+              { name: "lotus_runner", children: [
+                { name: "lotus_runner.py", file: "src/scenario/movie/runner/lotus_runner/lotus_runner.py", badge: "Code Mode", badgeClass: "badge-code" }
+              ]},
+              { name: "bigquery_runner", children: [
+                { name: "bigquery_runner.py", file: "src/scenario/movie/runner/bigquery_runner/bigquery_runner.py", badge: "SQL Mode", badgeClass: "badge-sql" }
+              ]}
+            ]}
+          ]}
+        ]}
+      ]},
+      { name: "files", children: [
+        { name: "movie", children: [
+          { name: "query", children: [
+            { name: "bigquery", children: [
+              { name: "Q1.sql", file: "files/movie/query/bigquery/Q1.sql", badge: "SQL Mode", badgeClass: "badge-sql" }
+            ]}
+          ]}
+        ]},
+        { name: "cars", children: [
+          { name: "query", children: [
+            { name: "lotus", children: [
+              { name: "Q1.py", file: "files/cars/query/lotus/Q1.py", badge: "Code* Mode", badgeClass: "badge-codestar" }
+            ]}
+          ]}
+        ]}
+      ]}
+    ]}
+  ];
+
+  var treeEl = document.getElementById('fileTree');
+  var headerEl = document.getElementById('codeViewerHeader');
+  var bodyEl = document.getElementById('codeViewerBody');
+  var activeItem = null;
+
+  function fileIcon(name) {
+    if (name.endsWith('.py')) return '<span class="icon-span py-icon"><i class="fas fa-file-code"></i></span>';
+    if (name.endsWith('.sql')) return '<span class="icon-span sql-icon"><i class="fas fa-database"></i></span>';
+    if (name.endsWith('.txt')) return '<span class="icon-span file-icon"><i class="fas fa-file-alt"></i></span>';
+    return '<span class="icon-span file-icon"><i class="fas fa-file"></i></span>';
+  }
+
+  function renderTree(nodes, container, depth) {
+    nodes.forEach(function(node) {
+      if (node.children) {
+        // Folder
+        var row = document.createElement('div');
+        row.className = 'tree-item';
+        row.style.paddingLeft = (depth * 16 + 8) + 'px';
+        row.innerHTML = '<span class="tree-caret"><i class="fas fa-caret-down"></i></span> ' +
+          '<span class="icon-span folder-icon"><i class="fas fa-folder-open"></i></span>' +
+          '<span>' + node.name + '</span>';
+        container.appendChild(row);
+
+        var childContainer = document.createElement('div');
+        childContainer.className = 'tree-children';
+        container.appendChild(childContainer);
+
+        renderTree(node.children, childContainer, depth + 1);
+
+        row.addEventListener('click', function() {
+          var hidden = childContainer.style.display === 'none';
+          childContainer.style.display = hidden ? '' : 'none';
+          var caret = row.querySelector('.tree-caret');
+          var folderIcon = row.querySelector('.folder-icon i');
+          if (hidden) {
+            caret.classList.remove('collapsed');
+            folderIcon.className = 'fas fa-folder-open';
+          } else {
+            caret.classList.add('collapsed');
+            folderIcon.className = 'fas fa-folder';
+          }
+        });
+      } else {
+        // File
+        var row = document.createElement('div');
+        row.className = 'tree-item';
+        row.style.paddingLeft = (depth * 16 + 8) + 'px';
+        var badgeHtml = '';
+        if (node.badge) {
+          badgeHtml = '<span class="file-badge ' + node.badgeClass + '">' + node.badge + '</span>';
+        }
+        row.innerHTML = '<span class="tree-caret" style="visibility:hidden"><i class="fas fa-caret-down"></i></span> ' +
+          fileIcon(node.name) +
+          '<span>' + node.name + '</span>' + badgeHtml;
+        container.appendChild(row);
+
+        if (node.file) {
+          row.setAttribute('data-file-path', node.file);
+          row.addEventListener('click', function() {
+            selectFile(node.file, node.name, row);
+          });
+        }
+      }
+    });
+  }
+
+  function getLang(path) {
+    if (path.endsWith('.py')) return 'python';
+    if (path.endsWith('.sql')) return 'sql';
+    return 'none';
+  }
+
+  function selectFile(path, name, rowEl) {
+    if (activeItem) activeItem.classList.remove('active');
+    rowEl.classList.add('active');
+    activeItem = rowEl;
+    headerEl.textContent = path;
+    var content = fileContents[path] || '// File contents not available';
+    var lang = getLang(path);
+    bodyEl.className = '';
+    if (lang !== 'none' && Prism.languages[lang]) {
+      bodyEl.className = 'language-' + lang;
+      bodyEl.innerHTML = Prism.highlight(content, Prism.languages[lang], lang);
+    } else {
+      bodyEl.textContent = content;
+    }
+  }
+
+  renderTree(tree, treeEl, 0);
+
+  // Global function: select a file by its path (used by step card links)
+  window.selectFileByPath = function(path) {
+    var item = treeEl.querySelector('.tree-item[data-file-path="' + path + '"]');
+    if (!item) return;
+    var fileName = path.split('/').pop();
+    // Expand parent folders so the item is visible
+    var parent = item.parentElement;
+    while (parent && parent !== treeEl) {
+      if (parent.classList && parent.classList.contains('tree-children')) {
+        parent.style.display = '';
+        var prev = parent.previousElementSibling;
+        if (prev) {
+          var caret = prev.querySelector('.tree-caret');
+          if (caret) caret.classList.remove('collapsed');
+          var folderIcon = prev.querySelector('.folder-icon i');
+          if (folderIcon) folderIcon.className = 'fas fa-folder-open';
+        }
+      }
+      parent = parent.parentElement;
+    }
+    selectFile(path, fileName, item);
+    item.scrollIntoView({ block: 'nearest' });
+    document.getElementById('codeViewerPre').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  // Select run.py by default
+  var defaultPath = 'src/run.py';
+  var allItems = treeEl.querySelectorAll('.tree-item');
+  allItems.forEach(function(item) {
+    if (item.textContent.indexOf('run.py') !== -1 &&
+        !item.querySelector('.folder-icon')) {
+      selectFile(defaultPath, 'run.py', item);
+    }
+  });
+})();
+</script>
+
+<!-- Footer -->
+<footer class="footer" style="padding: 2rem 1.5rem;">
+  <div class="container has-text-centered">
+    <p>
+      <a href="index.html">&larr; Back to SemBench</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
