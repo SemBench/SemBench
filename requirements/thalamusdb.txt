@@ -1,0 +1,4 @@
+# ThalamusDB - Semantic operators optimized with approximate query processing
+-r base.txt
+
+thalamusdb==0.1.15

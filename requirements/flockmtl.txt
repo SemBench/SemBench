@@ -1,0 +1,4 @@
+# FlockMTL - Open-source extension of DuckDB with LLM capabilities
+-r base.txt
+
+# duckdb and jinja2 are in base.txt

@@ -4,6 +4,7 @@
 # Environments
 .env
 .venv
+.venvs/
 env/
 venv/
 ENV/

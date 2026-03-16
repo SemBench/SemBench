@@ -128,9 +128,22 @@ Please refer to the `.env.example` file and create a corresponding `.env` file t
 For the list of supported models for each system, please consult the corresponding repository for detailed information.
 
 ### Automatic Environment Setup
+
+SemBench uses per-system isolated virtual environments (managed by [uv](https://docs.astral.sh/uv/)) to avoid dependency conflicts between systems. Setup takes a few minutes and requires no manual intervention:
+
 ```bash
-bash scripts/setup_environment.sh
+# Set up all systems (installs uv automatically if needed)
+bash scripts/setup_envs.sh
+
+# Or set up specific systems only
+bash scripts/setup_envs.sh lotus palimpzest
 ```
+
+This creates:
+- `.venvs/sembench/` — orchestrator environment (runs `run.py`, evaluation, plotting)
+- `.venvs/{system}/` — isolated environment per system (e.g., `.venvs/lotus/`, `.venvs/palimpzest/`)
+
+Each system gets its own environment with its own dependencies, so there are no conflicts (e.g., lotus-ai requires numpy<2 while palimpzest requires numpy>=2). See [ENVIRONMENT_SETUP.md](ENVIRONMENT_SETUP.md) for details.
 
 ### Automatic Dataset Download and Database Generation
 Note
@@ -141,13 +154,16 @@ Note
 
 ### Running Benchmarks
 ```bash
+# Activate the orchestrator environment
+source .venvs/sembench/bin/activate
+
 # Run specific system on specific use case and queries
 python3 src/run.py --systems lotus --use-cases movie --queries 1 3 --model gemini-2.5-flash --scale-factor 2000
 
-# Run full evaluation on a use case  
+# Run full evaluation on a use case
 python3 src/run.py --systems lotus --use-cases movie --model gemini-2.5-flash --scale-factor 2000
 
-# Compare multiple systems
+# Compare multiple systems (each runs in its own isolated environment automatically)
 python3 src/run.py --systems lotus thalamusdb --use-cases movie --model gemini-2.5-flash --scale-factor 2000
 
 # Execute repeated experiments for error bars

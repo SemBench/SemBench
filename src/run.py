@@ -4,18 +4,32 @@ Created on May 28, 2025
 @author: Jiale Lao
 
 Main entry point for running benchmarks on different multi-modal data systems.
+
+Supports two execution modes:
+1. Isolated mode (default when .venvs/ exists): Each system runs in its own
+   virtual environment via subprocess, avoiding dependency conflicts.
+2. Direct mode (--no-isolation or when .venvs/ doesn't exist): All systems
+   run in the current Python process (legacy behavior).
 """
 
 import argparse
 import importlib
+import json
 import os
+import re
+import subprocess
 import sys
-from typing import List
+from pathlib import Path
+from typing import Dict, List, Optional
 
 from dotenv import load_dotenv
 
 # Add src directory to Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+# Project root (parent of src/)
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+VENVS_DIR = PROJECT_ROOT / ".venvs"
 
 
 def get_runner_class(system: str, use_case: str):
@@ -122,6 +136,99 @@ def parse_query_ids(query_args: List[str]) -> List[int]:
     return sorted(query_ids)
 
 
+def get_system_venv_python(system: str) -> Optional[Path]:
+    """Return the Python executable path for a system's venv, or None."""
+    venv_python = VENVS_DIR / system / "bin" / "python"
+    if venv_python.exists():
+        return venv_python
+    return None
+
+
+def run_system_isolated(
+    system: str,
+    use_case: str,
+    queries: Optional[List[int]],
+    model_name: str,
+    scale_factor: Optional[int],
+    skip_setup: bool,
+) -> Dict:
+    """
+    Run a system in its isolated virtual environment via subprocess.
+
+    Returns:
+        Dictionary of query results, or {"error": "..."} on failure.
+    """
+    venv_python = get_system_venv_python(system)
+    if not venv_python:
+        return {"error": f"No venv found for {system} at {VENVS_DIR / system}"}
+
+    worker_script = PROJECT_ROOT / "src" / "run_worker.py"
+
+    cmd = [
+        str(venv_python),
+        str(worker_script),
+        "--system", system,
+        "--use-case", use_case,
+        "--model", model_name,
+    ]
+    if queries:
+        cmd += ["--queries"] + [str(q) for q in queries]
+    if scale_factor is not None:
+        cmd += ["--scale-factor", str(scale_factor)]
+    if skip_setup:
+        cmd += ["--skip-setup"]
+
+    print(f"  [isolated] Using venv: {venv_python}")
+
+    result = subprocess.run(
+        cmd,
+        cwd=str(PROJECT_ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+    )
+
+    # Print worker output
+    if result.stdout:
+        # Filter out the worker result marker and print the rest
+        for line in result.stdout.splitlines():
+            if "__WORKER_RESULT__" in line or "__WORKER_ERROR__" in line:
+                continue
+            print(f"  [{system}] {line}")
+
+    # Parse worker result from stdout
+    if result.returncode == 0 and result.stdout:
+        match = re.search(
+            r"__WORKER_RESULT__(.+?)__END_WORKER_RESULT__", result.stdout
+        )
+        if match:
+            try:
+                return json.loads(match.group(1))
+            except json.JSONDecodeError:
+                pass
+
+    # Parse error
+    if result.stdout:
+        match = re.search(
+            r"__WORKER_ERROR__(.+?)__END_WORKER_ERROR__", result.stdout
+        )
+        if match:
+            return {"error": match.group(1)}
+
+    if result.returncode != 0:
+        return {"error": f"Worker exited with code {result.returncode}"}
+
+    # Fallback: try to read metrics from disk
+    metrics_file = (
+        PROJECT_ROOT / "files" / use_case / "metrics" / f"{system}.json"
+    )
+    if metrics_file.exists():
+        with open(metrics_file) as f:
+            return json.load(f)
+
+    return {"error": "No results returned from worker"}
+
+
 def run_benchmark(
     systems: List[str],
     use_cases: List[str],
@@ -129,6 +236,7 @@ def run_benchmark(
     skip_setup: bool = False,
     model_name: str = "gemini-2.5-flash",
     scale_factor: str = None,
+    use_isolation: bool = True,
 ):
     """
     Run benchmarks for specified systems and use cases.
@@ -139,6 +247,7 @@ def run_benchmark(
         queries: Optional list of specific query IDs to run (e.g., [1, 5])
         skip_setup: Whether to skip setup phase
         model_name: Model name to use for systems that support it
+        use_isolation: Use per-system venvs when available
     """
     results = {}
 
@@ -153,38 +262,61 @@ def run_benchmark(
         for system in systems:
             print(f"\n--- Running {system} ---")
 
-            # Get runner class
-            runner_class = get_runner_class(system, use_case)
-            if not runner_class:
-                print(f"Skipping {system} due to import error")
-                continue
+            # Decide execution mode
+            venv_python = get_system_venv_python(system) if use_isolation else None
 
-            # Initialize and run
-            try:
-                runner = runner_class(
+            if venv_python:
+                # Isolated execution via subprocess
+                system_results = run_system_isolated(
+                    system=system,
                     use_case=use_case,
+                    queries=queries,
+                    model_name=model_name,
                     scale_factor=scale_factor,
                     skip_setup=skip_setup,
-                    model_name=model_name,
                 )
-                system_metrics = runner.run_all_queries(queries=queries)
+                results[use_case][system] = system_results
 
-                # Convert metrics to serializable format
-                # The metrics now contain the results (DataFrames) which we
-                # don't serialize
-                results[use_case][system] = {
-                    f"Q{query_id}": metric.to_dict()
-                    for query_id, metric in system_metrics.items()
-                }
+                if "error" not in system_results:
+                    print(f"✓ {system} completed successfully (isolated)")
+                else:
+                    print(f"✗ Error running {system}: {system_results['error']}")
 
-                print(f"✓ {system} completed successfully")
+            else:
+                # Direct execution in current process (legacy mode)
+                if use_isolation:
+                    print(
+                        f"  No venv found for {system}, "
+                        f"falling back to direct execution"
+                    )
 
-            except Exception as e:
-                print(f"✗ Error running {system}: {e}")
-                import traceback
+                runner_class = get_runner_class(system, use_case)
+                if not runner_class:
+                    print(f"Skipping {system} due to import error")
+                    continue
 
-                traceback.print_exc()
-                results[use_case][system] = {"error": str(e)}
+                try:
+                    runner = runner_class(
+                        use_case=use_case,
+                        scale_factor=scale_factor,
+                        skip_setup=skip_setup,
+                        model_name=model_name,
+                    )
+                    system_metrics = runner.run_all_queries(queries=queries)
+
+                    results[use_case][system] = {
+                        f"Q{query_id}": metric.to_dict()
+                        for query_id, metric in system_metrics.items()
+                    }
+
+                    print(f"✓ {system} completed successfully")
+
+                except Exception as e:
+                    print(f"✗ Error running {system}: {e}")
+                    import traceback
+
+                    traceback.print_exc()
+                    results[use_case][system] = {"error": str(e)}
 
         # Run evaluation
         print(f"\n--- Running evaluation for {use_case} ---")
@@ -228,6 +360,9 @@ Examples:
 
   # Run queries using Q-prefix notation
   python run.py --systems lotus --queries Q1 Q5 Q10
+
+  # Force direct execution (skip venv isolation)
+  python run.py --systems lotus --no-isolation
         """,
     )
 
@@ -275,6 +410,12 @@ Examples:
         "--verbose", action="store_true", help="Enable verbose output"
     )
 
+    parser.add_argument(
+        "--no-isolation",
+        action="store_true",
+        help="Disable per-system venv isolation (run all systems in current process)",
+    )
+
     args = parser.parse_args()
 
     # Parse query IDs
@@ -285,12 +426,28 @@ Examples:
             print("Error: No valid query IDs provided")
             sys.exit(1)
 
+    # Determine isolation mode
+    use_isolation = not args.no_isolation
+    if use_isolation and VENVS_DIR.exists():
+        available_venvs = [
+            d.name for d in VENVS_DIR.iterdir()
+            if d.is_dir() and d.name != "sembench"
+            and (d / "bin" / "python").exists()
+        ]
+        if available_venvs:
+            print(f"Per-system venvs detected: {', '.join(available_venvs)}")
+        else:
+            use_isolation = False
+    else:
+        use_isolation = False
+
     print("Multi-Modal Data Systems Benchmark")
     print(f"Systems: {', '.join(args.systems)}")
     print(f"Use cases: {', '.join(args.use_cases)}")
     print(f"Model: {args.model}")
     print(f"Queries: {', '.join(map(str, query_ids)) if query_ids else 'All'}")
     print(f"Scale factor: {args.scale_factor}")
+    print(f"Isolation: {'enabled' if use_isolation else 'disabled'}")
 
     # Run benchmark
     results = run_benchmark(
@@ -300,6 +457,7 @@ Examples:
         skip_setup=args.skip_setup,
         model_name=args.model,
         scale_factor=args.scale_factor,
+        use_isolation=use_isolation,
     )
 
     # Print summary
@@ -362,6 +520,10 @@ Examples:
                                 )
                             else:
                                 print(f"    {display_id}: {time_str}")
+
+    # Flush output before force-terminating (os._exit skips buffer flush)
+    sys.stdout.flush()
+    sys.stderr.flush()
 
     # Force terminate all threads including background ones (LOTUS connection
     # pools)

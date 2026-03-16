@@ -1,0 +1,7 @@
+# LOTUS - Semantic operators optimized by reducing costs with guaranteed accuracy
+# lotus-ai requires numpy<2.0.0
+-r base.txt
+
+lotus-ai==1.1.3
+chromadb>=0.4.0
+faiss-cpu>=1.7.4
