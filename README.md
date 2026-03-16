@@ -1,9 +1,11 @@
 <table border="0">
   <tr>
-    <td style="border: none;"><h1>SemBench: Benchmarking Semantic Query Processing Engines</h1></td>
+    <td style="border: none;"><h1>SemBench: Benchmarking Semantic Query Processing Engines (VLDB 2026)</h1></td>
     <td style="border: none;"><img src="assets/SemBench_logo.png" alt="SemBench Logo" width="1500"></td>
   </tr>
 </table> 
+
+🎉 **SemBench has been accepted to VLDB 2026!** (March 15, 2026) 🎉
 
 SemBench is a benchmark targeting a novel class of systems: **semantic query processing engines**. Those systems rely inherently on generative and reasoning  capabilities of state-of-the-art large language models (LLMs). They extend SQL with semantic operators, configured by natural language instructions, that are evaluated via LLMs and enable users to perform various operations on multimodal data.
 

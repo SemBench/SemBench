@@ -84,19 +84,24 @@ function init() {
     // Set up query link clicks
     $(document).on('click', '.query-link', onQueryClick);
     
-    // Set up FAQ toggles
+    // Set up FAQ toggles (CSS max-height transitions)
     $('.faq-question').click(function() {
-        const answer = $(this).next('.faq-answer');
-        const isVisible = answer.is(':visible');
-        
-        // Close all other FAQ answers first
-        $('.faq-answer').slideUp(300);
+        const $this = $(this);
+        const answer = $this.next('.faq-answer')[0];
+        const isOpen = $this.hasClass('active');
+
+        // Close all
         $('.faq-question').removeClass('active');
-        
-        // If this one wasn't visible, show it
-        if (!isVisible) {
-            answer.slideDown(300);
-            $(this).addClass('active');
+        $('.faq-answer').each(function() {
+            this.style.maxHeight = null;
+            this.style.opacity = '0';
+        });
+
+        // Toggle current
+        if (!isOpen) {
+            $this.addClass('active');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            answer.style.opacity = '1';
         }
     });
     

@@ -1,9 +1,199 @@
-/* SemBench Website Styles - Adapted from MathArena */
+/* SemBench Website Styles - Modern Redesign */
 
 body {
   font-family: 'Google Sans', 'Noto Sans', sans-serif;
   background-color: #f8f9fa;
+  overflow-x: hidden;
 }
+
+/* =====================================================
+   1. ANIMATED HERO BACKGROUND
+   ===================================================== */
+.hero#top {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero#top .hero-body {
+  padding: 5rem 1.5rem 4rem;
+}
+
+.hero-bg-orbs {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  animation: orbFloat 12s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #a78bfa, transparent 70%);
+  top: -10%; left: -5%;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #60a5fa, transparent 70%);
+  bottom: -15%; right: -5%;
+  animation-delay: -4s;
+  animation-duration: 15s;
+}
+
+.orb-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, #f472b6, transparent 70%);
+  top: 40%; left: 50%;
+  animation-delay: -8s;
+  animation-duration: 18s;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -30px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+.hero#top > .hero-body {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero entrance animations */
+.hero-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroFadeUp 0.8s ease-out forwards;
+}
+
+.hero-animate-1 { animation-delay: 0.1s; }
+.hero-animate-2 { animation-delay: 0.35s; }
+.hero-animate-3 { animation-delay: 0.55s; }
+
+@keyframes heroFadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* VLDB acceptance badge */
+.vldb-badge {
+  margin: 0 auto 2rem;
+  max-width: 420px;
+  padding: 0.5rem 1.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* =====================================================
+   2. GLASS NAVBAR
+   ===================================================== */
+.glass-navbar {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08) !important;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(-100%);
+}
+
+.glass-navbar .navbar-item {
+  color: #4a5568;
+  font-weight: 500;
+  transition: color 0.3s ease, background-color 0.2s ease;
+  border-radius: 8px;
+  margin: 0 2px;
+}
+
+.glass-navbar .navbar-item:hover {
+  color: #667eea;
+  background-color: rgba(102, 126, 234, 0.08);
+}
+
+.navbar-logo {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 1.2rem !important;
+}
+
+.navbar-item.is-active-nav {
+  color: #667eea !important;
+  font-weight: 600;
+  background-color: rgba(102, 126, 234, 0.1);
+}
+
+/* =====================================================
+   3. SCROLL-REVEAL ANIMATIONS
+   ===================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =====================================================
+   4. WAVE SECTION DIVIDERS
+   ===================================================== */
+.wave-divider {
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.wave-divider svg {
+  display: block;
+  width: 100%;
+  height: 60px;
+}
+
+/* =====================================================
+   5. GRADIENT SECTION TITLES
+   ===================================================== */
+.section-title {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+/* Alternate section background */
+.section-alt {
+  background-color: #ffffff;
+}
+
+/* =====================================================
+   6. POLISHED BUTTONS
+   ===================================================== */
+
+/* =====================================================
+   7. SMOOTH FAQ ACCORDION
+   ===================================================== */
+
+/* =====================================================
+   ORIGINAL STYLES (preserved below)
+   ===================================================== */
 
 /* Hero sections */
 .hero {
@@ -28,10 +218,12 @@ body {
 }
 
 .publication-title {
-  font-weight: 700;
+  font-weight: 800;
   color: #ffffff;
-  margin-bottom: 1.5rem;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  margin-bottom: 1.75rem;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .publication-authors {
@@ -41,9 +233,9 @@ body {
 
 /* Links */
 .publication-links {
-  margin-top: 1rem;
+  margin-top: 0;
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -53,20 +245,31 @@ body {
 }
 
 .external-link.button {
-  border: 2px solid #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.6);
   color: #ffffff;
-  background-color: transparent;
-  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 .external-link.button:hover {
   background-color: #ffffff;
   color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.external-link.button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Section styling */
 .section {
-  padding: 3rem 1.5rem;
+  padding: 4rem 1.5rem;
 }
 
 .title.is-2 {
@@ -1062,19 +1265,27 @@ body {
 
 .faq-item {
   background: #ffffff;
-  border-radius: 8px;
+  border-radius: 16px;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
   overflow: hidden;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.faq-item:hover {
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.12);
+  transform: translateY(-2px);
 }
 
 .faq-question {
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #ffffff;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .faq-question:hover {
@@ -1083,36 +1294,50 @@ body {
 
 .faq-question.active {
   background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  border-radius: 16px 16px 0 0;
 }
 
 .faq-question.active::after {
   content: "−";
   float: right;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  transition: transform 0.3s ease;
+  transform: rotate(180deg);
 }
 
 .faq-question::after {
   content: "+";
   float: right;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  transition: transform 0.3s ease;
 }
 
 .faq-answer {
-  padding: 1.5rem;
+  padding: 0 1.5rem;
   background: #ffffff;
-  border-top: 1px solid #f0f0f0;
-  line-height: 1.6;
+  line-height: 1.7;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.35s ease,
+              padding 0.35s ease;
+}
+
+.faq-question.active + .faq-answer {
+  padding: 1.5rem;
 }
 
 /* Institutions Section */
 .institutions-section {
   background: #ffffff;
-  padding: 2rem 0;
-  border-bottom: 1px solid #e9ecef;
+  padding: 2.5rem 0;
+  border-bottom: none;
   width: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 /* Institution Logos Wrapper - handles centering logic */
@@ -1214,14 +1439,15 @@ body {
   background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
   border-radius: 20px;
   padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-  border: 1px solid #e9ecef;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 1px solid rgba(102, 126, 234, 0.08);
 }
 
 .team-member-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(102, 126, 234, 0.18);
+  border-color: rgba(102, 126, 234, 0.2);
 }
 
 .member-image {
@@ -1731,13 +1957,90 @@ body {
     font-size: 0.55rem;
     padding: 0.1rem 0.25rem;
   }
-  
+
   .coverage-indicators {
     gap: 0.2rem;
   }
-  
+
   .modality-badges,
   .operator-badges {
     gap: 0.2rem;
+  }
+}
+
+/* =====================================================
+   IMAGE CARD TREATMENT
+   ===================================================== */
+.image-card {
+  margin: 2rem 0;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.image-card:hover {
+  box-shadow: 0 8px 40px rgba(102, 126, 234, 0.12);
+  transform: translateY(-2px);
+}
+
+.image-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* =====================================================
+   SECTION CONTENT POLISH
+   ===================================================== */
+.content.has-text-justified p {
+  line-height: 1.8;
+  color: #4a5568;
+}
+
+/* Wave + section background harmony */
+#scalability {
+  background-color: #f8f9fa;
+}
+
+#faq {
+  background: #f8f9fa;
+}
+
+.section-line-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+/* =====================================================
+   MOBILE RESPONSIVE FOR NEW FEATURES
+   ===================================================== */
+@media (max-width: 768px) {
+  .hero#top {
+    min-height: auto;
+  }
+
+  .orb { filter: blur(60px); opacity: 0.2; }
+  .orb-1 { width: 250px; height: 250px; }
+  .orb-2 { width: 200px; height: 200px; }
+  .orb-3 { width: 150px; height: 150px; }
+
+  .wave-divider svg {
+    height: 35px;
+  }
+
+  .vldb-badge {
+    max-width: 90%;
+  }
+
+  .image-card {
+    padding: 0.75rem;
+    border-radius: 10px;
+    margin: 1rem -0.5rem;
   }
 }

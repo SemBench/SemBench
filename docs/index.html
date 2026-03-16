@@ -100,58 +100,51 @@
 <body>
 
 <section class="hero" id="top">
+  <!-- Animated gradient orbs -->
+  <div class="hero-bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">SemBench: A Benchmark for Semantic Query Processing Engines</h1>
-          <div class="is-size-5 publication-authors">
-            <!-- Institution logos moved to separate section below -->
+          <h1 class="title is-1 publication-title hero-animate hero-animate-1">SemBench: A Benchmark for Semantic Query Processing Engines</h1>
+          <div class="vldb-badge hero-animate hero-animate-2">
+            <p class="is-size-5 has-text-weight-bold" style="color: #fff; margin: 0;">
+              🎉 Accepted to VLDB 2026! 🎉
+            </p>
           </div>
-          <br>
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- GitHub link -->
-              <span class="link-block">
-                <a href="https://github.com/SemBench/SemBench/"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                  </a>
-              </span>
-              <!-- Paper link -->
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2511.01716"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <!-- Data link -->
-              <span class="link-block">
-                <a href="https://drive.google.com/drive/folders/1pqf8DKFai16MR80Z7pcls5FgBbom-IJt?dmr=1&ec=wgc-drive-globalnav-goto"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-database"></i>
-                  </span>
-                  <span>Data</span>
-                </a>
-              </span>
-              <!-- Submit link -->
-              <span class="link-block">
-                <a href="submit.html"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-upload"></i>
-                  </span>
-                  <span>Submit</span>
-                </a>
-              </span>
-            </div>
+          <div class="publication-links hero-animate hero-animate-3">
+            <span class="link-block">
+              <a href="https://github.com/SemBench/SemBench/"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Code</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://arxiv.org/abs/2511.01716"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <span>Paper</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://drive.google.com/drive/folders/1pqf8DKFai16MR80Z7pcls5FgBbom-IJt?dmr=1&ec=wgc-drive-globalnav-goto"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fas fa-database"></i></span>
+                <span>Data</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="submit.html"
+                 class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fas fa-upload"></i></span>
+                <span>Submit</span>
+              </a>
+            </span>
           </div>
         </div>
       </div>
@@ -191,10 +184,10 @@
 </section>
 
 <!-- Navigation Bar -->
-<nav class="navbar is-fixed-top is-light" id="siteNavbar" style="display: none; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+<nav class="navbar is-fixed-top glass-navbar" id="siteNavbar" style="opacity: 0; pointer-events: none;">
   <div class="container is-max-desktop">
     <div class="navbar-brand">
-      <a class="navbar-item has-text-weight-bold" href="#top">SemBench</a>
+      <a class="navbar-item has-text-weight-bold navbar-logo" href="#top">SemBench</a>
       <a role="button" class="navbar-burger" data-target="navbarMenu" aria-label="menu" aria-expanded="false">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -219,8 +212,8 @@
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
-        <div class="column is-ninety">
-          <h2 class="title is-2">What is SemBench?</h2>
+        <div class="column is-ninety reveal">
+          <h2 class="title is-2 section-title">What is SemBench?</h2>
           <div class="content has-text-justified">
             <p>
               SemBench is a systematic benchmark designed to evaluate and compare recent LLM-powered multi-modal data systems in realistic settings.
@@ -236,7 +229,8 @@
   </div>
 </section>
 
-<hr style="margin: 0; border: none; border-top: 2px solid #dbdbdb;">
+<!-- Subtle divider between about and leaderboard -->
+<div class="section-line-divider"></div>
 
 <section class="hero is-light" id="leaderboard">
   <div class="hero-body">
@@ -244,7 +238,7 @@
       <div class="columns is-centered">
         <div class="column has-text-justified">
           <div class="scenario-selection">
-            <h3 class="title is-3 has-text-centered">Select Version, Scenario, Model, and Scale</h3>
+            <h3 class="title is-3 has-text-centered section-title">Select Version, Scenario, Model, and Scale</h3>
             <div class="field is-grouped is-grouped-centered" style="margin-bottom: 2rem;">
               <div class="control">
                 <div class="select">
@@ -372,11 +366,18 @@
   </div>
 </section>
 
+<!-- Wave: white (leaderboard) -> #f8f9fa (scalability) -->
+<div class="wave-divider" style="background: #ffffff;">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0,0 C360,60 720,10 1080,50 C1260,65 1380,55 1440,40 L1440,80 L0,80 Z" fill="#f8f9fa"/>
+  </svg>
+</div>
+
 <section class="section" id="scalability">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-ninety">
-        <h2 class="title is-2">Scalability Experiments</h2>
+      <div class="column is-ninety reveal">
+        <h2 class="title is-2 section-title">Scalability Experiments</h2>
         <div class="content has-text-justified">
           <p>
             Scalability across scenarios. We report average execution time, monetary cost, result quality, and memory usage
@@ -386,10 +387,9 @@
             evaluated at larger scale factors. No timeout is applied in memory experiment to report the complete memory usage
             at the largest scales.
           </p>
-          <div class="has-text-centered" style="margin: 2rem 0;">
+          <div class="image-card">
             <img src="static/images/scalability_memory_combined.png"
                  alt="Scalability and Memory Usage across Scenarios"
-                 style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <p style="display: none; color: #666; font-style: italic;">Scalability chart not available</p>
           </div>
@@ -399,13 +399,18 @@
   </div>
 </section>
 
-<hr style="margin: 0; border: none; border-top: 2px solid #dbdbdb;">
+<!-- Wave: #f8f9fa (scalability) -> white (performance) -->
+<div class="wave-divider" style="background: #f8f9fa;">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0,0 C360,60 720,10 1080,50 C1260,65 1380,55 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/>
+  </svg>
+</div>
 
-<section class="section" id="performance">
+<section class="section section-alt" id="performance">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-ninety">
-        <h2 class="title is-2">Performance Comparison across All Scenarios</h2>
+      <div class="column is-ninety reveal">
+        <h2 class="title is-2 section-title">Performance Comparison across All Scenarios</h2>
           <div class="content has-text-justified">
             <div class="field is-grouped is-grouped-centered" style="margin-bottom: 2rem;">
               <div class="control">
@@ -423,11 +428,10 @@
               meaningful distinctions in real-world applications.
             </p>
 
-            <div class="has-text-centered" style="margin: 2rem 0;" id="toleranceAnalysisContainer">
+            <div class="image-card" id="toleranceAnalysisContainer">
               <img id="toleranceAnalysisImage"
                    src="static/images/tolerance_analysis_plots_custom_ranges.png"
                    alt="Performance Comparison across All Scenarios - Tolerance Analysis"
-                   style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;"
                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
               <p style="display: none; color: #666; font-style: italic;">Tolerance analysis chart not available for this version</p>
             </div>
@@ -455,19 +459,25 @@
     </div>
 </section>
 
-<section class="section hero" id="faq">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-ninety">
-          <h2 class="title is-2">Frequently Asked Questions</h2>
-          <div class="content has-text-justified">
-            <div class="faq-container">
+<!-- Wave: white (performance) -> #f8f9fa (faq) -->
+<div class="wave-divider" style="background: #ffffff;">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0,0 C480,70 960,10 1440,50 L1440,80 L0,80 Z" fill="#f8f9fa"/>
+  </svg>
+</div>
+
+<section class="section" id="faq">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-ninety reveal">
+        <h2 class="title is-2 section-title">Frequently Asked Questions</h2>
+        <div class="content has-text-justified">
+          <div class="faq-container">
               <div class="faq-item">
                 <div class="faq-question">
                   What types of queries does SemBench target?
                 </div>
-                <div class="faq-answer" style="display: none;">
+                <div class="faq-answer">
                   SemBench targets complex semantic queries that integrate structured data (tables) with unstructured modalities,
                   including text, images, and audio. Each scenario includes at least 10 diverse queries that test various aspects
                   of multimodal data processing, ranging from simple retrieval to complex analytical tasks that require reasoning
@@ -481,7 +491,7 @@
                 <div class="faq-question">
                   Can we contribute to this benchmark?
                 </div>
-                <div class="faq-answer" style="display: none;">
+                <div class="faq-answer">
                   Yes, we welcome contributions and can discuss building SemBench-2.0 together! The modular architecture supports easy extension:
                   <ul>
                     <li><strong>Add New Use Cases:</strong> Implement scenario-specific runner and evaluator</li>
@@ -497,7 +507,7 @@
                 <div class="faq-question">
                   Can we upload the results of our system?
                 </div>
-                <div class="faq-answer" style="display: none;">
+                <div class="faq-answer">
                   Of course! We understand that every system is under rapid development, which is why we maintain an online leaderboard.
                   We encourage you to submit your system's results and participate in the benchmark. Please reach out to discuss how to
                   contribute your results to the leaderboard.
@@ -508,8 +518,14 @@
         </div>
       </div>
     </div>
-  </div>
 </section>
+
+<!-- Wave: #f8f9fa (faq) -> #fafafa (footer) -->
+<div class="wave-divider" style="background: #f8f9fa;">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0,0 C480,70 960,10 1440,50 L1440,80 L0,80 Z" fill="#fafafa"/>
+  </svg>
+</div>
 
 <footer class="footer" id="team">
   <div class="container">
@@ -694,17 +710,26 @@
 <script src="static/js/sembench.js"></script>
 
 <script>
-// Show/hide sticky navbar on scroll
 (function() {
+  // --- Smooth navbar show/hide ---
   var navbar = document.getElementById('siteNavbar');
   var hero = document.getElementById('top');
+  var navbarVisible = false;
   window.addEventListener('scroll', function() {
-    if (window.scrollY > hero.offsetHeight) {
-      navbar.style.display = '';
-    } else {
-      navbar.style.display = 'none';
+    var shouldShow = window.scrollY > hero.offsetHeight;
+    if (shouldShow && !navbarVisible) {
+      navbar.style.opacity = '1';
+      navbar.style.pointerEvents = 'auto';
+      navbar.style.transform = 'translateY(0)';
+      navbarVisible = true;
+    } else if (!shouldShow && navbarVisible) {
+      navbar.style.opacity = '0';
+      navbar.style.pointerEvents = 'none';
+      navbar.style.transform = 'translateY(-100%)';
+      navbarVisible = false;
     }
   });
+
   // Mobile burger toggle
   var burger = document.querySelector('.navbar-burger');
   if (burger) {
@@ -714,6 +739,7 @@
       target.classList.toggle('is-active');
     });
   }
+
   // Highlight active nav link on scroll
   var sections = document.querySelectorAll('section[id]');
   var navLinks = document.querySelectorAll('#navbarMenu .navbar-item[href^="#"]');
@@ -730,11 +756,24 @@
       }
     });
   });
+
+  // --- Scroll-reveal animations ---
+  var revealElements = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  revealElements.forEach(function(el) { observer.observe(el); });
+
+
 })();
 </script>
 
 <style>
-  .navbar-item.is-active-nav { color: #3273dc !important; font-weight: 600; }
   html { scroll-behavior: smooth; }
   body.has-navbar-fixed-top { padding-top: 0 !important; }
 </style>
