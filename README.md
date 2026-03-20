@@ -5,11 +5,31 @@
   </tr>
 </table> 
 
-🎉 **SemBench has been accepted to VLDB 2026!** (March 15, 2026) 🎉
+<div align="center">
+
+> ### 🎉 SemBench has been accepted to VLDB 2026! 🎉
+> **Proceedings of the VLDB Endowment (PVLDB), Volume 19**
+>
+> [Paper](https://arxiv.org/abs/2511.01716) &nbsp;|&nbsp; [Online Leaderboard](https://sembench.ngrok.io/) &nbsp;|&nbsp; [Submit Your System](https://sembench.ngrok.io/submit.html) &nbsp;|&nbsp; [Multi-Modal Datasets](https://drive.google.com/drive/folders/1pqf8DKFai16MR80Z7pcls5FgBbom-IJt?usp=sharing)
+
+</div>
+
+### 🏆 Adopted By
+
+Beyond the four systems evaluated in our paper (LOTUS, Palimpzest, ThalamusDB, and BigQuery), SemBench has been independently adopted by research groups worldwide:
+
+| Operator Evaluated | System | Institutions | Paper |
+| :--- | :--- | :--- | :--- |
+| Semantic Rank | **Snowflake** | Snowflake, University of Chicago, UCLA, UCSB | [arXiv:2509.00303](https://arxiv.org/pdf/2509.00303) |
+| Semantic Filter, Semantic Map | **Stretto** | EURECOM, TU Darmstadt | [arXiv:2602.04430](https://arxiv.org/pdf/2602.04430) |
+| Semantic Join | **BAS** | UIUC | [arXiv:2603.16153](https://arxiv.org/pdf/2603.16153) |
+| Semantic Rank | **ListK** | University of Rochester | [arXiv:2603.17223](https://arxiv.org/pdf/2603.17223) |
+
+> If your system uses SemBench, we'd love to feature it here! Please open an issue or reach out to the team.
 
 SemBench is a benchmark targeting a novel class of systems: **semantic query processing engines**. Those systems rely inherently on generative and reasoning  capabilities of state-of-the-art large language models (LLMs). They extend SQL with semantic operators, configured by natural language instructions, that are evaluated via LLMs and enable users to perform various operations on multimodal data.
 
-SemBench introduces diversity across three key dimensions: **scenarios, modalities, and operators**. Included are scenarios ranging from movie review analysis to car damage detection. Within these scenarios, we cover different data modalities, including images, audio, text, and table. Finally, the queries involve a diverse set of operators, including semantic filters, joins, mappings, ranking, and classification operators. 
+SemBench introduces diversity across three key dimensions: **scenarios, modalities, and operators**. Included are scenarios ranging from movie review analysis to car damage detection. Within these scenarios, we cover different data modalities, including images, audio, text, and table. Finally, the queries involve a diverse set of operators, including semantic filters, joins, mappings, ranking, and classification operators.
 
 Currently SemBench is evalulated on **three academic systems (LOTUS, Palimpzest, and ThalamusDB) and one industrial system, Google BigQuery**. Although these results reflect a snapshot of systems under continuous development, our study offers crucial insights into their current strengths and weaknesses, illuminating promising directions for future research.
 
@@ -20,12 +40,6 @@ We understand that every system is under rapid development, which is why we main
 We understand that downloading datasets, generating databases, and setting up environments can be tedious—especially in the systems area, where each system often requires a unique setup. SemBench automates all of these steps for you! It automatically downloads datasets and generates multi-modal databases. Setting up environments for SemBench and four supported systems (LOTUS, Palimpzest, ThalamusDB, and BigQuery) takes just one script.
 
 So, enjoy using SemBench! We believe a good benchmark should minimize user effort—and SemBench is designed exactly for that.
-
-## Materials
-- [Online Leaderboard](https://sembench.ngrok.io/)
-- [Submit Your System](https://sembench.ngrok.io/submit.html) — Guide for implementing SemBench in your system and submitting results
-- [Multi-Modal Datasets](https://drive.google.com/drive/folders/1pqf8DKFai16MR80Z7pcls5FgBbom-IJt?usp=sharing)
-- [Paper](https://arxiv.org/abs/2511.01716)
 
 ## 🌟 Overview
 

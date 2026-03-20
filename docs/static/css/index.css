@@ -2043,4 +2043,128 @@ body {
     border-radius: 10px;
     margin: 1rem -0.5rem;
   }
+
+  .adopted-by-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* =====================================================
+   ADOPTED BY SECTION
+   ===================================================== */
+.adopted-by-subtitle {
+  font-size: 1.1rem;
+  color: #4a5568;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.adopted-by-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto 2rem auto;
+}
+
+.adopted-by-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.adopted-by-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.adopted-by-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(102, 126, 234, 0.2);
+  border-color: rgba(102, 126, 234, 0.25);
+}
+
+.adopted-by-card:hover::before {
+  opacity: 1;
+}
+
+.adopted-by-operator {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #667eea;
+  margin-bottom: 0.75rem;
+  padding: 0.3rem 1rem;
+  background: rgba(102, 126, 234, 0.08);
+  border-radius: 20px;
+}
+
+.adopted-by-system {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #2c3e50 0%, #4a5568 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.adopted-by-institutions {
+  font-size: 0.9rem;
+  color: #718096;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.adopted-by-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #667eea;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.3s ease;
+}
+
+.adopted-by-card:hover .adopted-by-link {
+  color: #764ba2;
+}
+
+.adopted-by-cta {
+  font-size: 1rem;
+  color: #718096;
+  margin-top: 1rem;
+}
+
+.adopted-by-cta a {
+  color: #667eea;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(102, 126, 234, 0.3);
+  text-underline-offset: 3px;
+  transition: all 0.3s ease;
+}
+
+.adopted-by-cta a:hover {
+  color: #764ba2;
+  text-decoration-color: #764ba2;
 }
