@@ -174,6 +174,14 @@ class EcommScenario:
         con.execute(f"set file_search_path = '{self.get_data_dir()}'")
         result_df = con.execute(ground_truth_sql).df()
         con.close()
+
+        # Save ground truth CSV
+        gt_path = os.path.join(
+            ECOMM_FILES_DIR, "raw_results", "ground_truth", f"Q{query_id}.csv"
+        )
+        os.makedirs(os.path.dirname(gt_path), exist_ok=True)
+        result_df.to_csv(gt_path, index=False)
+
         return result_df
 
     def get_accuracy_measure_for_query(self, query_id: int) -> str:

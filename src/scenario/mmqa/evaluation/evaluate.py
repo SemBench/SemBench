@@ -1,6 +1,7 @@
 """Evaluator for the MMQA dataset."""
 
 import json
+import shutil
 from typing import Union
 
 import pandas as pd
@@ -47,7 +48,14 @@ class MMQAEvaluator(GenericEvaluator):
         pass
 
     def _get_ground_truth(self, query_id: int) -> str:
-        return self._root / "query" / "natural_language" / f"q{query_id}.json"
+        src = self._root / "query" / "natural_language" / f"q{query_id}.json"
+
+        # Copy ground truth JSON to raw_results/ground_truth/
+        gt_dir = self._results_path / "ground_truth"
+        gt_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, gt_dir / f"Q{query_id}.json")
+
+        return src
 
     def _evaluate_single_query(
         self, query_id: int, system_results: pd.DataFrame, ground_truth: str
