@@ -77,7 +77,7 @@ def _download_from_drive(id: str, file_name: str = "raw_data.zip", folder: str =
 
     if not os.path.exists(zip_path):
         print(f"Downloading {file_name} from Google Drive to {folder}...")
-        os.system(f"gdown --id {id} -O {zip_path}")
+        os.system(f"gdown 'https://drive.google.com/uc?id={id}' -O {zip_path}")
     else:
         print(f"Archive file already exists at: {zip_path}")
         print("Skipping download.")

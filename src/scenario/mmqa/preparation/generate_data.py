@@ -69,7 +69,7 @@ class MMQADataGenerator:
         if not os.path.exists(zip_file):
             print(f"Downloading source data to {self.source_data_dir}...")
             os.system(
-                f"gdown 1oHXq5oxIfsyoNy9aCQ0V9G3W4puqHC6i -O {zip_file}"  # noqa: E501
+                f"gdown 'https://drive.google.com/uc?id=1oHXq5oxIfsyoNy9aCQ0V9G3W4puqHC6i' -O {zip_file}"  # noqa: E501
             )
         else:
             print(f"Archive file already exists at: {zip_file}")

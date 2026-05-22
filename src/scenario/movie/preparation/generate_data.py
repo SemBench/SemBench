@@ -57,9 +57,9 @@ def download_from_google_drive():
         # Try multiple download methods
         success = False
 
-        # Method 1: Try gdown with fuzzy flag (handles large files better)
+        # Method 1: Try gdown (handles large files better)
         print("Attempting download with gdown (handles large files)...")
-        result = os.system(f"gdown --fuzzy 'https://drive.google.com/file/d/{file_id}/view?usp=sharing' -O {zip_file}")
+        result = os.system(f"gdown 'https://drive.google.com/uc?id={file_id}' -O {zip_file}")
         if result == 0 and zip_file.exists() and zip_file.stat().st_size > 1000000:  # At least 1MB
             success = True
             print(f"Download successful with gdown (size: {zip_file.stat().st_size / 1024 / 1024:.1f}MB)")

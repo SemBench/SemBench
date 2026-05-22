@@ -77,7 +77,7 @@ def _download_from_drive(id: str, file_name: str = "raw_data.zip", folder: str =
 
     if not os.path.exists(zip_path):
         print(f"Downloading {file_name} from Google Drive to {folder}...")
-        os.system(f"gdown --id {id} -O {zip_path}")
+        os.system(f"gdown 'https://drive.google.com/uc?id={id}' -O {zip_path}")
     else:
         print(f"Archive file already exists at: {zip_path}")
         print("Skipping download.")
@@ -139,7 +139,7 @@ def _download_kaggle_datasets():
     nhtsa_path = raw_data_path / "nhtsa-dataset"
     if not os.path.exists(nhtsa_path):
         print("Downloading NHTSA complaints dataset...")
-        _download_from_drive(id="1ER5pooCIi2q6ZTYUrJw_ha_X3byNQB9M/", file_name="nhtsa-dataset.zip")
+        _download_from_drive(id="1ER5pooCIi2q6ZTYUrJw_ha_X3byNQB9M", file_name="nhtsa-dataset.zip")
 
 
 def _generate_synthetic_car_data(num_cars: int, seed: int = 42) -> pd.DataFrame:
