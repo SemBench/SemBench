@@ -28,21 +28,6 @@
     "recall": 0.0,
     "f1_score": 0.0
   },
-  "Q11": {
-    "query_id": "11",
-    "status": "success",
-    "execution_time": 1521.722148656845,
-    "token_usage": 10242299,
-    "money_cost": 3.1828305,
-    "row_count": 8113,
-    "model_name": "gemini-2.5-flash",
-    "concurrent_llm_worker": 20,
-    "accuracy": 0.606845513413506,
-    "metric_type": "f1-score",
-    "precision": 0.47058823529411764,
-    "recall": 0.8541666666666666,
-    "f1_score": 0.606845513413506
-  },
   "Q12": {
     "query_id": "12",
     "status": "success",
