@@ -1,0 +1,16 @@
+{
+  "Q11": {
+    "query_id": "11",
+    "status": "success",
+    "execution_time": 1794.198780298233,
+    "money_cost": 13.75228100000002,
+    "row_count": 544,
+    "model_name": "gemini-2.5-flash",
+    "concurrent_llm_worker": 20,
+    "accuracy": 0.6637931034482759,
+    "metric_type": "f1-score",
+    "precision": 0.5661764705882353,
+    "recall": 0.8020833333333334,
+    "f1_score": 0.6637931034482759
+  }
+}

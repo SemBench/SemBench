@@ -30,16 +30,16 @@
   "Q11": {
     "query_id": "11",
     "status": "success",
-    "execution_time": 860.064924955368,
-    "money_cost": 5.462633700000006,
-    "row_count": 648,
+    "execution_time": 2058.869311571121,
+    "money_cost": 13.74035610000001,
+    "row_count": 544,
     "model_name": "gemini-2.5-flash",
     "concurrent_llm_worker": 20,
-    "accuracy": 0.6821705426356588,
+    "accuracy": 0.6637931034482759,
     "metric_type": "f1-score",
-    "precision": 0.5432098765432098,
-    "recall": 0.9166666666666666,
-    "f1_score": 0.6821705426356588
+    "precision": 0.5661764705882353,
+    "recall": 0.8020833333333334,
+    "f1_score": 0.6637931034482759
   },
   "Q12": {
     "query_id": "12",

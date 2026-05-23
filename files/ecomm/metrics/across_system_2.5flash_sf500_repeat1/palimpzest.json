@@ -30,8 +30,8 @@
   "Q11": {
     "query_id": "11",
     "status": "success",
-    "execution_time": 86.1798186302185,
-    "money_cost": 0.5658176999999999,
+    "execution_time": 305.99814915657043,
+    "money_cost": 1.8227151000000001,
     "row_count": 27,
     "model_name": "gemini-2.5-flash",
     "concurrent_llm_worker": 20,

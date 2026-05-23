@@ -31,18 +31,17 @@
   },
   "Q11": {
     "query_id": "11",
-    "status": "success",
-    "execution_time": 106.31562972068787,
-    "token_usage": 535355,
-    "money_cost": 0.16725269999999998,
-    "row_count": 486,
+    "status": "failed",
+    "execution_time": 0.0,
+    "error": "'RateLimitError' object has no attribute 'choices'",
+    "row_count": 0,
     "model_name": "gemini-2.5-flash",
     "concurrent_llm_worker": 20,
-    "accuracy": 0.5714285714285715,
+    "accuracy": 0.0,
     "metric_type": "f1-score",
-    "precision": 0.6666666666666666,
-    "recall": 0.5,
-    "f1_score": 0.5714285714285715
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1_score": 0.0
   },
   "Q12": {
     "query_id": "12",
