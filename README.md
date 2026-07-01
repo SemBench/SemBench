@@ -27,6 +27,7 @@ Beyond the four systems evaluated in our paper (LOTUS, Palimpzest, ThalamusDB, a
 | Semantic Filter, Semantic Join, Semantic Map | **PLOP** | UC Berkeley, UW–Madison | [arXiv:2604.09944](https://arxiv.org/pdf/2604.09944) |
 | Semantic Filter | **Semantic Histograms** | TU Darmstadt, EURECOM | [arXiv:2606.04610](https://arxiv.org/pdf/2606.04610) |
 | Semantic Filter | **SemWeave** | UW–Madison, Microsoft | [SIGMOD '26 Demo](https://dl.acm.org/doi/10.1145/3788853.3801593) |
+| Semantic Filter, Semantic Join, Semantic Map, Semantic Rank, Semantic Classify | **CADENZA** | POSTECH, UIUC | [SIGMOD 2027](https://arxiv.org/pdf/2606.29151) |
 
 > If your system uses SemBench, we'd love to feature it here! Please open an issue or reach out to the team.
 
