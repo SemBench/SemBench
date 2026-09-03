@@ -101,7 +101,12 @@ class ThalamusDBRunner(GenericThalamusDBRunner):
             )
 
         super().__init__(
-            use_case, scale_factor, model_name, concurrent_llm_worker, db_path
+            use_case,
+            scale_factor,
+            model_name,
+            concurrent_llm_worker,
+            db_path,
+            skip_setup=skip_setup,
         )
 
     def _execute_q1(self) -> Dict[str, Any]:
