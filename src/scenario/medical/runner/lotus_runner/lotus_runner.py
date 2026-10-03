@@ -25,7 +25,11 @@ class LotusRunner(GenericLotusRunner):
         skip_setup: bool = False,
     ):
         super().__init__(
-            use_case, scale_factor, model_name, concurrent_llm_worker
+            use_case,
+            scale_factor,
+            model_name,
+            concurrent_llm_worker,
+            skip_setup=skip_setup,
         )
 
     def _discover_queries(self):

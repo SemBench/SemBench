@@ -37,7 +37,11 @@ class LotusRunner(GenericLotusRunner):
             model_name: LLM model to use
         """
         super().__init__(
-            use_case, scale_factor, model_name, concurrent_llm_worker
+            use_case,
+            scale_factor,
+            model_name,
+            concurrent_llm_worker,
+            skip_setup=skip_setup,
         )
 
     def _execute_q1(self) -> pd.DataFrame:
